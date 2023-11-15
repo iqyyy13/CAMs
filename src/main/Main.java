@@ -8,5 +8,4 @@ public class Main {
         //UIEntry.start();
         AccountManager.loadUsers();
     }
-    
 }

@@ -28,6 +28,11 @@ public class AccountManager
     public static User register(String userID, String password, String name, String email, String faculty)
             throws UserAlreadyExistsException {
         User user = UserFactory.create(userID, password, name, email, faculty);
+
+        if("password".equals(password))
+        {
+            System.out.println("WARNING");
+        }
         UserAdder.addUser(user);
         return user;
     }

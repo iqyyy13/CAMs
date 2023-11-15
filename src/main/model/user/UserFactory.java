@@ -20,6 +20,6 @@ public class UserFactory {
      */
     public static User create(String userID, String password, String name, String email, String faculty) {
         //String hashedPassword = PasswordHashManager.hashPassword(password);
-        return new Student(userID, name, email, password);
+        return new Student(userID, name, email, faculty, password);
     }
 }
