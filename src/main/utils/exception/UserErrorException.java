@@ -8,7 +8,7 @@ package main.utils.exception;
 public class UserErrorException extends Exception {
 
     /**
-     * Creates a new instance of the {@link ModelNotFoundException} class with a default error message.
+     * Creates a new instance of the {@link UserErrorException} class with a default error message.
      * The default message is "Model not found".
      */
     public UserErrorException() {
@@ -16,7 +16,7 @@ public class UserErrorException extends Exception {
     }
 
     /**
-     * Creates a new instance of the {@link ModelNotFoundException} class with a custom error message.
+     * Creates a new instance of the {@link UserErrorException} class with a custom error message.
      *
      * @param message The custom error message to be used.
      */

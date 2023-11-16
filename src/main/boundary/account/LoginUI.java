@@ -1,7 +1,9 @@
 package main.boundary.account;
 
+import main.boundary.mainpage.StudentMainPage;
 import main.controller.account.AccountManager;
 import main.model.user.User;
+import main.model.user.UserType;
 import main.utils.ui.ChangePage;
 import main.utils.exception.PageBackException;
 import main.utils.exception.PasswordIncorrectException;
@@ -18,7 +20,9 @@ public class LoginUI
 
         try
         {
-            User user = AccountManager.login(userID,password);
+            User user = AccountManager.login(UserType.STUDENT, userID, password);
+            StudentMainPage.studentMainPage(user);
+            System.out.println("YAY");
         } 
         catch (PasswordIncorrectException e)
         {
@@ -28,6 +32,7 @@ public class LoginUI
         {
             System.out.println("User not found.");
         }
+
         System.out.println("Enter [b] to go back, or any other key to try again.");
         Scanner scanner = new Scanner(System.in);
         String choice = scanner.nextLine();

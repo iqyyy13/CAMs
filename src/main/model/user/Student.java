@@ -31,14 +31,12 @@ public class Student implements User {
      */
     private StudentStatus status;
     /**
-     * The ID of the supervisor
-     */
-    private String supervisorID;
-    /**
      * The ID of the project
      */
-    private String projectID;
-    private String hashedPassword;
+    private String campID;
+    private String password;
+
+    private UserType userType;
 
     /**
      * Constructs a new Student object with the specified student ID and default password.
@@ -48,14 +46,14 @@ public class Student implements User {
      * @param email       the email of the student.
      * @param faculty     the faculty of the student
      */
-    public Student(String studentID, String studentName, String email, String faculty) {
+    public Student(UserType userType, String studentID, String studentName, String email, String faculty) {
+        this.userType = UserType.STUDENT;
         this.studentID = studentID;
         this.studentName = studentName;
         this.email = email;
         this.faculty = faculty;
         this.status = StudentStatus.UNREGISTERED;
-        supervisorID = EmptyID.EMPTY_ID;
-        projectID = EmptyID.EMPTY_ID;
+        campID = EmptyID.EMPTY_ID;
     }
 
     /**
@@ -65,17 +63,17 @@ public class Student implements User {
      * @param studentName    the name of the student.
      * @param email          the email of the student.
      * @param faculty        the faculty of the student
-     * @param hashedPassword the password of the student.
+     * @param password       the password of the student.
      */
-    public Student(String studentID, String studentName, String email, String faculty, @NotNull String hashedPassword) {
+    public Student(UserType userType, String studentID, String studentName, String email, String faculty, @NotNull String password) {
+        this.userType  = UserType.STUDENT;
         this.studentID = studentID;
         this.studentName = studentName;
         this.email = email;
         this.faculty = faculty;
         this.status = StudentStatus.UNREGISTERED;
-        supervisorID = EmptyID.EMPTY_ID;
-        projectID = EmptyID.EMPTY_ID;
-        this.hashedPassword = hashedPassword;
+        campID = EmptyID.EMPTY_ID;
+        this.password = password;
     }
 
     /**
@@ -96,6 +94,8 @@ public class Student implements User {
         this.studentID = EmptyID.EMPTY_ID;
         this.studentName = EmptyID.EMPTY_ID;
         this.faculty = EmptyID.EMPTY_ID;
+        this.userType = UserType.STUDENT;
+        //this.password = EmptyID.EMPTY_ID;
         this.status = StudentStatus.UNREGISTERED;
     }
 
@@ -170,39 +170,21 @@ public class Student implements User {
     }
 
     /**
-     * Gets the ID of the supervisor
+     * Gets the ID of the camp
      *
-     * @return the ID of the supervisor
+     * @return the ID of the camp
      */
-    public String getSupervisorID() {
-        return supervisorID;
+    public String getCampID() {
+        return campID;
     }
 
     /**
-     * Sets the ID of the supervisor
+     * Sets the ID of the camp
      *
-     * @param supervisorID the ID of the supervisor
+     * @param campID the ID of the camp
      */
-    public void setSupervisorID(String supervisorID) {
-        this.supervisorID = supervisorID;
-    }
-
-    /**
-     * Gets the ID of the project
-     *
-     * @return the ID of the project
-     */
-    public String getProjectID() {
-        return projectID;
-    }
-
-    /**
-     * Sets the ID of the project
-     *
-     * @param projectID the ID of the project
-     */
-    public void setProjectID(String projectID) {
-        this.projectID = projectID;
+    public void setCampID(String campID) {
+        this.campID = campID;
     }
 
     /**
@@ -210,8 +192,8 @@ public class Student implements User {
      *
      * @return hashedPassword
      */
-    public String getHashedPassword() {
-        return hashedPassword;
+    public String getPassword() {
+        return password;
     }
 
     /**
@@ -219,7 +201,7 @@ public class Student implements User {
      *
      * @param hashedPassword the password that to be set
      */
-    public void setHashedPassword(String hashedPassword) {
-        this.hashedPassword = hashedPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

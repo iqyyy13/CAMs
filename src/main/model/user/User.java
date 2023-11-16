@@ -25,14 +25,14 @@ public interface User extends Model {
      *
      * @return the hashed password of the user
      */
-    String getHashedPassword();
+    String getPassword();
 
     /**
      * Sets the hashed password of the user
      *
      * @param hashedPassword the hashed password of the user
      */
-    void setHashedPassword(String hashedPassword);
+    void setPassword(String password);
 
     /**
      * Gets the email of the user

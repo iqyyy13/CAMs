@@ -23,7 +23,7 @@ public class Welcome
                 switch (choice) 
                 {
                     case 1 -> LoginUI.login();
-                    //case 3 -> ExitPage.exitPage();
+                    case 2 -> Exit.exit();
                     default -> System.out.println("Invalid choice. Please try again.");
                 }
             }

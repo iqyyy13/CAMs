@@ -1,7 +1,11 @@
 package main.controller.account;
 
-import main.controller.account.user.UserAdder;
+import main.controller.account.password.PasswordManager;
+import main.controller.account.user.UserAdd;
+import main.controller.account.user.UserFinder;
+import main.controller.account.user.UserUpdate;
 import main.model.user.User;
+import main.model.user.UserType;
 import main.model.user.UserFactory;
 import main.utils.config.Location;
 import main.utils.exception.PasswordIncorrectException;
@@ -13,10 +17,18 @@ import java.util.List;
 
 public class AccountManager 
 {
-
-    public static User login(String userID, String password)
+    public static void changePassword(UserType userType, String userID, String oldPassword, String newPassword)
             throws PasswordIncorrectException, UserErrorException {
-        User user = UserFinder.findUser(userID);
+        User user = UserFinder.findUser(userID, userType);
+        PasswordManager.changePassword(user, oldPassword, newPassword);
+        UserUpdate.updateUser(user);
+    }
+
+    public static User login(UserType userType, String userID, String password)
+            throws PasswordIncorrectException, UserErrorException {
+        
+        //User user = UserFinder.findUser(userID, userType);
+        User user = UserFinder.findStudent(userID);
 //        System.err.println("User found: " + user.getUserName() + " " + user.getID());
         if (PasswordManager.checkPassword(user, password)) {
             return user;
@@ -25,19 +37,24 @@ public class AccountManager
         }
     }
 
-    public static User register(String userID, String password, String name, String email, String faculty)
+    public static User register(UserType userType, String userID, String password, String name, String email, String faculty)
             throws UserAlreadyExistsException {
-        User user = UserFactory.create(userID, password, name, email, faculty);
+        User user = UserFactory.create(userType, userID, password, name, email, faculty);
+
+        if(userType.equals(userType.STUDENT))
+        {
+            System.out.println("YAY");
+        }
 
         if("password".equals(password))
         {
             System.out.println("WARNING");
         }
-        UserAdder.addUser(user);
+        UserAdd.addUser(user);
         return user;
     }
 
-    public static User register(String userID, String name, String email, String faculty)
+    public static User register(UserType userType, String userID, String name, String email, String faculty)
             throws UserAlreadyExistsException {
 //        if (userType == UserType.COORDINATOR) {
 //            System.err.println("Registering coordinator...");
@@ -45,7 +62,7 @@ public class AccountManager
 //            System.err.println("Coordinator name: " + name);
 //            System.err.println("Coordinator email: " + email);
 //        }
-        return register(userID, "password", name, email, faculty);
+        return register(userType, userID, "password", name, email, faculty);
     }    
     private static String getID(String email) 
     {
@@ -69,7 +86,7 @@ public class AccountManager
             
             try 
             {
-                register(userID, name, email, faculty);
+                register(UserType.STUDENT, userID, name, email, faculty);
                 System.out.println("Registration Success");
                 //System.out.println("");
             } 

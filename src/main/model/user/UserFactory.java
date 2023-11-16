@@ -18,8 +18,13 @@ public class UserFactory {
      * @param faculty   The user's faculty
      * @return          A new User object of the specified type.
      */
-    public static User create(String userID, String password, String name, String email, String faculty) {
+    public static User create(UserType userType, String userID, String password, String name, String email, String faculty) {
         //String hashedPassword = PasswordHashManager.hashPassword(password);
-        return new Student(userID, name, email, faculty, password);
+        return switch (userType)
+        {
+            case STUDENT -> new Student(userType, userID, name, email, faculty, password);
+            case STAFF -> new Student();
+            case CC -> new Student();
+        };
     }
 }

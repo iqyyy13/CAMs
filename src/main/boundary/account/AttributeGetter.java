@@ -8,8 +8,9 @@ public class AttributeGetter
 {
     public static String getPassword() 
     {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Please enter your password: ");
-        return PasswordReader.getPassword();
+        return scanner.nextLine();
     }
 
     public static String getUserID() 
