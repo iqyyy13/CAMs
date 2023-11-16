@@ -190,7 +190,7 @@ public class Student implements User {
     /**
      * getter for the password
      *
-     * @return hashedPassword
+     * @return 
      */
     public String getPassword() {
         return password;
@@ -199,9 +199,13 @@ public class Student implements User {
     /**
      * setter for the password
      *
-     * @param hashedPassword the password that to be set
+     * @param password the password that to be set
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserType getUserType() {
+        return userType;
     }
 }

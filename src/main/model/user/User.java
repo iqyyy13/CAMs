@@ -48,6 +48,8 @@ public interface User extends Model {
      */
     String getFaculty();
 
+    UserType getUserType();
+
     /**
      * The function to check if username is equal to the user's username regardless of case
      *

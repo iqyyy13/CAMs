@@ -19,11 +19,11 @@ public class ViewUserProfile {
     public static void viewUserProfile(User user) {
         String userType = UserTypeGetter.getUserTypeInCamelCase(user);
         System.out.println("Welcome to View " + userType + " Profile");
-        System.out.println("┌--------------------------------------------------------------------┐");
-        System.out.printf("| %-15s | %-30s | %-15s |\n", "Name", "Email", userType + " ID");
-        System.out.println("|-----------------|--------------------------------|-----------------|");
-        System.out.printf("| %-15s | %-30s | %-15s |\n", user.getUserName(), user.getEmail(), user.getID());
-        System.out.println("└--------------------------------------------------------------------┘");
+        System.out.println("┌--------------------------------------------------------------------------------------┐");
+        System.out.printf("| %-15s | %-30s | %-15s | %-15s |\n", "Name", "Email", userType + " ID", "Role");
+        System.out.println("|-----------------|--------------------------------|-----------------------------------|");
+        System.out.printf("| %-15s | %-30s | %-15s | %-15s |\n", user.getUserName(), user.getEmail(), user.getID(), user.getUserType());
+        System.out.println("└--------------------------------------------------------------------------------------┘");
     }
 
     /**
