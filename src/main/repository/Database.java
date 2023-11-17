@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class Repository<ModelObject extends Model> extends Savable<ModelObject> implements Iterable<ModelObject> 
+public abstract class Database<ModelObject extends Model> extends Savable<ModelObject> implements Iterable<ModelObject> 
 {
 
 
@@ -18,7 +18,7 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
     /**
      * Creates a new instance of the Repository class.
      */
-    public Repository() 
+    public Database() 
     {
         super();
         listOfModelObjects = new ArrayList<>();

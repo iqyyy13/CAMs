@@ -2,7 +2,7 @@ package main.repository.request;
 
 import main.model.request.Request;
 import main.model.request.RequestFactory;
-import main.repository.Repository;
+import main.repository.Database;
 import main.utils.config.Location;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Map;
  * through file I/O operations.
  * It extends the Repository class, which provides basic CRUD operations for the repository.
  */
-public class RequestRepository extends Repository<Request> {
+public class RequestRepository extends Database<Request> {
 
     /**
      * The path of the repository file.

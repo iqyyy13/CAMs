@@ -1,13 +1,13 @@
 package main.repository.user;
 
 import main.model.user.Staff;
-import main.repository.Repository;
+import main.repository.Database;
 import main.utils.config.Location;
 
 import java.util.List;
 import java.util.Map;
 
-public class StaffRepository extends Repository<Staff> {
+public class StaffRepository extends Database<Staff> {
 
     /**
      * The path of the repository file.

@@ -1,14 +1,14 @@
 package main.repository.camp;
 
 import main.model.camp.Camp;
-import main.repository.Repository;
+import main.repository.Database;
 
 import java.util.List;
 import java.util.Map;
 
 import static main.utils.config.Location.RESOURCE_LOCATION;
 
-public class CampRepository extends Repository<Camp> 
+public class CampRepository extends Database<Camp> 
 {
     private static final String FILE_PATH = "/data/camp/camp.txt";
 

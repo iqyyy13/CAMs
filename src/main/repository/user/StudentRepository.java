@@ -1,7 +1,7 @@
 package main.repository.user;
 
 import main.model.user.Student;
-import main.repository.Repository;
+import main.repository.Database;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +13,7 @@ import static main.utils.config.Location.RESOURCE_LOCATION;
  * through file I/O operations.
  * It extends the Repository class, which provides basic CRUD operations for the repository.
  */
-public class StudentRepository extends Repository<Student> {
+public class StudentRepository extends Database<Student> {
 
     /**
      * The path of the repository file.
