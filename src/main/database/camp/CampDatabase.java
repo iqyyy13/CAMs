@@ -1,7 +1,7 @@
-package main.repository.camp;
+package main.database.camp;
 
+import main.database.Database;
 import main.model.camp.Camp;
-import main.repository.Database;
 
 import java.util.List;
 import java.util.Map;

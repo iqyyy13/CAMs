@@ -1,14 +1,14 @@
 package main.controller.camp;
 
 import main.controller.request.StaffManager;
+import main.database.camp.CampDatabase;
+import main.database.user.StaffDatabase;
+import main.database.user.StudentDatabase;
 import main.model.camp.Camp;
 import main.model.camp.CampStatus;
 import main.model.user.Student;
 import main.model.user.StudentStatus;
 import main.model.user.Staff;
-import main.repository.camp.CampDatabase;
-import main.repository.user.StudentDatabase;
-import main.repository.user.StaffDatabase;
 import main.utils.config.Location;
 import main.utils.exception.UserAlreadyExistsException;
 import main.utils.exception.UserErrorException;

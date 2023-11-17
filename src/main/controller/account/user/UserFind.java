@@ -1,9 +1,9 @@
 package main.controller.account.user;
 
+import main.database.user.StaffDatabase;
+import main.database.user.StudentDatabase;
 import main.model.user.User;
 import main.model.user.UserType;
-import main.repository.user.StudentDatabase;
-import main.repository.user.StaffDatabase;
 import main.utils.exception.UserErrorException;
 
 /**

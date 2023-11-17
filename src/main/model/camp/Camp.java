@@ -1,11 +1,11 @@
 package main.model.camp;
 
+import main.database.user.StaffDatabase;
+import main.database.user.StudentDatabase;
 import main.model.Displayable;
 import main.model.Model;
 import main.model.user.Student;
 import main.model.user.Staff;
-import main.repository.user.StaffDatabase;
-import main.repository.user.StudentDatabase;
 import main.utils.exception.UserErrorException;
 import main.utils.parameters.EmptyID;
 

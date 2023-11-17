@@ -1,7 +1,7 @@
-package main.repository.user;
+package main.database.user;
 
+import main.database.Database;
 import main.model.user.Student;
-import main.repository.Database;
 
 import java.util.List;
 import java.util.Map;

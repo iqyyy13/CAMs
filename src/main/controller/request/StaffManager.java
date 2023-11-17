@@ -1,13 +1,13 @@
 package main.controller.request;
 
+import main.database.camp.CampDatabase;
+import main.database.request.RequestDatabase;
+import main.database.user.StaffDatabase;
 import main.model.camp.CampStatus;
 import main.model.request.Request;
 import main.model.request.RequestStatus;
 import main.model.request.RequestType;
 import main.model.user.Staff;
-import main.repository.camp.CampDatabase;
-import main.repository.request.RequestDatabase;
-import main.repository.user.StaffDatabase;
 import main.utils.exception.UserAlreadyExistsException;
 import main.utils.parameters.EmptyID;
 

@@ -1,7 +1,7 @@
-package main.repository.user;
+package main.database.user;
 
+import main.database.Database;
 import main.model.user.Staff;
-import main.repository.Database;
 import main.utils.config.Location;
 
 import java.util.List;

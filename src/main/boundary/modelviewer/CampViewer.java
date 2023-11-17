@@ -1,12 +1,12 @@
 package main.boundary.modelviewer;
 
 import main.controller.camp.CampManager;
+import main.database.camp.CampDatabase;
+import main.database.user.StaffDatabase;
 import main.model.camp.Camp;
 import main.model.camp.CampStatus;
 import main.model.user.Student;
 import main.model.user.StudentStatus;
-import main.repository.camp.CampDatabase;
-import main.repository.user.StaffDatabase;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
 import main.utils.iocontrol.IntGetter;

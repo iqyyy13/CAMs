@@ -1,8 +1,8 @@
-package main.repository.request;
+package main.database.request;
 
+import main.database.Database;
 import main.model.request.Request;
 import main.model.request.RequestFactory;
-import main.repository.Database;
 import main.utils.config.Location;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package main.repository;
+package main.database;
 
 import main.model.Model;
 import main.utils.exception.UserAlreadyExistsException;
