@@ -5,6 +5,7 @@ import java.util.Scanner;
 import main.boundary.account.Logout;
 import main.boundary.account.ResetPassword;
 import main.boundary.account.ViewUserProfile;
+import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
 import main.controller.account.AccountManager;
 import main.controller.request.StudentManager;
@@ -53,7 +54,7 @@ public class StudentMainPage {
                 switch (choice) {
                     case 1 -> ViewUserProfile.viewUserProfilePage(student);
                     case 2 -> ResetPassword.changePassword(UserType.STUDENT, student.getID());
-                    //case 3 -> CampViewer.viewAvailableCamps(student);
+                    case 3 -> CampViewer.viewAvailableCamps(student);
                     //case 4 -> ProjectViewer.viewStudentProject(student);
                     //case 5 -> viewMySupervisor(student);
                     //case 6 -> registerProject(student);

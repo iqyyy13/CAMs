@@ -6,10 +6,20 @@ import main.controller.camp.CampManager;
 
 public class UIEntry 
 {
+
+    private static boolean onBootUp()
+    {
+        return CampManager.repositoryIsEmpty();
+    }
     public static void start() 
     {
         AccountManager.loadUsers();
-        CampManager.loadProjects();
+        if(onBootUp())
+        {
+            CampManager.loadProjects();
+        }
         Welcome.welcome();
     }
+
+    
 }

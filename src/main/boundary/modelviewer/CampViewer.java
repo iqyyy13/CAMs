@@ -73,7 +73,7 @@ public class CampViewer
         throw new PageBackException();
     }
 
-    public static void generateDetailsBySupervisorID() throws PageBackException
+    public static void generateDetailsByStaffID() throws PageBackException
     {
         System.out.println("Please enter the StaffID to search: ");
         String s1 = new Scanner(System.in).nextLine();
