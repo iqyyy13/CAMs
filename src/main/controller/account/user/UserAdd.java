@@ -3,7 +3,7 @@ package main.controller.account.user;
 import main.model.user.Staff;
 import main.model.user.Student;
 import main.model.user.User;
-import main.repository.user.StudentRepository;
+import main.repository.user.StudentDatabase;
 import main.repository.user.StaffRepository;
 import main.utils.exception.UserAlreadyExistsException;
 
@@ -31,7 +31,7 @@ public class UserAdd {
 
     private static void addStudent(Student student) throws UserAlreadyExistsException 
     {
-        StudentRepository.getInstance().add(student);
+        StudentDatabase.getInstance().add(student);
     }
 
     private static void addStaff(Staff staff) throws UserAlreadyExistsException 

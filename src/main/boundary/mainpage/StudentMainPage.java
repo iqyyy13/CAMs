@@ -10,7 +10,7 @@ import main.boundary.modelviewer.ModelViewer;
 import main.controller.account.AccountManager;
 import main.controller.request.StudentManager;
 import main.model.user.*;
-import main.repository.user.StudentRepository;
+import main.repository.user.StudentDatabase;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
 import main.utils.iocontrol.IntGetter;
@@ -45,7 +45,7 @@ public class StudentMainPage {
             int choice = IntGetter.readInt();
 
             try {
-                student = StudentRepository.getInstance().getByID(student.getID());
+                student = StudentDatabase.getInstance().getByID(student.getID());
             } catch (UserErrorException e) {
                 e.printStackTrace();
             }

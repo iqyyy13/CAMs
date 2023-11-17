@@ -5,7 +5,7 @@ import main.model.Model;
 import main.model.user.Student;
 import main.model.user.Staff;
 import main.repository.user.StaffRepository;
-import main.repository.user.StudentRepository;
+import main.repository.user.StudentDatabase;
 import main.utils.exception.UserErrorException;
 import main.utils.parameters.EmptyID;
 
@@ -71,7 +71,7 @@ public class Camp implements Model, Displayable
      */
     private void displayStudentInformation() {
         try {
-            Student student = StudentRepository.getInstance().getByID(studentID);
+            Student student = StudentDatabase.getInstance().getByID(studentID);
             System.out.println("Student Name: " + student.getUserName());
             System.out.println("Student Email Address: " + student.getEmail());
         } catch (UserErrorException e) {
@@ -190,7 +190,7 @@ public class Camp implements Model, Displayable
         }
         try 
         {
-            Student student = StudentRepository.getInstance().getByID(studentID);
+            Student student = StudentDatabase.getInstance().getByID(studentID);
             return String.format("| Student Name                | %-30s |\n", student.getUserName()) +
                     String.format("| Student Email Address       | %-30s |\n", student.getEmail());
         } catch (UserErrorException e) {

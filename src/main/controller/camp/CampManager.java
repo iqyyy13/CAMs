@@ -7,7 +7,7 @@ import main.model.user.Student;
 import main.model.user.StudentStatus;
 import main.model.user.Staff;
 import main.repository.camp.CampRepository;
-import main.repository.user.StudentRepository;
+import main.repository.user.StudentDatabase;
 import main.repository.user.StaffRepository;
 import main.utils.config.Location;
 import main.utils.exception.UserAlreadyExistsException;
@@ -100,7 +100,7 @@ public class CampManager
         Student student;
         try 
         {
-            student = StudentRepository.getInstance().getByID(c.getStudentID());
+            student = StudentDatabase.getInstance().getByID(c.getStudentID());
         } catch (UserErrorException e) {
             throw new IllegalStateException("Student not found");
         }
@@ -113,7 +113,7 @@ public class CampManager
         c.setStudentID(EmptyID.EMPTY_ID);
         c.setStatus(CampStatus.AVAILABLE);
         CampRepository.getInstance().update(c);
-        StudentRepository.getInstance().update(student);
+        StudentDatabase.getInstance().update(student);
         StaffRepository.getInstance().update(staff);
         CampManager.updateCampsStatus();
     }
@@ -131,7 +131,7 @@ public class CampManager
         Student student;
         try 
         {
-            student = StudentRepository.getInstance().getByID(studentID);
+            student = StudentDatabase.getInstance().getByID(studentID);
         } catch (UserErrorException e) {
             throw new IllegalStateException("Student not found");
         }
@@ -149,7 +149,7 @@ public class CampManager
         String staffID = c.getStaffID();
         Staff staff = StaffRepository.getInstance().getByID(staffID);
         CampRepository.getInstance().update(c);
-        StudentRepository.getInstance().update(student);
+        StudentDatabase.getInstance().update(student);
         StaffRepository.getInstance().update(staff);
         CampManager.updateCampsStatus();
     }

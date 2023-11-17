@@ -13,7 +13,7 @@ import static main.utils.config.Location.RESOURCE_LOCATION;
  * through file I/O operations.
  * It extends the Repository class, which provides basic CRUD operations for the repository.
  */
-public class StudentRepository extends Database<Student> {
+public class StudentDatabase extends Database<Student> {
 
     /**
      * The path of the repository file.
@@ -23,7 +23,7 @@ public class StudentRepository extends Database<Student> {
     /**
      * Constructor for the StudentRepository class.
      */
-    StudentRepository() {
+    StudentDatabase() {
         super();
         load();
     }
@@ -33,8 +33,8 @@ public class StudentRepository extends Database<Student> {
      *
      * @return a new instance of the StudentRepository class
      */
-    public static StudentRepository getInstance() {
-        return new StudentRepository();
+    public static StudentDatabase getInstance() {
+        return new StudentDatabase();
     }
 
     /**

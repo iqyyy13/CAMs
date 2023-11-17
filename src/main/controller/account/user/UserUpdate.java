@@ -3,7 +3,7 @@ package main.controller.account.user;
 import main.model.user.Staff;
 import main.model.user.Student;
 import main.model.user.User;
-import main.repository.user.StudentRepository;
+import main.repository.user.StudentDatabase;
 import main.repository.user.StaffRepository;
 import main.utils.exception.UserErrorException;
 
@@ -19,7 +19,7 @@ public class UserUpdate {
      */
     private static void updateStudent(Student student) throws UserErrorException 
     {
-        StudentRepository.getInstance().update(student);
+        StudentDatabase.getInstance().update(student);
     }
 
     private static void updateStaff(Staff staff) throws UserErrorException
