@@ -157,7 +157,7 @@ public class CampManager
     /**
      * load projects from csv resource file
      */
-    public static void loadProjects() 
+    public static void loadCamps() 
     {
         List<List<String>> camps = CSVReader.read(Location.RESOURCE_LOCATION + "/resources/CampList.csv", true);
         System.out.println("TEST");

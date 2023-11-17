@@ -16,7 +16,8 @@ public interface Mappable {
      *
      * @return the map
      */
-    default Map<String, String> toMap() {
+    default Map<String, String> toMap() 
+    {
         Map<String, String> map = new HashMap<>();
         Field[] fields = getClass().getDeclaredFields();
         for (Field field : fields) 

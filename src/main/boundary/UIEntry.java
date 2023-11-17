@@ -16,7 +16,7 @@ public class UIEntry
         AccountManager.loadUsers();
         if(onBootUp())
         {
-            CampManager.loadProjects();
+            CampManager.loadCamps();
         }
         Welcome.welcome();
     }
