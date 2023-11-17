@@ -120,7 +120,7 @@ public class Camp implements Model, Displayable
     {
         if (status != CampStatus.AVAILABLE) 
         {
-            throw new IllegalStateException("Project is not available for allocation.");
+            throw new IllegalStateException("Camp is not available for allocation.");
         }
         this.studentID = studentID;
         this.status = CampStatus.ALLOCATED;
@@ -175,8 +175,9 @@ public class Camp implements Model, Displayable
     private String getCampStaffInformationString() {
         try {
             Staff staff = StaffRepository.getInstance().getByID(staffID);
-            return String.format("| Supervisor Name             | %-30s |\n", staff.getUserName()) +
-                    String.format("| Supervisor Email Address    | %-30s |\n", staff.getEmail());
+            return  String.format("| Staff Name                  | %-30s |\n", staff.getUserName()) +
+                    String.format("| Staff Email Address         | %-30s |\n", staff.getEmail()) +
+                    String.format("| Staff Faculty               | %-30s |\n", staff.getFaculty());
         } catch (UserErrorException e) {
             return "No Staff Assigned";
         }
@@ -199,7 +200,7 @@ public class Camp implements Model, Displayable
 
     private String getCampInformationString() 
     {
-        return String.format("| Project Status              | %-39s |\n", getStatus().colorString());
+        return String.format("| Camp Status                 | %-39s |\n", getStatus().colorString());
     }
 
     private String getSingleCampString() 
@@ -257,7 +258,7 @@ public class Camp implements Model, Displayable
 
         return titleLine1 + titleLine2 +
                 "|--------------------------------------------------------------|\n" +
-                String.format("| Project ID                  | %-30s |\n", getID()) +
+                String.format("| Camp ID                     | %-30s |\n", getID()) +
                 getCampStaffInformationString() +
                 getCampStudentInformationString() +
                 getCampInformationString();

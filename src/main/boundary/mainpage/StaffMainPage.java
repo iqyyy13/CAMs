@@ -13,6 +13,7 @@ import main.controller.camp.CampManager;
 import main.controller.request.StudentManager;
 import main.model.user.*;
 import main.model.camp.Camp;
+import main.repository.camp.CampRepository;
 import main.repository.user.StaffRepository;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
@@ -99,6 +100,27 @@ public class StaffMainPage {
         } catch (UserAlreadyExistsException e) {
             throw new RuntimeException(e);
         }
+        System.out.println("The camp details are as follows:");
+        ModelViewer.displaySingleDisplayable(camp);
+        System.out.println("Are you sure you want to create this camp? (Y/N)");
+        String input = new Scanner(System.in).nextLine();
+        if (!input.equalsIgnoreCase("Y")) 
+        {
+            System.out.println("Project creation cancelled!");
+            try {
+                CampRepository.getInstance().remove(camp.getID());
+                CampManager.updateCampsStatus();
+            } catch (UserErrorException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("Enter enter to continue");
+            new Scanner(System.in).nextLine();
+            throw new PageBackException();
+        }
+        System.out.println("Project created successfully!");
+        System.out.println("Enter enter to continue");
+        new Scanner(System.in).nextLine();
+        throw new PageBackException();
     }
 }
 
