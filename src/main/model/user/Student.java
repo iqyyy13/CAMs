@@ -21,6 +21,8 @@ public class Student implements User {
 
     private StudentStatus status;
 
+    private String staffID;
+
     private String campID;
     private String password;
 
@@ -34,13 +36,15 @@ public class Student implements User {
      * @param email       the email of the student.
      * @param faculty     the faculty of the student
      */
-    public Student(UserType userType, String studentID, String studentName, String email, String faculty) {
+    public Student(UserType userType, String studentID, String studentName, String email, String faculty) 
+    {
         this.userType = UserType.STUDENT;
         this.studentID = studentID;
         this.studentName = studentName;
         this.email = email;
         this.faculty = faculty;
         this.status = StudentStatus.UNREGISTERED;
+        staffID = EmptyID.EMPTY_ID;
         campID = EmptyID.EMPTY_ID;
     }
 
@@ -60,6 +64,7 @@ public class Student implements User {
         this.email = email;
         this.faculty = faculty;
         this.status = StudentStatus.UNREGISTERED;
+        staffID = EmptyID.EMPTY_ID;
         campID = EmptyID.EMPTY_ID;
         this.password = password;
     }
@@ -69,14 +74,16 @@ public class Student implements User {
      *
      * @param informationMap the map
      */
-    public Student(Map<String, String> informationMap) {
+    public Student(Map<String, String> informationMap) 
+    {
         fromMap(informationMap);
     }
 
     /**
      * default constructor for Student class
      */
-    public Student() {
+    public Student() 
+    {
         super();
         this.email = EmptyID.EMPTY_ID;
         this.studentID = EmptyID.EMPTY_ID;
@@ -95,7 +102,8 @@ public class Student implements User {
      @param informationMap a map containing the information required to create a new Student object
      @return a new Student object with the information provided in the map
      */
-    public static User getUser(Map<String, String> informationMap) {
+    public static User getUser(Map<String, String> informationMap) 
+    {
         return new Student(informationMap);
     }
 
@@ -148,7 +156,6 @@ public class Student implements User {
         return password;
     }
 
-
     public void setPassword(String password) 
     {
         this.password = password;
@@ -157,5 +164,15 @@ public class Student implements User {
     public UserType getUserType() 
     {
         return userType;
+    }
+
+    public String getStaffID()
+    {
+        return staffID;
+    }
+
+    public void setStaffID(String staffID)
+    {
+        this.staffID = staffID;
     }
 }

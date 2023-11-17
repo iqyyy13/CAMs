@@ -2,11 +2,10 @@ package main.repository.user;
 
 import main.model.user.Staff;
 import main.repository.Repository;
+import main.utils.config.Location;
 
 import java.util.List;
 import java.util.Map;
-
-import static main.utils.config.Location.RESOURCE_LOCATION;
 
 public class StaffRepository extends Repository<Staff> {
 
@@ -28,7 +27,7 @@ public class StaffRepository extends Repository<Staff> {
     @Override
     public String getFilePath() 
     {
-        return RESOURCE_LOCATION + FILE_PATH;
+        return Location.RESOURCE_LOCATION + FILE_PATH;
     }
 
     @Override

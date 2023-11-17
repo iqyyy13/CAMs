@@ -25,7 +25,8 @@ public class LoginUI
         try
         {
             User user = AccountManager.login(role, userID, password);
-            switch (role) {
+            switch (role) 
+            {
                 case STUDENT -> StudentMainPage.studentMainPage(user);
                 case STAFF -> StaffMainPage.staffMainPage(user);
             }

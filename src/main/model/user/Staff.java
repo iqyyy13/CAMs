@@ -41,9 +41,9 @@ public class Staff implements User
         this.password = password;
     }
 
-    public Staff(Map<String, String> informationMap) 
+    public Staff(Map<String, String> map) 
     {
-        fromMap(informationMap);
+        this.fromMap(map);
     }
 
     public Staff() 
@@ -53,13 +53,14 @@ public class Staff implements User
         this.staffID = EmptyID.EMPTY_ID;
         this.staffName = EmptyID.EMPTY_ID;
         this.faculty = EmptyID.EMPTY_ID;
-        this.userType = UserType.STUDENT;
-        //this.password = EmptyID.EMPTY_ID;
+        this.userType = UserType.STAFF;
+        this.password = EmptyID.EMPTY_ID;
+        this.campID = EmptyID.EMPTY_ID;
     }
 
-    public static User getUser(Map<String, String> informationMap) 
+    public static User getUser(Map<String, String> map) 
     {
-        return new Staff(informationMap);
+        return new Staff(map);
     }
 
     @Override

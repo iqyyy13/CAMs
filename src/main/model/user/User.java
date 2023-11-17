@@ -25,7 +25,8 @@ public interface User extends Model
      *
      * @return true if the username is equal to the user's username regardless of case
      */
-    default boolean checkUsername(String username) {
+    default boolean checkUsername(String username) 
+    {
         return this.getUserName().equalsIgnoreCase(username);
     }
 }

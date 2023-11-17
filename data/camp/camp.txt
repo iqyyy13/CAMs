@@ -1,0 +1,5 @@
+studentIDnullcampIDP1campTitleAI Nexus RetreatstaffIDHUKUMARstatusAVAILABLEfacultySCSE
+studentIDnullcampIDP2campTitleCreatiCon ArtistrystaffIDOURINstatusAVAILABLEfacultyADM
+studentIDnullcampIDP3campTitleElectroInnovatestaffIDUPAMstatusAVAILABLEfacultyEEE
+studentIDnullcampIDP4campTitleVRVerse VoyagestaffIDANWITstatusAVAILABLEfacultySCSE
+studentIDnullcampIDP5campTitleFutureFinance FestivalstaffIDARVIstatusAVAILABLEfacultyNBS

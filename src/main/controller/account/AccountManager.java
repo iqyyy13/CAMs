@@ -38,26 +38,15 @@ public class AccountManager
         }
     }
 
-    public static User register(UserType userType, String userID, String password, String name, String email, String faculty)
-            throws UserAlreadyExistsException {
+    public static User register(UserType userType, String userID, String password, String name, String email, String faculty) throws UserAlreadyExistsException 
+    {
         User user = UserFactory.create(userType, userID, password, name, email, faculty);
-
-        if(userType.equals(userType.STUDENT))
-        {
-            System.out.println("YAY");
-        }
-
-        if("password".equals(password))
-        {
-            System.out.println("WARNING");
-        }
         UserAdd.addUser(user);
         return user;
     }
 
-    public static User register(UserType userType, String userID, String name, String email, String faculty)
-            throws UserAlreadyExistsException {
-
+    public static User register(UserType userType, String userID, String name, String email, String faculty) throws UserAlreadyExistsException 
+    {
         return register(userType, userID, "password", name, email, faculty);
     }    
 
@@ -128,7 +117,7 @@ public class AccountManager
     
     public static void loadUsers()
     {
-        loadStudents();
         loadStaff();
+        loadStudents();
     }
 }

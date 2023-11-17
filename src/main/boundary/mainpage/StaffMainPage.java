@@ -2,16 +2,21 @@ package main.boundary.mainpage;
 
 import java.util.Scanner;
 
+import javax.management.RuntimeErrorException;
+
 import main.boundary.account.Logout;
 import main.boundary.account.ResetPassword;
 import main.boundary.account.ViewUserProfile;
 import main.boundary.modelviewer.ModelViewer;
 import main.controller.account.AccountManager;
+import main.controller.camp.CampManager;
 import main.controller.request.StudentManager;
 import main.model.user.*;
+import main.model.camp.Camp;
 import main.repository.user.StaffRepository;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
+import main.utils.exception.UserAlreadyExistsException;
 import main.utils.iocontrol.IntGetter;
 import main.utils.parameters.EmptyID;
 import main.utils.ui.ChangePage;
@@ -58,13 +63,13 @@ public class StaffMainPage {
                 switch (choice) {
                     case 1 -> ViewUserProfile.viewUserProfilePage(staff);
                     case 2 -> ResetPassword.changePassword(UserType.STAFF, staff.getID());
-                    //case 3 -> ProjectViewer.viewAvailableProjectList(student);
+                    case 3 -> createCamp(staff);
                     //case 4 -> ProjectViewer.viewStudentProject(student);
                     //case 5 -> viewMySupervisor(student);
                     //case 6 -> registerProject(student);
                     //case 7 -> deregisterForProject(student);
                     //case 8 -> changeTitleForProject(student);
-                    case 9 -> Logout.logout();
+                    case 14 -> Logout.logout();
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
                         new Scanner(System.in).nextLine();
@@ -72,12 +77,27 @@ public class StaffMainPage {
                     }
                 }
             } catch (PageBackException e) {
-                StudentMainPage.studentMainPage(staff);
+                StaffMainPage.staffMainPage(staff);
             }
 
 
         } else {
             throw new IllegalArgumentException("User is not a student.");
+        }
+    }
+
+    private static void createCamp(Staff staff) throws PageBackException
+    {
+        ChangePage.changePage();
+        System.out.println("Creating a camp..");
+        System.out.println("Please name your camp:");
+        String campTitle = new Scanner(System.in).nextLine();
+        Camp camp;
+        try 
+        {
+            camp = CampManager.createCamp(campTitle, staff.getID(), staff.getFaculty());
+        } catch (UserAlreadyExistsException e) {
+            throw new RuntimeException(e);
         }
     }
 }

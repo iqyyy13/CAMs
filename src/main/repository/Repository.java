@@ -9,17 +9,17 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class Repository<ModelObject extends Model> extends Savable<ModelObject> implements Iterable<ModelObject> {
+public abstract class Repository<ModelObject extends Model> extends Savable<ModelObject> implements Iterable<ModelObject> 
+{
 
-    /**
-     * The list of model objects stored in the repository.
-     */
+
     List<ModelObject> listOfModelObjects;
 
     /**
      * Creates a new instance of the Repository class.
      */
-    public Repository() {
+    public Repository() 
+    {
         super();
         listOfModelObjects = new ArrayList<>();
     }
@@ -37,7 +37,8 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
      * @return the list of mappable objects
      */
     @Override
-    protected List<ModelObject> getAll() {
+    protected List<ModelObject> getAll() 
+    {
         return listOfModelObjects;
     }
 
@@ -48,9 +49,12 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
      * @return the model object with the given ID
      * @throws UserErrorException if the model object with the given ID does not exist
      */
-    public ModelObject getByID(String modelObjectID) throws UserErrorException {
-        for (ModelObject modelObject : listOfModelObjects) {
-            if (modelObject.getID().equalsIgnoreCase(modelObjectID)) {
+    public ModelObject getByID(String modelObjectID) throws UserErrorException 
+    {
+        for (ModelObject modelObject : listOfModelObjects) 
+        {
+            if (modelObject.getID().equalsIgnoreCase(modelObjectID)) 
+            {
                 return modelObject;
             }
         }
@@ -63,8 +67,10 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
      * @param modelObjectID the ID of the model object to check
      * @return true if the repository contains a model object with the given ID, false otherwise
      */
-    public boolean contains(String modelObjectID) {
-        try {
+    public boolean contains(String modelObjectID) 
+    {
+        try 
+        {
             getByID(modelObjectID);
             return true;
         } catch (UserErrorException e) {
@@ -78,10 +84,14 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
      * @param modelObject the model object to add
      * @throws ModelAlreadyExistsException if a model object with the same ID already exists in the repository
      */
-    public void add(ModelObject modelObject) throws UserAlreadyExistsException {
-        if (contains(modelObject.getID())) {
+    public void add(ModelObject modelObject) throws UserAlreadyExistsException 
+    {
+        if (contains(modelObject.getID())) 
+        {
             throw new UserAlreadyExistsException("A model object with ID " + modelObject.getID() + " already exists.");
-        } else {
+        } 
+        else 
+        {
             listOfModelObjects.add(modelObject);
             save(getFilePath());
         }
@@ -93,7 +103,8 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
      * @param modelObjectID the ID of the model object to remove
      * @throws UserErrorException if the model object with the given ID does not exist
      */
-    public void remove(String modelObjectID) throws UserErrorException {
+    public void remove(String modelObjectID) throws UserErrorException 
+    {
         listOfModelObjects.remove(getByID(modelObjectID));
         save(getFilePath());
     }
@@ -103,7 +114,8 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
      *
      * @return true if the repository is empty, false otherwise
      */
-    public boolean isEmpty() {
+    public boolean isEmpty() 
+    {
         return listOfModelObjects.isEmpty();
     }
 
@@ -112,14 +124,16 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
      *
      * @return the size of the repository
      */
-    public int size() {
+    public int size() 
+    {
         return listOfModelObjects.size();
     }
 
     /**
      * Removes all model objects from this repository.
      */
-    public void clear() {
+    public void clear() 
+    {
         listOfModelObjects.clear();
         save(getFilePath());
     }
@@ -130,7 +144,8 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
      * @param modelObject the model object to update
      * @throws UserErrorException if the specified model object is not found in the repository
      */
-    public void update(ModelObject modelObject) throws UserErrorException {
+    public void update(ModelObject modelObject) throws UserErrorException 
+    {
         ModelObject oldModelObject = getByID(modelObject.getID());
         listOfModelObjects.set(listOfModelObjects.indexOf(oldModelObject), modelObject);
         save(getFilePath());
@@ -141,7 +156,8 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
      *
      * @param modelObjects the list of model objects to update
      */
-    public void updateAll(List<ModelObject> modelObjects) {
+    public void updateAll(List<ModelObject> modelObjects) 
+    {
         listOfModelObjects = modelObjects;
         save(getFilePath());
     }
@@ -149,7 +165,8 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
     /**
      * Loads the list of model objects from the repository file.
      */
-    public void load() {
+    public void load() 
+    {
         this.listOfModelObjects = new ArrayList<>();
         load(getFilePath());
     }
@@ -157,7 +174,8 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
     /**
      * Saves the list of model objects to the repository file.
      */
-    public void save() {
+    public void save() 
+    {
         save(getFilePath());
     }
 
@@ -167,7 +185,8 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
      * @return an iterator over the list of model objects
      */
     @Override
-    public Iterator<ModelObject> iterator() {
+    public Iterator<ModelObject> iterator() 
+    {
         return listOfModelObjects.iterator();
     }
 
@@ -215,7 +234,8 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
      *
      * @return a list of all model objects in the repository
      */
-    public List<ModelObject> getList() {
+    public List<ModelObject> getList()
+    {
         return findByRules();
     }
 
@@ -224,7 +244,8 @@ public abstract class Repository<ModelObject extends Model> extends Savable<Mode
      *
      * @param <ModelObject> the type of model object stored in the repository
      */
-    public interface RepositoryRule<ModelObject> {
+    public interface RepositoryRule<ModelObject>
+    {
         /**
          * Checks whether the specified model object matches the rule.
          *
