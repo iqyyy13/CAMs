@@ -7,9 +7,6 @@ import main.utils.ui.UserTypeGetter;
 
 import java.util.Scanner;
 
-/**
- * This class provides a UI for the user to view his/her profile.
- */
 public class ViewUserProfile {
     /**
      * Displays the user's profile.

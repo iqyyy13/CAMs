@@ -10,29 +10,17 @@ import java.util.Map;
  * It extends the User class and includes a student ID field.
  */
 public class Student implements User {
-    /**
-     * The ID of the student.
-     */
+    
     private String studentID;
-    /**
-     * The name of a student
-     */
+
     private String studentName;
-    /**
-     * The email of a student
-     */
+
     private String email;
-    /**
-     * The faculty of a student
-     */
+
     private String faculty;
-    /**
-     * The status of a student
-     */
+
     private StudentStatus status;
-    /**
-     * The ID of the project
-     */
+
     private String campID;
     private String password;
 
@@ -111,101 +99,63 @@ public class Student implements User {
         return new Student(informationMap);
     }
 
-    /**
-     * Gets the email of the user
-     *
-     * @return the email of the user
-     */
     @Override
-    public String getID() {
+    public String getID() 
+    {
         return this.studentID;
     }
 
-    /**
-     * Gets the username of the user
-     *
-     * @return the name of the user
-     */
     @Override
-    public String getUserName() {
+    public String getUserName() 
+    {
         return this.studentName;
     }
 
-    /**
-     * Gets the email of the user
-     *
-     * @return the email of the user
-     */
     @Override
-    public String getEmail() {
+    public String getEmail() 
+    {
         return this.email;
     }
 
-    /**
-     * Gets the faculty of the user
-     *
-     * @return the faculty of the user
-     */
     @Override
-    public String getFaculty() {
+    public String getFaculty() 
+    {
         return this.faculty;
     }
 
-    /**
-     * Gets the status of the student
-     *
-     * @return the status of the student
-     */
-    public StudentStatus getStatus() {
+    public StudentStatus getStatus() 
+    {
         return this.status;
     }
 
-    /**
-     * Sets the status of the student
-     *
-     * @param status the new status of the student
-     */
-    public void setStatus(StudentStatus status) {
+    public void setStatus(StudentStatus status) 
+    {
         this.status = status;
     }
 
-    /**
-     * Gets the ID of the camp
-     *
-     * @return the ID of the camp
-     */
-    public String getCampID() {
+    public String getCampID() 
+    {
         return campID;
     }
 
-    /**
-     * Sets the ID of the camp
-     *
-     * @param campID the ID of the camp
-     */
-    public void setCampID(String campID) {
+    public void setCampID(String campID) 
+    {
         this.campID = campID;
     }
 
-    /**
-     * getter for the password
-     *
-     * @return 
-     */
-    public String getPassword() {
+    public String getPassword() 
+    {
         return password;
     }
 
-    /**
-     * setter for the password
-     *
-     * @param password the password that to be set
-     */
-    public void setPassword(String password) {
+
+    public void setPassword(String password) 
+    {
         this.password = password;
     }
 
-    public UserType getUserType() {
+    public UserType getUserType() 
+    {
         return userType;
     }
 }

@@ -2,50 +2,18 @@ package main.model.user;
 
 import main.model.Model;
 
-/**
- * A class that represents a user
- */
-public interface User extends Model {
-    /**
-     * Gets the user ID of the user.
-     *
-     * @return the ID of the user.
-     */
+public interface User extends Model 
+{
     String getID();
 
-    /**
-     * Gets the username of the user
-     *
-     * @return the name of the user
-     */
     String getUserName();
 
-    /**
-     * Gets the hashed password of the user
-     *
-     * @return the hashed password of the user
-     */
     String getPassword();
 
-    /**
-     * Sets the hashed password of the user
-     *
-     * @param hashedPassword the hashed password of the user
-     */
     void setPassword(String password);
 
-    /**
-     * Gets the email of the user
-     *
-     * @return the email of the user
-     */
     String getEmail();
 
-    /**
-     * Gets the faculty of the user
-     *
-     * @return the faculty of the user
-     */
     String getFaculty();
 
     UserType getUserType();

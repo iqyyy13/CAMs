@@ -10,10 +10,6 @@ import main.utils.ui.UserTypeGetter;
 
 import java.util.Scanner;
 
-/**
- * This class is responsible for handling the change password feature for a given user account. It contains
- * two methods, {@code changePassword} and {@code askToRetry}, that are used for this purpose.
- */
 public class ResetPassword {
     /**
      * This method is called when the user enters an incorrect password and wants to retry the password change. It
@@ -68,15 +64,15 @@ public class ResetPassword {
 
         do {
             // read the new password
-            System.out.print("Please enter your new password: ");
+            System.out.print("Please enter a new password: ");
             newPassword = AttributeGetter.getPassword();
             // read the new password again
-            System.out.print("Please enter your new password again: ");
+            System.out.print("Please enter a new password again: ");
             newPasswordAgain = AttributeGetter.getPassword();
             // if the new password is not the same as the new password again, ask the user to enter again
 
             if (!newPassword.equals(newPasswordAgain)) {
-                System.out.println("Two passwords are not the same.");
+                System.out.println("The two passwords are not the same.");
                 askToRetry(userType, userID);
             } else if (newPassword.equals(oldPassword)) {
                 System.out.println("New password cannot be the same as the old password.");
@@ -85,7 +81,7 @@ public class ResetPassword {
         } while (!newPassword.equals(newPasswordAgain));
 
         if (newPassword.length() < 8) {
-            System.out.println("Password must be at least 8 characters long.");
+            System.out.println("Password must be more than 8 characters.");
             askToRetry(userType, userID);
         }
 

@@ -17,11 +17,10 @@ public interface Mappable {
      * @return the map
      */
     default Map<String, String> toMap() {
-//        System.err.println("in");
         Map<String, String> map = new HashMap<>();
         Field[] fields = getClass().getDeclaredFields();
-        for (Field field : fields) {
-//            System.err.println(field.getName() + " in");
+        for (Field field : fields) 
+        {
             try {
                 field.setAccessible(true);
                 try {
@@ -32,9 +31,7 @@ public interface Mappable {
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-//            System.err.println(field.getName() + " out");
         }
-//        System.err.println("out");
         return map;
     }
 
@@ -48,19 +45,26 @@ public interface Mappable {
         for (Field field : fields) {
             try {
                 field.setAccessible(true);
-                if (field.getType().isEnum()) {
+                if (field.getType().isEnum()) 
+                {
                     @SuppressWarnings("unchecked")
                     Enum<?> enumValue = Enum.valueOf((Class<Enum>) field.getType(), map.get(field.getName()));
                     field.set(this, enumValue);
-                } else if (field.getType().equals(Integer.TYPE) || field.getType().equals(Integer.class)) {
-//                    System.err.println("==============================");
-                    if (EmptyID.isEmptyID(map.get(field.getName()))) {
+                } 
+                else if (field.getType().equals(Integer.TYPE) || field.getType().equals(Integer.class)) 
+                {
+                    if (EmptyID.isEmptyID(map.get(field.getName()))) 
+                    {
                         field.set(this, 0);
-                    } else {
+                    } 
+                    else 
+                    {
                         int intValue = Integer.parseInt(map.get(field.getName()));
                         field.set(this, intValue);
                     }
-                } else {
+                } 
+                else 
+                {
                     field.set(this, map.get(field.getName()));
                 }
             } catch (IllegalAccessException | NumberFormatException e) {

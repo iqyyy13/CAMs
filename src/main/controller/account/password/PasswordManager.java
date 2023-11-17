@@ -15,9 +15,6 @@ public class PasswordManager {
      * @return true if the password is correct, false otherwise
      */
     public static boolean checkPassword(User user, String password) {
-//        System.err.println("Checking password...");
-//        System.err.println("User password: " + user.getHashedPassword());
-//        System.err.println("Input password: " + PasswordHashManager.hashPassword(password));
         return user.getPassword().equals(password);
     }
 
