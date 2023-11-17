@@ -29,29 +29,16 @@ public class CampManager
         CampManager.updateCampsStatus();
     }
 
-    /**
-     * Change the supervisor of a project
-     *
-     * @return the new supervisor
-     */
     public static List<Camp> viewAllCamp()
     {
         return CampDatabase.getInstance().getList();
     }
 
-    /**
-     * View all the projects that are available
-     *
-     * @return the list of available projects
-     */
     public static List<Camp> viewAvailableCamps() 
     {
         return CampDatabase.getInstance().findByRules(p -> p.getStatus() == CampStatus.AVAILABLE);
     }
 
-    /**
-     * create a new camp
-     */
     public static void createCamp(String campID, String campTitle, String staffID, String faculty) throws UserAlreadyExistsException 
     {
         Camp c = new Camp(campID, campTitle, staffID, faculty);
@@ -80,7 +67,8 @@ public class CampManager
     public static String getNewCampID() 
     {
         int max = 0;
-        for (Camp c : CampDatabase.getInstance()) {
+        for (Camp c : CampDatabase.getInstance()) 
+        {
             int id = Integer.parseInt(c.getID().substring(1));
             if (id > max) 
             {
@@ -118,13 +106,6 @@ public class CampManager
         CampManager.updateCampsStatus();
     }
 
-    /**
-     * allocate a project
-     *
-     * @param projectID the ID of the project
-     * @param studentID the ID of the student
-     * @throws ModelNotFoundException if the project is not found
-     */
     public static void allocateCamp(String campID, String studentID) throws UserErrorException 
     {
         Camp c = CampDatabase.getInstance().getByID(campID);
@@ -154,9 +135,6 @@ public class CampManager
         CampManager.updateCampsStatus();
     }
 
-    /**
-     * load projects from csv resource file
-     */
     public static void loadCamps() 
     {
         List<List<String>> camps = CSVReader.read(Location.RESOURCE_LOCATION + "/resources/CampList.csv", true);
@@ -186,45 +164,23 @@ public class CampManager
         }
     }
 
-    /**
-     * check if the repository is empty
-     *
-     * @return true if the repository is empty
-     */
     public static boolean repositoryIsEmpty() 
     {
         return CampDatabase.getInstance().isEmpty();
     }
 
-    /**
-     * Check if the project is not in the repository
-     *
-     * @param projectID the ID of the project
-     * @return true if the project is not in the repository
-     */
     public static boolean notContainsCampByID(String campID) 
     {
         return !CampDatabase.getInstance().contains(campID);
     }
 
-    /**
-     * Check if the project is in the repository
-     *
-     * @param projectID the ID of the project
-     * @return true if the project is in the repository
-     */
     public static boolean containsCampByID(String campID) 
     {
         return CampDatabase.getInstance().contains(campID);
     }
 
-    /**
-     * get the project of a student
-     *
-     * @param student the student
-     * @return the project of the student
-     */
-    public static Camp getStudentCamp(Student student) {
+    public static Camp getStudentCamp(Student student)
+    {
         if (EmptyID.isEmptyID(student.getCampID())) 
         {
             return null;
@@ -240,53 +196,27 @@ public class CampManager
         }
     }
 
-    /**
-     * get the project of a supervisor
-     *
-     * @param projectID the ID of the project
-     * @return the project of the supervisor
-     * @throws ModelNotFoundException if the project is not found
-     */
     public static Camp getByID(String campID) throws UserErrorException 
     {
         return CampDatabase.getInstance().getByID(campID);
     }
 
-    /**
-     * get all available projects
-     *
-     * @return all available projects
-     */
     public static List<Camp> getAllAvailableProject() 
     {
         return CampDatabase.getInstance().findByRules(p -> p.getStatus() == CampStatus.AVAILABLE);
     }
 
-    /**
-     * get project by the project ID
-     * @param projectID the ID of the project
-     * @return the project
-     * @throws ModelNotFoundException if the project is not found
-     */
     public static Camp getCampByID(String campID) throws UserErrorException 
     {
         return CampDatabase.getInstance().getByID(campID);
     }
 
-    /**
-     * get all projects by supervisor
-     *
-     * @param supervisorID the ID of the supervisor
-     * @return all projects by supervisor
-     */
     public static List<Camp> getAllProjectsByStaff(String staffID) {
         return CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staffID));
     }
 
-    /**
-     * update the status of all projects
-     */
-    public static void updateCampsStatus() {
+    public static void updateCampsStatus() 
+    {
         List<Staff> staffs = StaffManager.getAllUnavailableStaff();
         Set<String> staffIDs = new HashSet<>();
         for (Staff staff : staffs) 

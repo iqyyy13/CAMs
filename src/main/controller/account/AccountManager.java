@@ -95,7 +95,7 @@ public class AccountManager
             String faculty = row.get(2);
             String userID = getID(email);
 
-            //System.out.println("Registering student:");
+            //System.out.println("Registering staff:");
             //System.out.println("Name: " + name);
             //System.out.println("Email: " + email);
             //System.out.println("Faculty: " + faculty);

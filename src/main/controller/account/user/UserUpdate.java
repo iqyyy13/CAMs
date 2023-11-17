@@ -7,16 +7,8 @@ import main.model.user.Student;
 import main.model.user.User;
 import main.utils.exception.UserErrorException;
 
-/**
- * The UserUpdater class provides a utility for updating users in the database.
- */
-public class UserUpdate {
-    /**
-     * Updates the specified user in the database.
-     *
-     * @param student the user to be updated
-     * @throws UserErrorException if the user is not found in the database
-     */
+public class UserUpdate 
+{
     private static void updateStudent(Student student) throws UserErrorException 
     {
         StudentDatabase.getInstance().update(student);
@@ -27,12 +19,6 @@ public class UserUpdate {
         StaffDatabase.getInstance().update(staff);
     }
 
-    /**
-     * Updates the specified user in the database.
-     *
-     * @param user the user to be updated
-     * @throws ModelNotFoundException if the user is not found in the database
-     */
     public static void updateUser(User user) throws UserErrorException 
     {
         if(user instanceof Student student) 
