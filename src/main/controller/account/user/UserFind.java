@@ -8,7 +8,7 @@ import main.utils.exception.UserErrorException;
 /**
  * A class that provides a utility for finding users in the database.
  */
-public class UserFinder {
+public class UserFind {
     /**
      * Finds the user with the specified ID.
      *

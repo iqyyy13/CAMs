@@ -2,7 +2,7 @@ package main.controller.account;
 
 import main.controller.account.password.PasswordManager;
 import main.controller.account.user.UserAdd;
-import main.controller.account.user.UserFinder;
+import main.controller.account.user.UserFind;
 import main.controller.account.user.UserUpdate;
 import main.model.user.User;
 import main.model.user.UserType;
@@ -19,7 +19,7 @@ public class AccountManager
 {
     public static void changePassword(UserType userType, String userID, String oldPassword, String newPassword)
             throws PasswordIncorrectException, UserErrorException {
-        User user = UserFinder.findUser(userID, userType);
+        User user = UserFind.findUser(userID, userType);
         PasswordManager.changePassword(user, oldPassword, newPassword);
         UserUpdate.updateUser(user);
     }
@@ -27,8 +27,8 @@ public class AccountManager
     public static User login(UserType userType, String userID, String password)
             throws PasswordIncorrectException, UserErrorException {
         
-        //User user = UserFinder.findUser(userID, userType);
-        User user = UserFinder.findStudent(userID);
+        //User user = .findUser(userID, userType);
+        User user = UserFind.findStudent(userID);
 //        System.err.println("User found: " + user.getUserName() + " " + user.getID());
         if (PasswordManager.checkPassword(user, password)) {
             return user;
