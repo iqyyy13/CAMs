@@ -14,7 +14,8 @@ public class PasswordManager {
      * @param password the password to be checked
      * @return true if the password is correct, false otherwise
      */
-    public static boolean checkPassword(User user, String password) {
+    public static boolean checkPassword(User user, String password) 
+    {
         return user.getPassword().equals(password);
     }
 
@@ -26,10 +27,14 @@ public class PasswordManager {
      * @param newPassword the new password
      * @throws PasswordIncorrectException if the old password is incorrect
      */
-    public static void changePassword(User user, String oldPassword, String newPassword) throws PasswordIncorrectException {
-        if (checkPassword(user, oldPassword)) {
+    public static void changePassword(User user, String oldPassword, String newPassword) throws PasswordIncorrectException 
+    {
+        if (checkPassword(user, oldPassword)) 
+        {
             user.setPassword(newPassword);
-        } else {
+        } 
+        else 
+        {
             throw new PasswordIncorrectException();
         }
     }

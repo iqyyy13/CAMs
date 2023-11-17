@@ -1,0 +1,5 @@
+passwordpasswordcampIDnullstaffNameMADHUKUMARuserTypeSTUDENTstaffIDHUKUMARemailHUKUMAR@NTU.EDU.SGfacultySCSE
+passwordpasswordcampIDnullstaffNameALEXEIuserTypeSTUDENTstaffIDOURINemailOURIN@ntu.edu.sgfacultyADM
+passwordpasswordcampIDnullstaffNameCHATTOPADHYAYuserTypeSTUDENTstaffIDUPAMemailUPAM@NTU.EDU.SGfacultyEEE
+passwordpasswordcampIDnullstaffNameDATTAuserTypeSTUDENTstaffIDANWITemailANWIT@NTU.EDU.SGfacultySCSE
+passwordpasswordcampIDnullstaffNameARVINDuserTypeSTUDENTstaffIDARVIemailARVI@NTU.EDU.SGfacultyNBS

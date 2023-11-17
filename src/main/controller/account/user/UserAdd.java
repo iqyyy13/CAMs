@@ -1,8 +1,10 @@
 package main.controller.account.user;
 
+import main.model.user.Staff;
 import main.model.user.Student;
 import main.model.user.User;
 import main.repository.user.StudentRepository;
+import main.repository.user.StaffRepository;
 import main.utils.exception.UserAlreadyExistsException;
 
 /**
@@ -17,14 +19,23 @@ public class UserAdd {
      */
     public static void addUser(User user) throws UserAlreadyExistsException 
     {
-        if (user instanceof Student student) 
+        if(user instanceof Student student) 
         {
             addStudent(student);
+        }
+        else if(user instanceof Staff staff)
+        {
+            addStaff(staff);
         }
     }
 
     private static void addStudent(Student student) throws UserAlreadyExistsException 
     {
         StudentRepository.getInstance().add(student);
+    }
+
+    private static void addStaff(Staff staff) throws UserAlreadyExistsException 
+    {
+        StaffRepository.getInstance().add(staff);
     }
 }

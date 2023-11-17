@@ -1,7 +1,9 @@
 package main.boundary.account;
 
+import main.boundary.mainpage.StaffMainPage;
 import main.boundary.mainpage.StudentMainPage;
 import main.controller.account.AccountManager;
+import main.model.user.Student;
 import main.model.user.User;
 import main.model.user.UserType;
 import main.utils.ui.ChangePage;
@@ -15,14 +17,19 @@ public class LoginUI
     public static void login() throws PageBackException 
     {
         ChangePage.changePage();
+        
+        UserType role = AttributeGetter.getRole();
         String userID = AttributeGetter.getUserID();
         String password = AttributeGetter.getPassword();
 
         try
         {
-            User user = AccountManager.login(UserType.STUDENT, userID, password);
-            StudentMainPage.studentMainPage(user);
-            System.out.println("YAY");
+            User user = AccountManager.login(role, userID, password);
+            switch (role) {
+                case STUDENT -> StudentMainPage.studentMainPage(user);
+                case STAFF -> StaffMainPage.staffMainPage(user);
+            }
+            return;
         } 
         catch (PasswordIncorrectException e)
         {

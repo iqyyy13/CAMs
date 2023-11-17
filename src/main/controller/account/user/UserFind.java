@@ -3,6 +3,7 @@ package main.controller.account.user;
 import main.model.user.User;
 import main.model.user.UserType;
 import main.repository.user.StudentRepository;
+import main.repository.user.StaffRepository;
 import main.utils.exception.UserErrorException;
 
 /**
@@ -16,8 +17,14 @@ public class UserFind {
      * @return the user with the specified ID
      * @throws ModelNotFoundException if the user is not found
      */
-    public static User findStudent(String userID) throws UserErrorException {
+    public static User findStudent(String userID) throws UserErrorException 
+    {
         return StudentRepository.getInstance().getByID(userID);
+    }
+
+    public static User findStaff(String userID) throws UserErrorException 
+    {
+        return StaffRepository.getInstance().getByID(userID);
     }
 
     /**
@@ -28,10 +35,12 @@ public class UserFind {
      * @return the user with the specified ID
      * @throws ModelNotFoundException if the user is not found
      */
-    public static User findUser(String userID, UserType userType) throws UserErrorException {
-        return switch (userType) {
+    public static User findUser(String userID, UserType userType) throws UserErrorException 
+    {
+        return switch (userType) 
+        {
             case STUDENT -> findStudent(userID);
-            case STAFF -> findStudent(userID);
+            case STAFF -> findStaff(userID);
             case CC -> findStudent(userID);
         };
     }

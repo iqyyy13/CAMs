@@ -1,4 +1,4 @@
-studentIDYCHERNpasswordskyblue1308campIDnullstudentNameCHERNuserTypeSTUDENTemailYCHERN@e.ntu.edu.sg;facultySCSEstatusUNREGISTERED
+studentIDYCHERNpasswordpasswordcampIDnullstudentNameCHERNuserTypeSTUDENTemailYCHERN@e.ntu.edu.sg;facultySCSEstatusUNREGISTERED
 studentIDKOH1passwordpasswordcampIDnullstudentNameKOHuserTypeSTUDENTemailKOH1@e.ntu.edu.sg;facultyADMstatusUNREGISTERED
 studentIDBR015passwordpasswordcampIDnullstudentNameBRANDONuserTypeSTUDENTemailBR015@e.ntu.edu.sg;facultyEEEstatusUNREGISTERED
 studentIDCT113passwordpasswordcampIDnullstudentNameCALVINuserTypeSTUDENTemailCT113@e.ntu.edu.sg;facultySCSEstatusUNREGISTERED

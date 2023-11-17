@@ -17,7 +17,7 @@ public class UserFactory {
         return switch (userType)
         {
             case STUDENT -> new Student(userType, userID, name, email, faculty, password);
-            case STAFF -> new Student();
+            case STAFF -> new Staff(userType, userID, name, email, faculty, password);
             case CC -> new Student();
         };
     }
