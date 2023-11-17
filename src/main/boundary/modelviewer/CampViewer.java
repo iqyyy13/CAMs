@@ -87,7 +87,7 @@ public class CampViewer
             } 
             else 
             {
-                generateDetailsBySupervisorID();
+                generateDetailsByStaffID();
                 return;
             }
         }
@@ -136,7 +136,7 @@ public class CampViewer
             switch (option) 
             {
                 case 1 -> generateDetailsByCampID();
-                case 2 -> generateDetailsBySupervisorID();
+                case 2 -> generateDetailsByStaffID();
                 case 3 -> generateDetailsByStudentID();
                 case 4 -> generateDetailsByStatus();
                 default -> 
