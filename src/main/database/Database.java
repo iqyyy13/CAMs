@@ -3,13 +3,13 @@ package main.database;
 import main.model.Model;
 import main.utils.exception.UserAlreadyExistsException;
 import main.utils.exception.UserErrorException;
-import main.utils.iocontrol.Savable;
+import main.utils.iocontrol.Preservable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class Database<ModelObject extends Model> extends Savable<ModelObject> implements Iterable<ModelObject> 
+public abstract class Database<ModelObject extends Model> extends Preservable<ModelObject> implements Iterable<ModelObject> 
 {
 
 
