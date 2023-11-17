@@ -5,7 +5,7 @@ import main.model.camp.Camp;
 import main.model.camp.CampStatus;
 import main.model.user.Student;
 import main.model.user.StudentStatus;
-import main.repository.camp.CampRepository;
+import main.repository.camp.CampDatabase;
 import main.repository.user.StaffDatabase;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
@@ -53,7 +53,7 @@ public class CampViewer
         System.out.println("Please Enter the CampID to search: ");
         String s1 = new Scanner(System.in).nextLine();
         try {
-            Camp camp = CampRepository.getInstance().getByID(s1);
+            Camp camp = CampDatabase.getInstance().getByID(s1);
             camp.displayCamp();
         } catch (UserErrorException e) {
             System.out.println("Cannot find the camp matching this ID");
@@ -91,7 +91,7 @@ public class CampViewer
                 return;
             }
         }
-        List<Camp> campList = CampRepository.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(s1));
+        List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(s1));
         ModelViewer.displayListOfDisplayable(campList);
         System.out.println("Enter <Enter> to continue");
         new Scanner(System.in).nextLine();
@@ -102,7 +102,7 @@ public class CampViewer
     {
         System.out.println("Enter the StudentID to search");
         String s1 = new Scanner(System.in).nextLine();
-        ModelViewer.displayListOfDisplayable(CampRepository.getInstance().findByRules(p -> Objects.equals(p.getStudentID(), s1)));
+        ModelViewer.displayListOfDisplayable(CampDatabase.getInstance().findByRules(p -> Objects.equals(p.getStudentID(), s1)));
         System.out.println("Enter <Enter> to continue");
         new Scanner(System.in).nextLine();
         throw new PageBackException();
@@ -111,7 +111,7 @@ public class CampViewer
     public static void generateDetailsByStatus() throws PageBackException 
     {
         CampStatus status = geCampStatus();
-        ModelViewer.displayListOfDisplayable(CampRepository.getInstance().findByRules(p -> Objects.equals(p.getStatus(), status)));
+        ModelViewer.displayListOfDisplayable(CampDatabase.getInstance().findByRules(p -> Objects.equals(p.getStatus(), status)));
         System.out.println("Enter <Enter> to continue");
         new Scanner(System.in).nextLine();
         throw new PageBackException();

@@ -13,7 +13,7 @@ import main.controller.camp.CampManager;
 import main.controller.request.StudentManager;
 import main.model.user.*;
 import main.model.camp.Camp;
-import main.repository.camp.CampRepository;
+import main.repository.camp.CampDatabase;
 import main.repository.user.StaffDatabase;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
@@ -108,7 +108,7 @@ public class StaffMainPage {
         {
             System.out.println("Project creation cancelled!");
             try {
-                CampRepository.getInstance().remove(camp.getID());
+                CampDatabase.getInstance().remove(camp.getID());
                 CampManager.updateCampsStatus();
             } catch (UserErrorException e) {
                 throw new RuntimeException(e);

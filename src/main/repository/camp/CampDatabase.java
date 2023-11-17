@@ -8,19 +8,19 @@ import java.util.Map;
 
 import static main.utils.config.Location.RESOURCE_LOCATION;
 
-public class CampRepository extends Database<Camp> 
+public class CampDatabase extends Database<Camp> 
 {
     private static final String FILE_PATH = "/data/camp/camp.txt";
 
-    CampRepository() 
+    CampDatabase() 
     {
         super();
         load();
     }
 
-    public static CampRepository getInstance()
+    public static CampDatabase getInstance()
     {
-        return new CampRepository();
+        return new CampDatabase();
     }
 
     @Override

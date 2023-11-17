@@ -5,7 +5,7 @@ import main.model.request.Request;
 import main.model.request.RequestStatus;
 import main.model.request.RequestType;
 import main.model.user.Staff;
-import main.repository.camp.CampRepository;
+import main.repository.camp.CampDatabase;
 import main.repository.request.RequestDatabase;
 import main.repository.user.StaffDatabase;
 import main.utils.exception.UserAlreadyExistsException;
@@ -73,7 +73,7 @@ public class StaffManager
      */
     public static int getNumOfStudents(String staffID) 
     {
-        return CampRepository.getInstance().findByRules(
+        return CampDatabase.getInstance().findByRules(
                 camp -> camp.getStaffID().equalsIgnoreCase(staffID),
                 camp -> camp.getStatus() == CampStatus.ALLOCATED ||
                         camp.getStatus() == CampStatus.AVAILABLE

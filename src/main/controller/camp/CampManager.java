@@ -6,7 +6,7 @@ import main.model.camp.CampStatus;
 import main.model.user.Student;
 import main.model.user.StudentStatus;
 import main.model.user.Staff;
-import main.repository.camp.CampRepository;
+import main.repository.camp.CampDatabase;
 import main.repository.user.StudentDatabase;
 import main.repository.user.StaffDatabase;
 import main.utils.config.Location;
@@ -23,9 +23,9 @@ public class CampManager
 {
     public static void changeCampTitle(String campID, String newTitle) throws UserErrorException 
     {
-        Camp camp = CampRepository.getInstance().getByID(campID);
+        Camp camp = CampDatabase.getInstance().getByID(campID);
         camp.setCampTitle(newTitle);
-        CampRepository.getInstance().update(camp);
+        CampDatabase.getInstance().update(camp);
         CampManager.updateCampsStatus();
     }
 
@@ -36,7 +36,7 @@ public class CampManager
      */
     public static List<Camp> viewAllCamp()
     {
-        return CampRepository.getInstance().getList();
+        return CampDatabase.getInstance().getList();
     }
 
     /**
@@ -46,7 +46,7 @@ public class CampManager
      */
     public static List<Camp> viewAvailableCamps() 
     {
-        return CampRepository.getInstance().findByRules(p -> p.getStatus() == CampStatus.AVAILABLE);
+        return CampDatabase.getInstance().findByRules(p -> p.getStatus() == CampStatus.AVAILABLE);
     }
 
     /**
@@ -55,32 +55,32 @@ public class CampManager
     public static void createCamp(String campID, String campTitle, String staffID, String faculty) throws UserAlreadyExistsException 
     {
         Camp c = new Camp(campID, campTitle, staffID, faculty);
-        CampRepository.getInstance().add(c);
+        CampDatabase.getInstance().add(c);
         CampManager.updateCampsStatus();
     }
 
     public static Camp createCamp(String campTitle, String staffID, String faculty) throws UserAlreadyExistsException 
     {
         Camp c = new Camp(getNewCampID(), campTitle, staffID, faculty);
-        CampRepository.getInstance().add(c);
+        CampDatabase.getInstance().add(c);
         CampManager.updateCampsStatus();
         return c;
     }
 
     public static List<Camp> getAllCamp() 
     {
-        return CampRepository.getInstance().getList();
+        return CampDatabase.getInstance().getList();
     }
 
     public static List<Camp> getAllCampByStatus(CampStatus campStatus) 
     {
-        return CampRepository.getInstance().findByRules(camp -> camp.getStatus().equals(campStatus));
+        return CampDatabase.getInstance().findByRules(camp -> camp.getStatus().equals(campStatus));
     }
 
     public static String getNewCampID() 
     {
         int max = 0;
-        for (Camp c : CampRepository.getInstance()) {
+        for (Camp c : CampDatabase.getInstance()) {
             int id = Integer.parseInt(c.getID().substring(1));
             if (id > max) 
             {
@@ -92,7 +92,7 @@ public class CampManager
 
     public static void deallocateCamp(String campID) throws UserErrorException 
     {
-        Camp c = CampRepository.getInstance().getByID(campID);
+        Camp c = CampDatabase.getInstance().getByID(campID);
         if (c.getStatus() != CampStatus.ALLOCATED) 
         {
             throw new IllegalStateException("The camp status is not ALLOCATED");
@@ -112,7 +112,7 @@ public class CampManager
         student.setStatus(StudentStatus.UNREGISTERED);
         c.setStudentID(EmptyID.EMPTY_ID);
         c.setStatus(CampStatus.AVAILABLE);
-        CampRepository.getInstance().update(c);
+        CampDatabase.getInstance().update(c);
         StudentDatabase.getInstance().update(student);
         StaffDatabase.getInstance().update(staff);
         CampManager.updateCampsStatus();
@@ -127,7 +127,7 @@ public class CampManager
      */
     public static void allocateCamp(String campID, String studentID) throws UserErrorException 
     {
-        Camp c = CampRepository.getInstance().getByID(campID);
+        Camp c = CampDatabase.getInstance().getByID(campID);
         Student student;
         try 
         {
@@ -148,7 +148,7 @@ public class CampManager
         student.setStatus(StudentStatus.REGISTERED);
         String staffID = c.getStaffID();
         Staff staff = StaffDatabase.getInstance().getByID(staffID);
-        CampRepository.getInstance().update(c);
+        CampDatabase.getInstance().update(c);
         StudentDatabase.getInstance().update(student);
         StaffDatabase.getInstance().update(staff);
         CampManager.updateCampsStatus();
@@ -193,7 +193,7 @@ public class CampManager
      */
     public static boolean repositoryIsEmpty() 
     {
-        return CampRepository.getInstance().isEmpty();
+        return CampDatabase.getInstance().isEmpty();
     }
 
     /**
@@ -204,7 +204,7 @@ public class CampManager
      */
     public static boolean notContainsCampByID(String campID) 
     {
-        return !CampRepository.getInstance().contains(campID);
+        return !CampDatabase.getInstance().contains(campID);
     }
 
     /**
@@ -215,7 +215,7 @@ public class CampManager
      */
     public static boolean containsCampByID(String campID) 
     {
-        return CampRepository.getInstance().contains(campID);
+        return CampDatabase.getInstance().contains(campID);
     }
 
     /**
@@ -233,7 +233,7 @@ public class CampManager
         {
             try 
             {
-                return CampRepository.getInstance().getByID(student.getCampID());
+                return CampDatabase.getInstance().getByID(student.getCampID());
             } catch (UserErrorException e) {
                 throw new IllegalStateException("Project " + student.getCampID() + " not found");
             }
@@ -249,7 +249,7 @@ public class CampManager
      */
     public static Camp getByID(String campID) throws UserErrorException 
     {
-        return CampRepository.getInstance().getByID(campID);
+        return CampDatabase.getInstance().getByID(campID);
     }
 
     /**
@@ -259,7 +259,7 @@ public class CampManager
      */
     public static List<Camp> getAllAvailableProject() 
     {
-        return CampRepository.getInstance().findByRules(p -> p.getStatus() == CampStatus.AVAILABLE);
+        return CampDatabase.getInstance().findByRules(p -> p.getStatus() == CampStatus.AVAILABLE);
     }
 
     /**
@@ -270,7 +270,7 @@ public class CampManager
      */
     public static Camp getCampByID(String campID) throws UserErrorException 
     {
-        return CampRepository.getInstance().getByID(campID);
+        return CampDatabase.getInstance().getByID(campID);
     }
 
     /**
@@ -280,7 +280,7 @@ public class CampManager
      * @return all projects by supervisor
      */
     public static List<Camp> getAllProjectsByStaff(String staffID) {
-        return CampRepository.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staffID));
+        return CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staffID));
     }
 
     /**
@@ -293,7 +293,7 @@ public class CampManager
         {
             staffIDs.add(staff.getID());
         }
-        List<Camp> camps = CampRepository.getInstance().getList();
+        List<Camp> camps = CampDatabase.getInstance().getList();
         for (Camp camp : camps) {
             if (staffIDs.contains(camp.getStaffID()) && camp.getStatus() == CampStatus.AVAILABLE) {
                 camp.setStatus(CampStatus.UNAVAILABLE);
@@ -302,6 +302,6 @@ public class CampManager
                 camp.setStatus(CampStatus.AVAILABLE);
             }
         }
-        CampRepository.getInstance().updateAll(camps);
+        CampDatabase.getInstance().updateAll(camps);
     }
 }
