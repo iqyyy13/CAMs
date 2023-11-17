@@ -13,7 +13,7 @@ import java.util.Map;
  * through file I/O operations.
  * It extends the Repository class, which provides basic CRUD operations for the repository.
  */
-public class RequestRepository extends Database<Request> {
+public class RequestDatabase extends Database<Request> {
 
     /**
      * The path of the repository file.
@@ -23,7 +23,7 @@ public class RequestRepository extends Database<Request> {
     /**
      * Constructor to create an instance of RequestRepository.
      */
-    RequestRepository() {
+    RequestDatabase() {
         super();
         load();
     }
@@ -33,8 +33,8 @@ public class RequestRepository extends Database<Request> {
      *
      * @return the instance of RequestRepository
      */
-    public static RequestRepository getInstance() {
-        return new RequestRepository();
+    public static RequestDatabase getInstance() {
+        return new RequestDatabase();
     }
 
     /**

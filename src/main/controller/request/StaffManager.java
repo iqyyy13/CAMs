@@ -6,7 +6,7 @@ import main.model.request.RequestStatus;
 import main.model.request.RequestType;
 import main.model.user.Staff;
 import main.repository.camp.CampRepository;
-import main.repository.request.RequestRepository;
+import main.repository.request.RequestDatabase;
 import main.repository.user.StaffDatabase;
 import main.utils.exception.UserAlreadyExistsException;
 import main.utils.parameters.EmptyID;
@@ -30,7 +30,7 @@ public class StaffManager
      */
     public static List<Request> viewRequest(String staffID) 
     {
-        return RequestRepository.getInstance().findByRules(request -> request.getID().equals(staffID));
+        return RequestDatabase.getInstance().findByRules(request -> request.getID().equals(staffID));
     }
 
     /**
@@ -43,7 +43,7 @@ public class StaffManager
         if (!StaffDatabase.getInstance().contains(staffID)) {
             throw new IllegalArgumentException("Staff does not exist");
         }
-        return RequestRepository.getInstance().findByRules(
+        return RequestDatabase.getInstance().findByRules(
                 request -> request.getStaffID().equals(staffID),
                 request -> request.getStatus() == RequestStatus.PENDING,
                 request -> request.getRequestType() != RequestType.STUDENT_EDIT_ENQUIRY
@@ -58,7 +58,7 @@ public class StaffManager
      */
     public static List<Request> getAllRequestHistory(Staff staff) 
     {
-        return RequestRepository.getInstance().findByRules(
+        return RequestDatabase.getInstance().findByRules(
                 request -> Objects.equals(request.getStaffID(), staff.getID()),
                 request -> request.getRequestType() != RequestType.STUDENT_REGISTRATION,
                 request -> request.getRequestType() != RequestType.STUDENT_DEREGISTRATION
