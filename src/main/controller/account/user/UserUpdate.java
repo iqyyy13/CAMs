@@ -4,7 +4,7 @@ import main.model.user.Staff;
 import main.model.user.Student;
 import main.model.user.User;
 import main.repository.user.StudentDatabase;
-import main.repository.user.StaffRepository;
+import main.repository.user.StaffDatabase;
 import main.utils.exception.UserErrorException;
 
 /**
@@ -24,7 +24,7 @@ public class UserUpdate {
 
     private static void updateStaff(Staff staff) throws UserErrorException
     {
-        StaffRepository.getInstance().update(staff);
+        StaffDatabase.getInstance().update(staff);
     }
 
     /**

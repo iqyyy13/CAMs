@@ -7,7 +7,7 @@ import main.model.request.RequestType;
 import main.model.user.Staff;
 import main.repository.camp.CampRepository;
 import main.repository.request.RequestRepository;
-import main.repository.user.StaffRepository;
+import main.repository.user.StaffDatabase;
 import main.utils.exception.UserAlreadyExistsException;
 import main.utils.parameters.EmptyID;
 
@@ -40,7 +40,7 @@ public class StaffManager
      */
     public static List<Request> getPendingRequestsByStaff(String staffID) 
     {
-        if (!StaffRepository.getInstance().contains(staffID)) {
+        if (!StaffDatabase.getInstance().contains(staffID)) {
             throw new IllegalArgumentException("Staff does not exist");
         }
         return RequestRepository.getInstance().findByRules(
@@ -88,7 +88,7 @@ public class StaffManager
     public static List<Staff> getAllUnavailableStaff() 
     {
         List<Staff> staffs = new ArrayList<>();
-        for (Staff staff : StaffRepository.getInstance()) 
+        for (Staff staff : StaffDatabase.getInstance()) 
         {
             if (getNumOfStudents(staff.getID()) >= MAX_NUM_OF_STUDENTS_PER_STAFF) 
             {

@@ -4,7 +4,7 @@ import main.model.user.Staff;
 import main.model.user.Student;
 import main.model.user.User;
 import main.repository.user.StudentDatabase;
-import main.repository.user.StaffRepository;
+import main.repository.user.StaffDatabase;
 import main.utils.exception.UserAlreadyExistsException;
 
 /**
@@ -36,6 +36,6 @@ public class UserAdd {
 
     private static void addStaff(Staff staff) throws UserAlreadyExistsException 
     {
-        StaffRepository.getInstance().add(staff);
+        StaffDatabase.getInstance().add(staff);
     }
 }

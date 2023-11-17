@@ -14,7 +14,7 @@ import main.controller.request.StudentManager;
 import main.model.user.*;
 import main.model.camp.Camp;
 import main.repository.camp.CampRepository;
-import main.repository.user.StaffRepository;
+import main.repository.user.StaffDatabase;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
 import main.utils.exception.UserAlreadyExistsException;
@@ -55,7 +55,7 @@ public class StaffMainPage {
             int choice = IntGetter.readInt();
 
             try {
-                staff = StaffRepository.getInstance().getByID(staff.getID());
+                staff = StaffDatabase.getInstance().getByID(staff.getID());
             } catch (UserErrorException e) {
                 e.printStackTrace();
             }

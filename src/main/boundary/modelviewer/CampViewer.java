@@ -6,7 +6,7 @@ import main.model.camp.CampStatus;
 import main.model.user.Student;
 import main.model.user.StudentStatus;
 import main.repository.camp.CampRepository;
-import main.repository.user.StaffRepository;
+import main.repository.user.StaffDatabase;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
 import main.utils.iocontrol.IntGetter;
@@ -77,7 +77,7 @@ public class CampViewer
     {
         System.out.println("Please enter the StaffID to search: ");
         String s1 = new Scanner(System.in).nextLine();
-        if (!StaffRepository.getInstance().contains(s1)) {
+        if (!StaffDatabase.getInstance().contains(s1)) {
             System.out.println("Staff Not Found.");
             System.out.println("Press Enter to retry");
             String input = new Scanner(System.in).nextLine().trim();

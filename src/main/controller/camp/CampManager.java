@@ -8,7 +8,7 @@ import main.model.user.StudentStatus;
 import main.model.user.Staff;
 import main.repository.camp.CampRepository;
 import main.repository.user.StudentDatabase;
-import main.repository.user.StaffRepository;
+import main.repository.user.StaffDatabase;
 import main.utils.config.Location;
 import main.utils.exception.UserAlreadyExistsException;
 import main.utils.exception.UserErrorException;
@@ -106,7 +106,7 @@ public class CampManager
         }
 
         String staffID = c.getStaffID();
-        Staff staff = StaffRepository.getInstance().getByID(staffID);
+        Staff staff = StaffDatabase.getInstance().getByID(staffID);
         student.setCampID(EmptyID.EMPTY_ID);
         student.setStaffID(EmptyID.EMPTY_ID);
         student.setStatus(StudentStatus.UNREGISTERED);
@@ -114,7 +114,7 @@ public class CampManager
         c.setStatus(CampStatus.AVAILABLE);
         CampRepository.getInstance().update(c);
         StudentDatabase.getInstance().update(student);
-        StaffRepository.getInstance().update(staff);
+        StaffDatabase.getInstance().update(staff);
         CampManager.updateCampsStatus();
     }
 
@@ -147,10 +147,10 @@ public class CampManager
         student.setStaffID(c.getStaffID());
         student.setStatus(StudentStatus.REGISTERED);
         String staffID = c.getStaffID();
-        Staff staff = StaffRepository.getInstance().getByID(staffID);
+        Staff staff = StaffDatabase.getInstance().getByID(staffID);
         CampRepository.getInstance().update(c);
         StudentDatabase.getInstance().update(student);
-        StaffRepository.getInstance().update(staff);
+        StaffDatabase.getInstance().update(staff);
         CampManager.updateCampsStatus();
     }
 
@@ -167,7 +167,7 @@ public class CampManager
                 String campName = camp.get(1);
                 String faculty = camp.get(2);
                 System.out.println("Checks works");
-                List<Staff> staffs = StaffRepository.getInstance().findByRules(s -> s.checkUsername(staffName));
+                List<Staff> staffs = StaffDatabase.getInstance().findByRules(s -> s.checkUsername(staffName));
                 if (staffs.size() == 0) 
                 {
                     System.out.println("Load camp " + campName + " failed: staff " + staffName + "not found");

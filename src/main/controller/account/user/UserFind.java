@@ -3,7 +3,7 @@ package main.controller.account.user;
 import main.model.user.User;
 import main.model.user.UserType;
 import main.repository.user.StudentDatabase;
-import main.repository.user.StaffRepository;
+import main.repository.user.StaffDatabase;
 import main.utils.exception.UserErrorException;
 
 /**
@@ -24,7 +24,7 @@ public class UserFind {
 
     public static User findStaff(String userID) throws UserErrorException 
     {
-        return StaffRepository.getInstance().getByID(userID);
+        return StaffDatabase.getInstance().getByID(userID);
     }
 
     /**

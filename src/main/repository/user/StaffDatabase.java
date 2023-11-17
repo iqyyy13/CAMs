@@ -7,21 +7,21 @@ import main.utils.config.Location;
 import java.util.List;
 import java.util.Map;
 
-public class StaffRepository extends Database<Staff> {
+public class StaffDatabase extends Database<Staff> {
 
     /**
      * The path of the repository file.
      */
     private static final String FILE_PATH = "/data/user/staff.txt";
 
-    StaffRepository() {
+    StaffDatabase() {
         super();
         load();
     }
 
-    public static StaffRepository getInstance() 
+    public static StaffDatabase getInstance() 
     {
-        return new StaffRepository();
+        return new StaffDatabase();
     }
 
     @Override

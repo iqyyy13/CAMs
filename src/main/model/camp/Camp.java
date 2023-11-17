@@ -4,7 +4,7 @@ import main.model.Displayable;
 import main.model.Model;
 import main.model.user.Student;
 import main.model.user.Staff;
-import main.repository.user.StaffRepository;
+import main.repository.user.StaffDatabase;
 import main.repository.user.StudentDatabase;
 import main.utils.exception.UserErrorException;
 import main.utils.parameters.EmptyID;
@@ -58,7 +58,7 @@ public class Camp implements Model, Displayable
     {
         try 
         {
-            Staff staff = StaffRepository.getInstance().getByID(staffID);
+            Staff staff = StaffDatabase.getInstance().getByID(staffID);
             System.out.println("Staff Name: " + staff.getUserName());
             System.out.println("Staff Email Address: " + staff.getEmail());
         } catch (UserErrorException e) {
@@ -174,7 +174,7 @@ public class Camp implements Model, Displayable
 
     private String getCampStaffInformationString() {
         try {
-            Staff staff = StaffRepository.getInstance().getByID(staffID);
+            Staff staff = StaffDatabase.getInstance().getByID(staffID);
             return  String.format("| Staff Name                  | %-30s |\n", staff.getUserName()) +
                     String.format("| Staff Email Address         | %-30s |\n", staff.getEmail()) +
                     String.format("| Staff Faculty               | %-30s |\n", staff.getFaculty());
