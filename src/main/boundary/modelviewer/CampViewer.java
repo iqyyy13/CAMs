@@ -162,7 +162,7 @@ public class CampViewer
         ChangePage.changePage();
         if (student.getStatus() != StudentStatus.UNREGISTERED) 
         {
-            System.out.println("You are not allowed to view available projects as you are registered to a project.");
+            System.out.println("You are not allowed to view available camps as you are registered to a camp.");
         } 
         else 
         {
@@ -174,11 +174,6 @@ public class CampViewer
         throw new PageBackException();
     }
 
-    /**
-     * Displays the project details.
-     *
-     * @throws PageBackException if the user wants to go back
-     */
     public static void viewAllCamp() throws PageBackException 
     {
         ChangePage.changePage();
@@ -189,12 +184,6 @@ public class CampViewer
         throw new PageBackException();
     }
 
-    /**
-     * Displays the project details.
-     *
-     * @param student the student
-     * @throws PageBackException if the user wants to go back
-     */
     public static void viewStudentCamp(Student student) throws PageBackException 
     {
         ChangePage.changePage();
@@ -202,7 +191,7 @@ public class CampViewer
         Camp camp = CampManager.getStudentCamp(student);
         if (camp == null) 
         {
-            System.out.println("Student has no project yet.");
+            System.out.println("Student has no camp yet.");
         } 
         else 
         {
@@ -285,10 +274,6 @@ public class CampViewer
                 switch (choice) {
                     case 1 -> CampManager.changeCampTitle(ID);
                     case 2 -> CampManager.changeCampStatus(ID);
-                    //case 3 -> createCamp(staff);
-                    //case 4 -> CampViewer.viewAllCamp();
-                    //case 7 -> deregisterForProject(student);
-                    //case 8 -> changeTitleForProject(student);
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
                         new Scanner(System.in).nextLine();

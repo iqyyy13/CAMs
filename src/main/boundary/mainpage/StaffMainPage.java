@@ -70,7 +70,7 @@ public class StaffMainPage {
                     case 5 -> CampViewer.generateCreatedCamp(staff);
                     case 6 -> CampViewer.editCampDetails(staff);
                     case 7 -> CampViewer.deleteCamp(staff);
-                    //case 8 -> changeTitleForProject(student);
+                    //case 8 -> changeTitleForCamp(student);
                     case 14 -> Logout.logout();
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
@@ -111,7 +111,7 @@ public class StaffMainPage {
         String input = new Scanner(System.in).nextLine();
         if (!input.equalsIgnoreCase("Y")) 
         {
-            System.out.println("Project creation cancelled!");
+            System.out.println("Camp creation cancelled!");
             try {
                 CampDatabase.getInstance().remove(camp.getID());
                 CampManager.updateCampsStatus();
@@ -122,7 +122,7 @@ public class StaffMainPage {
             new Scanner(System.in).nextLine();
             throw new PageBackException();
         }
-        System.out.println("Project created successfully!");
+        System.out.println("Camp created successfully!");
         System.out.println("Enter enter to continue");
         new Scanner(System.in).nextLine();
         throw new PageBackException();

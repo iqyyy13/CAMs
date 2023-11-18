@@ -10,19 +10,11 @@ import main.utils.ui.UserTypeGetter;
 
 import java.util.Scanner;
 
-public class ResetPassword {
-    /**
-     * This method is called when the user enters an incorrect password and wants to retry the password change. It
-     * prompts the user to either go back or try again, and throws a {@code PageBackException} if the user chooses to
-     * go back.
-     *
-     * @param userType the type of user who wants to change their password
-     * @param userID   the ID of the user who wants to change their password
-     * @throws PageBackException if the user chooses to go back
-     */
+public class ResetPassword 
+{
     public static void askToRetry(UserType userType, String userID) throws PageBackException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter [b] to go back, or any other key to try again.");
+        System.out.println("Press Enter to try again or [b] to go back.");
         String choice = scanner.nextLine();
         if (choice.equals("b")) {
             throw new PageBackException();
@@ -32,23 +24,12 @@ public class ResetPassword {
         }
     }
 
-    /**
-     * This method is called to change the password for a given user account. It prompts the user for their old password
-     * and verifies it, then prompts the user for their new password and verifies that it is entered correctly. If
-     * successful, it updates the user's password and displays a success message before throwing a
-     * {@code PageBackException} to return to the previous page.
-     *
-     * @param userType the type of user who wants to change their password
-     * @param userID   the ID of the user who wants to change their password
-     * @throws PageBackException if the user chooses to go back
-     */
     public static void changePassword(UserType userType, String userID) throws PageBackException {
         ChangePage.changePage();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Welcome to Change " + UserTypeGetter.getUserTypeInCamelCase(userType) + " Password");
         System.out.print("Please enter your old password: ");
-        String oldPassword = AttributeGetter.getPassword();
+        String oldPassword = AttributeGetter.getPassword1();
 
         try {
             AccountManager.login(userType, userID, oldPassword);
@@ -65,10 +46,10 @@ public class ResetPassword {
         do {
             // read the new password
             System.out.print("Please enter a new password: ");
-            newPassword = AttributeGetter.getPassword();
+            newPassword = AttributeGetter.getPassword1();
             // read the new password again
             System.out.print("Please enter a new password again: ");
-            newPasswordAgain = AttributeGetter.getPassword();
+            newPasswordAgain = AttributeGetter.getPassword1();
             // if the new password is not the same as the new password again, ask the user to enter again
 
             if (!newPassword.equals(newPasswordAgain)) {
@@ -85,7 +66,8 @@ public class ResetPassword {
             askToRetry(userType, userID);
         }
 
-        try {
+        try 
+        {
             AccountManager.changePassword(userType, userID, oldPassword, newPassword);
 
             System.out.println("Password changed successfully.");

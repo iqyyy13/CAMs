@@ -11,9 +11,6 @@ import main.utils.parameters.EmptyID;
 
 import java.util.Map;
 
-/**
- * The class of the project
- */
 public class Camp implements Model, Displayable 
 {
     CampStatus status;
@@ -40,13 +37,6 @@ public class Camp implements Model, Displayable
 
     private String description;
 
-    /**
-     * the constructor of the project
-     *
-     * @param campID    the ID of the project
-     * @param campTitle the title of the project
-     * @param staffID the supervisor of the project
-     */
     public Camp(String campID, String campTitle, String staffID, String faculty, String location, String description) 
     {
         this.campID = campID;
@@ -64,10 +54,6 @@ public class Camp implements Model, Displayable
 
     }
 
-    /**
-     * Get the ID of the project
-     * @param map the map of the project
-     */
     public Camp(Map<String, String> map) 
     {
         fromMap(map);
@@ -85,9 +71,6 @@ public class Camp implements Model, Displayable
         }
     }
 
-    /**
-     * Display the information of the student
-     */
     private void displayStudentInformation() {
         try {
             Student student = StudentDatabase.getInstance().getByID(studentID);
@@ -98,26 +81,17 @@ public class Camp implements Model, Displayable
         }
     }
 
-    /**
-     * Display the ID of the project
-     */
     private void displayCampID() 
     {
         System.out.println("Camp ID: " + campID);
     }
 
-    /**
-     * Display the information of the project
-     */
     private void displayCampInformation() 
     {
         System.out.println("Camp Title: " + campTitle);
         System.out.println("Camp Status: " + status);
     }
 
-    /**
-     * Display the whole information of the project
-     */
     public void displayCamp() 
     {
         displayCampID();
@@ -129,12 +103,6 @@ public class Camp implements Model, Displayable
         displayCampInformation();
     }
 
-    /**
-     * Assign a student to the project
-     *
-     * @param studentID the student to be assigned
-     * @throws IllegalStateException if the project is not available for allocation
-     */
     public void assignStudent(String studentID) throws IllegalStateException 
     {
         if (status != CampStatus.AVAILABLE) 

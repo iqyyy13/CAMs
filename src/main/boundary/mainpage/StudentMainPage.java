@@ -66,9 +66,9 @@ public class StudentMainPage {
                     case 4 -> CampViewer.viewRegisteredCamps(student);
                     case 5 -> registerCamp(student);
                     case 6 -> deregisterCamp(student);
-                    //case 6 -> registerProject(student);
-                    //case 7 -> deregisterForProject(student);
-                    //case 8 -> changeTitleForProject(student);
+                    //case 6 -> register(student);
+                    //case 7 -> deregisterFor(student);
+                    //case 8 -> changeTitleFor(student);
                     case 10 -> Logout.logout();
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");

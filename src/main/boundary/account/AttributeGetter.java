@@ -45,10 +45,15 @@ public class AttributeGetter
         return scanner.nextLine();
     }
 
+    public static String getPassword1() 
+    {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
     public static String getUserID() 
     {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Please enter your UserID (Press enter if you forget): ");
+        System.out.print("Please enter your UserID: ");
         return scanner.nextLine();
     }    
     

@@ -210,7 +210,7 @@ public class CampManager
             {
                 return CampDatabase.getInstance().getByID(student.getCampID());
             } catch (UserErrorException e) {
-                throw new IllegalStateException("Project " + student.getCampID() + " not found");
+                throw new IllegalStateException("Camp " + student.getCampID() + " not found");
             }
         }
     }
@@ -230,7 +230,7 @@ public class CampManager
         return CampDatabase.getInstance().getByID(campID);
     }
 
-    public static List<Camp> getAllProjectsByStaff(String staffID) 
+    public static List<Camp> getAllCampsByStaff(String staffID) 
     {
         return CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staffID));
     }

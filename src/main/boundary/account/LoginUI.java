@@ -25,6 +25,10 @@ public class LoginUI
         try
         {
             User user = AccountManager.login(role, userID, password);
+            //System.out.println("Login Successful");
+            //System.out.println("Press enter to continue.");
+            //Scanner scanner = new Scanner(System.in);
+            //scanner.nextLine();
             switch (role) 
             {
                 case STUDENT -> StudentMainPage.studentMainPage(user);
