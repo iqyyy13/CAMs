@@ -1,11 +1,13 @@
 package main.model.user;
 
+import main.boundary.mainpage.StudentMainPage;
 import main.database.user.StudentDatabase;
 import main.utils.exception.PageBackException;
 import main.utils.parameters.EmptyID;
 import main.utils.parameters.NotNull;
 
 import java.util.Map;
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -194,19 +196,28 @@ public class Student implements User
     {
         try
         {
-            if(this.registeredCampIDs == null)
+            if(!isCampAlreadyRegistered(campID))
             {
-                this.registeredCampIDs = campID;
-                StudentDatabase.getInstance().update(student);
+                if(this.registeredCampIDs == null)
+                {
+                    this.registeredCampIDs = campID;
+                    StudentDatabase.getInstance().update(student);
+                }
+                else if (!this.registeredCampIDs.contains(campID)) 
+                {
+                    this.registeredCampIDs += "," + campID;
+                    StudentDatabase.getInstance().update(student);
+                    
+                }
             }
-            else if (!this.registeredCampIDs.contains(campID)) 
+            else
             {
-                this.registeredCampIDs += "," + campID;
-                StudentDatabase.getInstance().update(student);
-                
+                System.out.println("You have already registered for this camp before");
+                System.out.println("Press Enter to go back.");
+                Scanner scanner = new Scanner(System.in);
+                scanner.nextLine();
+                StudentMainPage.studentMainPage(student);
             }
-
-            //StudentDatabase.getInstance().update(student);
         } catch(Exception e)
         {
             System.out.println("CampID cannot find");
@@ -233,5 +244,23 @@ public class Student implements User
         {
             System.out.println("CampID cannot find");
         }
+    }
+
+    private boolean isCampAlreadyRegistered(String campID)
+    {
+        if(registeredCampIDs != null && !registeredCampIDs.isEmpty())
+        {
+            String[] campIDs = registeredCampIDs.split(",");
+            for(String registeredCampID : campIDs)
+            {
+                if(registeredCampID.trim().equals(campID.trim()))
+                {
+                    System.out.println("Camp registered before: " + campID);
+                    return true; //camp is registered
+                }
+            }
+        }
+        
+        return false;
     }
 }
