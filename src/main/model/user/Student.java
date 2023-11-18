@@ -196,27 +196,33 @@ public class Student implements User
     {
         try
         {
-            if(!isCampAlreadyRegistered(campID))
+            if(isCampAlreadyRegistered(campID))
             {
-                if(this.registeredCampIDs == null)
-                {
-                    this.registeredCampIDs = campID;
-                    StudentDatabase.getInstance().update(student);
-                }
-                else if (!this.registeredCampIDs.contains(campID)) 
-                {
-                    this.registeredCampIDs += "," + campID;
-                    StudentDatabase.getInstance().update(student);
-                    
-                }
-            }
-            else
-            {
-                System.out.println("You have already registered for this camp before");
+                System.out.println("You have already registered for this camp. Cannot register again.");
                 System.out.println("Press Enter to go back.");
                 Scanner scanner = new Scanner(System.in);
                 scanner.nextLine();
                 StudentMainPage.studentMainPage(student);
+            }
+            else if(isCampAlreadyDeregistered(campID))
+            {
+                System.out.println("You have already deregistered for this camp. Cannot register again.");
+                System.out.println("Press Enter to go back.");
+                Scanner scanner = new Scanner(System.in);
+                scanner.nextLine();
+                StudentMainPage.studentMainPage(student);                
+            }
+            else
+            {
+                if(this.registeredCampIDs == null)
+                {
+                    this.registeredCampIDs = campID;
+                }
+                else if (!this.registeredCampIDs.contains(campID)) 
+                {
+                    this.registeredCampIDs += "," + campID;
+                }
+                StudentDatabase.getInstance().update(student);
             }
         } catch(Exception e)
         {
@@ -261,6 +267,23 @@ public class Student implements User
             }
         }
         
+        return false;
+    }
+
+    private boolean isCampAlreadyDeregistered(String campID)
+    {
+        if(deregisteredCampIDs != null && !deregisteredCampIDs.isEmpty())
+        {
+            String[] campIDs = deregisteredCampIDs.split(",");
+            for(String deregisteredCampID : campIDs)
+            {
+                if(deregisteredCampID.trim().equals(campID.trim()))
+                {
+                    System.out.println("Camp deregistered before: " + campID);
+                    return true; //camp is deregistered, student can't register for this camp
+                }
+            }
+        }
         return false;
     }
 }
