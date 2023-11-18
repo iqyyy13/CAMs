@@ -94,9 +94,9 @@ public class StaffMainPage {
         System.out.println("Creating a camp..");
         System.out.println("Please name your camp:");
         String campTitle = new Scanner(System.in).nextLine();
-        System.out.println("Please name your camp:");
+        System.out.println("Please enter the location to meet:");
         String location = new Scanner(System.in).nextLine();
-        System.out.println("Please name your camp:");
+        System.out.println("Please give a brief description for the camp:");
         String description = new Scanner(System.in).nextLine();
         Camp camp;
         try 

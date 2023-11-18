@@ -1,16 +1,20 @@
 package main.model.user;
 
+import main.database.user.StudentDatabase;
+import main.utils.exception.PageBackException;
 import main.utils.parameters.EmptyID;
 import main.utils.parameters.NotNull;
 
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents a student, which is a type of user.
  * It extends the User class and includes a student ID field.
  */
-public class Student implements User {
-    
+public class Student implements User 
+{
     private String studentID;
 
     private String studentName;
@@ -27,6 +31,9 @@ public class Student implements User {
     private String password;
 
     private UserType userType;
+
+    private String registeredCampIDs;
+    private String deregisteredCampIDs;
 
     /**
      * Constructs a new Student object with the specified student ID and default password.
@@ -46,6 +53,8 @@ public class Student implements User {
         this.status = StudentStatus.UNREGISTERED;
         staffID = EmptyID.EMPTY_ID;
         campID = EmptyID.EMPTY_ID;
+        this.registeredCampIDs = "";
+        this.deregisteredCampIDs = "";
     }
 
     /**
@@ -174,5 +183,55 @@ public class Student implements User {
     public void setStaffID(String staffID)
     {
         this.staffID = staffID;
+    }
+
+    public String getRegisteredCampIDs()
+    {
+        return registeredCampIDs;
+    }
+
+    public void registerCamp(Student student, String campID)
+    {
+        try
+        {
+            if(this.registeredCampIDs == null)
+            {
+                this.registeredCampIDs = campID;
+                StudentDatabase.getInstance().update(student);
+            }
+            else if (!this.registeredCampIDs.contains(campID)) 
+            {
+                this.registeredCampIDs += "," + campID;
+                StudentDatabase.getInstance().update(student);
+                
+            }
+
+            //StudentDatabase.getInstance().update(student);
+        } catch(Exception e)
+        {
+            System.out.println("CampID cannot find");
+        }
+    }
+
+    public void deregisterCamp(Student student, String campID)
+    {
+        try
+        {
+            this.registeredCampIDs = this.registeredCampIDs.replace(campID, "").replace(",,",",").trim();
+
+            if(this.deregisteredCampIDs == null)
+            {
+                this.deregisteredCampIDs = campID;
+                StudentDatabase.getInstance().update(student);
+            }
+            else if(!this.deregisteredCampIDs.contains(campID))
+            {
+                this.deregisteredCampIDs += "," + campID;
+                StudentDatabase.getInstance().update(student);
+            }
+        } catch(Exception e)
+        {
+            System.out.println("CampID cannot find");
+        }
     }
 }

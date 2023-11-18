@@ -356,4 +356,36 @@ public class CampViewer
             deleteCamp(staff);
         }
     }
+
+    public static void viewRegisteredCamps(Student student) throws PageBackException
+    {
+        ChangePage.changePage();
+        String registeredCampID = student.getRegisteredCampIDs();
+
+        if(registeredCampID != null && !registeredCampID.isEmpty())
+        {
+            String[] campIDs = registeredCampID.split(",");
+
+            for(String campID : campIDs)
+            {
+                try
+                {
+                    Camp camp = CampDatabase.getInstance().getByID(campID.trim());
+                    if(camp != null)
+                    {
+                        ModelViewer.displaySingleDisplayable(camp);
+                        throw new PageBackException();
+                    }
+                } catch (Exception e)
+                {
+                    System.out.println("");
+                }
+            }
+            System.out.println("Press Enter to go back");
+            new Scanner(System.in).nextLine();
+            throw new PageBackException();
+        }
+    }
+
+
 }

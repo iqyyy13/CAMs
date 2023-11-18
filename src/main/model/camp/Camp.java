@@ -251,9 +251,9 @@ public class Camp implements Model, Displayable
     private String getCampStaffInformationString() {
         try {
             Staff staff = StaffDatabase.getInstance().getByID(staffID);
-            return  String.format("| Staff Name                  | %-30s |\n", staff.getUserName()) +
-                    String.format("| Staff Email Address         | %-30s |\n", staff.getEmail()) +
-                    String.format("| Staff Faculty               | %-30s |\n", staff.getFaculty());
+            return  String.format("| Staff Name                  | %-65s |\n", staff.getUserName()) +
+                    String.format("| Staff Email Address         | %-65s |\n", staff.getEmail()) +
+                    String.format("| Staff Faculty               | %-65s |\n", staff.getFaculty());
         } catch (UserErrorException e) {
             return "No Staff Assigned";
         }
@@ -267,8 +267,8 @@ public class Camp implements Model, Displayable
         try 
         {
             Student student = StudentDatabase.getInstance().getByID(studentID);
-            return String.format("| Student Name                | %-30s |\n", student.getUserName()) +
-                   String.format("| Student Email Address       | %-30s |\n", student.getEmail());
+            return String.format("| Student Name                | %-65s |\n", student.getUserName()) +
+                   String.format("| Student Email Address       | %-65s |\n", student.getEmail());
         } catch (UserErrorException e) {
             throw new IllegalStateException("Cannot find the student.");
         }
@@ -276,24 +276,31 @@ public class Camp implements Model, Displayable
 
     private String getCampInformationString() 
     {
-        return String.format("| Available Slots             | %-30s |\n", getAvailableSlots()) +
-               String.format("| Available CC Slots          | %-30s |\n", getAvailableCCSlots()) +
-               String.format("| Camp Status                 | %-39s |\n", getStatus().colorString());
+        return String.format("| Location                    | %-65s |\n", getLocation()) +
+               String.format("| Available Slots             | %-65s |\n", getAvailableSlots()) +
+               String.format("| Available CC Slots          | %-65s |\n", getAvailableCCSlots()) +
+               String.format("| Camp Status                 | %-74s |\n", getStatus().colorString());
     }
 
     private String getSingleCampString() 
     {
         String campTitle = getCampTitle();
-        int maxTitleLength = 60;
+        String description = getDescription();
+        int maxTitleLength = 95;
         String titleLine1;
         String titleLine2;
+        String titleLine3;
+        String titleLine4;
 
         if (campTitle.length() <= maxTitleLength) 
         {
             int leftPadding = (maxTitleLength - campTitle.length()) / 2;
             int rightPadding = maxTitleLength - campTitle.length() - leftPadding;
+            int rightPadding2 = maxTitleLength - description.length();
             titleLine1 = String.format("| %-" + leftPadding + "s%-" + campTitle.length() + "s%-" + rightPadding + "s |\n", "", campTitle, "");
             titleLine2 = "";
+            titleLine3 = String.format("| %-" + leftPadding + "s%-" + campTitle.length() + "s%-" + rightPadding + "s |\n", "", "Camp Description", "");
+            titleLine4 = String.format("| %" + "s%-" + campTitle.length() + "s%-" + rightPadding2 + "s |\n", "", description, "");
         } 
         else 
         {
@@ -332,16 +339,22 @@ public class Camp implements Model, Displayable
             int rightPadding2 = maxTitleLength - secondLine.length() - leftPadding2;
             titleLine1 = String.format("| %-" + leftPadding1 + "s%-" + firstLine.length() + "s%-" + rightPadding1 + "s |\n", "", firstLine.trim(), "");
             titleLine2 = String.format("| %-" + leftPadding2 + "s%-" + secondLine.length() + "s%-" + rightPadding2 + "s |\n", "", secondLine.trim(), "");
+            titleLine3 = String.format("| %-" + leftPadding2 + "s%-" + secondLine.length() + "s%-" + rightPadding2 + "s |\n", "", secondLine.trim(),"");
+            titleLine4 = String.format("| %" + "s%-" + secondLine.length() + "s%-" + rightPadding2 + "s |\n", "", secondLine.trim(),"");
         }
 
         return titleLine1 + titleLine2 +
-                "|--------------------------------------------------------------|\n" +
-                String.format("| Camp ID                     | %-30s |\n", getID()) +
+                "|-------------------------------------------------------------------------------------------------|\n" +
+                String.format("| Camp ID                     | %-65s |\n", getID()) +
                 getCampStaffInformationString() +
                 getCampStudentInformationString() +
-                getCampInformationString();
+                getCampInformationString() +
+                "|=================================================================================================|\n" +
+                titleLine3 +
+                "|-------------------------------------------------------------------------------------------------|\n" +
+                titleLine4 +
+                "|=================================================================================================|\n";
     }
-
     @Override
     public String getDisplayableString() 
     {
@@ -351,6 +364,6 @@ public class Camp implements Model, Displayable
     @Override
     public String getSplitter() 
     {
-        return "================================================================";
+        return "===================================================================================================";
     }
 }
