@@ -10,9 +10,11 @@ import main.model.user.Student;
 import main.model.user.StudentStatus;
 import main.model.user.Staff;
 import main.utils.config.Location;
+import main.utils.exception.PageBackException;
 import main.utils.exception.UserAlreadyExistsException;
 import main.utils.exception.UserErrorException;
 import main.utils.iocontrol.CSVReader;
+import main.utils.iocontrol.IntGetter;
 import main.utils.parameters.EmptyID;
 import main.utils.ui.ChangePage;
 
@@ -224,7 +226,8 @@ public class CampManager
         return CampDatabase.getInstance().getByID(campID);
     }
 
-    public static List<Camp> getAllProjectsByStaff(String staffID) {
+    public static List<Camp> getAllProjectsByStaff(String staffID) 
+    {
         return CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staffID));
     }
 
@@ -237,14 +240,43 @@ public class CampManager
             staffIDs.add(staff.getID());
         }
         List<Camp> camps = CampDatabase.getInstance().getList();
-        for (Camp camp : camps) {
-            if (staffIDs.contains(camp.getStaffID()) && camp.getStatus() == CampStatus.AVAILABLE) {
+        for (Camp camp : camps) 
+        {
+            if (staffIDs.contains(camp.getStaffID()) && camp.getStatus() == CampStatus.AVAILABLE) 
+            {
                 camp.setStatus(CampStatus.UNAVAILABLE);
             }
-            if (!staffIDs.contains(camp.getStaffID()) && camp.getStatus() == CampStatus.UNAVAILABLE) {
+            if (!staffIDs.contains(camp.getStaffID()) && camp.getStatus() == CampStatus.UNAVAILABLE) 
+            {
                 camp.setStatus(CampStatus.AVAILABLE);
             }
         }
         CampDatabase.getInstance().updateAll(camps);
+    }
+
+    //toggles visibility of the camp itself to students
+    public static void changeCampStatus(String campID) throws UserErrorException
+    {
+        ChangePage.changePage();
+        Camp camp = CampDatabase.getInstance().getByID(campID);
+        System.out.println("\t1. AVAILABLE");
+        System.out.println("\t2. UNAVAILABLE");
+        System.out.println("Current Camp Status: " + camp.getStatus());
+        System.out.println("Please enter your choice for the new status of your camp:");
+        int option = IntGetter.readInt();
+        try
+        {        
+            switch(option)
+            {
+                case 1 -> camp.setStatus(CampStatus.AVAILABLE);
+                case 2 -> camp.setStatus(CampStatus.UNAVAILABLE);
+                default -> throw new IllegalArgumentException("Invalid option");
+            }
+        } catch (IllegalArgumentException e) {
+            throw new IllegalStateException("Camp not found");
+        }
+
+        CampDatabase.getInstance().update(camp);
+        //CampManager.updateCampsStatus();
     }
 }

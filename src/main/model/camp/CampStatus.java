@@ -1,7 +1,7 @@
 package main.model.camp;
 
-public enum CampStatus {
-
+public enum CampStatus 
+{
     AVAILABLE,
 
     ALLOCATED,

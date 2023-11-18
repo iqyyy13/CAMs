@@ -24,7 +24,7 @@ import java.util.Scanner;
 
 public class CampViewer 
 {
-    public static CampStatus geCampStatus() throws PageBackException
+    public static CampStatus getCampStatus() throws PageBackException
     {
         System.out.println("\t1. Available");
         System.out.println("\t2. Allocated");
@@ -48,7 +48,7 @@ public class CampViewer
                 }
                 else
                 {
-                    yield geCampStatus();
+                    yield getCampStatus();
                 }
             }
         };
@@ -117,7 +117,7 @@ public class CampViewer
 
     public static void generateDetailsByStatus() throws PageBackException 
     {
-        CampStatus status = geCampStatus();
+        CampStatus status = getCampStatus();
         ModelViewer.displayListOfDisplayable(CampDatabase.getInstance().findByRules(p -> Objects.equals(p.getStatus(), status)));
         System.out.println("Enter <Enter> to continue");
         new Scanner(System.in).nextLine();
@@ -243,7 +243,10 @@ public class CampViewer
             {
                 modifyCampDetails(campToEdit);
                 System.out.println("Camp details edited successfully.");
-                ModelViewer.displayListOfDisplayable(campList);
+                System.out.println("Press enter to go back.");
+                Scanner scanner = new Scanner(System.in);
+                scanner.nextLine();
+                throw new PageBackException();
             }
             else
             {
@@ -281,7 +284,7 @@ public class CampViewer
         try {
                 switch (choice) {
                     case 1 -> CampManager.changeCampTitle(ID);
-                    //case 2 -> ResetPassword.changePassword(UserType.STAFF, staff.getID());
+                    case 2 -> CampManager.changeCampStatus(ID);
                     //case 3 -> createCamp(staff);
                     //case 4 -> CampViewer.viewAllCamp();
                     //case 7 -> deregisterForProject(student);
