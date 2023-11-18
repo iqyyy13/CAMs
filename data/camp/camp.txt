@@ -3,4 +3,3 @@ studentIDnullcampIDP2campTitleCreatiCon ArtistrystaffIDOURI
 studentIDnullcampIDP3campTitleElectroInnovatestaffIDUPAMstatusAVAILABLEfacultyEEE
 studentIDnullcampIDP4campTitleVRVerse VoyagestaffIDANWITstatusAVAILABLEfacultySCSE
 studentIDnullcampIDP5campTitleFutureFinance FestivalstaffIDARVIstatusAVAILABLEfacultyNBS
-studentIDnullcampIDP6campTitleORD LOstaffIDOURINstatusUNAVAILABLEfacultyADM

@@ -69,7 +69,7 @@ public class StaffMainPage {
                     case 4 -> CampViewer.viewAllCamp();
                     case 5 -> CampViewer.generateCreatedCamp(staff);
                     case 6 -> CampViewer.editCampDetails(staff);
-                    //case 7 -> deregisterForProject(student);
+                    case 7 -> CampViewer.deleteCamp(staff);
                     //case 8 -> changeTitleForProject(student);
                     case 14 -> Logout.logout();
                     default -> {

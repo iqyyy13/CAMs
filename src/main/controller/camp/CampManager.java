@@ -41,7 +41,7 @@ public class CampManager
         String newTitle = new Scanner(System.in).nextLine().trim();
         camp.setCampTitle(newTitle);
         CampDatabase.getInstance().update(camp);
-        CampManager.updateCampsStatus();
+        //CampManager.updateCampsStatus();
     }
 
     public static List<Camp> viewAllCamp()
