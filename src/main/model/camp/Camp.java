@@ -28,6 +28,18 @@ public class Camp implements Model, Displayable
 
     private String faculty;
 
+    private int maxSlots;
+
+    private int maxCCSlots;
+
+    private int availableSlots;
+
+    private int availableCCSlots;
+    
+    private String location;
+
+    private String description;
+
     /**
      * the constructor of the project
      *
@@ -35,14 +47,21 @@ public class Camp implements Model, Displayable
      * @param campTitle the title of the project
      * @param staffID the supervisor of the project
      */
-    public Camp(String campID, String campTitle, String staffID, String faculty) 
+    public Camp(String campID, String campTitle, String staffID, String faculty, String location, String description) 
     {
         this.campID = campID;
         this.campTitle = campTitle;
         this.staffID = staffID;
         this.faculty = faculty;
+        this.location = location;
         this.studentID = EmptyID.EMPTY_ID;
         this.status = CampStatus.AVAILABLE;
+        this.maxSlots = 20;
+        this.maxCCSlots = 10;
+        this.description = description;
+        this.availableSlots = maxSlots;
+        this.availableCCSlots = maxCCSlots;
+
     }
 
     /**
@@ -172,6 +191,63 @@ public class Camp implements Model, Displayable
         return this.faculty;
     }
 
+    public int getMaxSlots()
+    {
+        return maxSlots;
+    }
+
+    public int getCCMaxSlots()
+    {
+        return maxCCSlots;
+    }
+
+    public int getAvailableSlots()
+    {
+        return availableSlots;
+    }
+
+    public int getAvailableCCSlots()
+    {
+        return availableCCSlots;
+    }
+
+    public String getLocation()
+    {
+        return location;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void decrementAvailableSlots()
+    {
+        if(availableSlots > 0)
+        {
+            availableSlots--;
+            System.out.println("The number of available slots now are : " + getAvailableSlots());
+        }
+        else
+        {
+            System.out.println("No available slots for regular registration");
+        }
+    }
+
+    public void decrementAvailableCCSlots()
+    {
+        if(availableSlots > 0)
+        {
+            availableSlots--;
+            System.out.println("The number of available slots now are : " + getAvailableCCSlots());
+        }
+        else
+        {
+            System.out.println("No available slots for regular registration");
+        }
+    }
+    
+
     private String getCampStaffInformationString() {
         try {
             Staff staff = StaffDatabase.getInstance().getByID(staffID);
@@ -192,7 +268,7 @@ public class Camp implements Model, Displayable
         {
             Student student = StudentDatabase.getInstance().getByID(studentID);
             return String.format("| Student Name                | %-30s |\n", student.getUserName()) +
-                    String.format("| Student Email Address       | %-30s |\n", student.getEmail());
+                   String.format("| Student Email Address       | %-30s |\n", student.getEmail());
         } catch (UserErrorException e) {
             throw new IllegalStateException("Cannot find the student.");
         }
@@ -200,7 +276,9 @@ public class Camp implements Model, Displayable
 
     private String getCampInformationString() 
     {
-        return String.format("| Camp Status                 | %-39s |\n", getStatus().colorString());
+        return String.format("| Available Slots             | %-30s |\n", getAvailableSlots()) +
+               String.format("| Available CC Slots          | %-30s |\n", getAvailableCCSlots()) +
+               String.format("| Camp Status                 | %-39s |\n", getStatus().colorString());
     }
 
     private String getSingleCampString() 

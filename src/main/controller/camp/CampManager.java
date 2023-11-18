@@ -41,7 +41,7 @@ public class CampManager
         String newTitle = new Scanner(System.in).nextLine().trim();
         camp.setCampTitle(newTitle);
         CampDatabase.getInstance().update(camp);
-        //CampManager.updateCampsStatus();
+        CampManager.updateCampsStatus();
     }
 
     public static List<Camp> viewAllCamp()
@@ -54,16 +54,18 @@ public class CampManager
         return CampDatabase.getInstance().findByRules(p -> p.getStatus() == CampStatus.AVAILABLE);
     }
 
-    public static void createCamp(String campID, String campTitle, String staffID, String faculty) throws UserAlreadyExistsException 
+    public static void createCamp(String campID, String campTitle, String staffID, String faculty, String location, String description) 
+    throws UserAlreadyExistsException 
     {
-        Camp c = new Camp(campID, campTitle, staffID, faculty);
+        Camp c = new Camp(campID, campTitle, staffID, faculty, location, description);
         CampDatabase.getInstance().add(c);
         CampManager.updateCampsStatus();
     }
 
-    public static Camp createCamp(String campTitle, String staffID, String faculty) throws UserAlreadyExistsException 
+    public static Camp createCamp(String campTitle, String staffID, String faculty, String location, String description) 
+    throws UserAlreadyExistsException 
     {
-        Camp c = new Camp(getNewCampID(), campTitle, staffID, faculty);
+        Camp c = new Camp(getNewCampID(), campTitle, staffID, faculty, location, description);
         CampDatabase.getInstance().add(c);
         CampManager.updateCampsStatus();
         return c;
@@ -159,6 +161,8 @@ public class CampManager
                 String staffName = camp.get(0);
                 String campName = camp.get(1);
                 String faculty = camp.get(2);
+                String location = camp.get(3);
+                String description = camp.get(4);
                 System.out.println("Checks works");
                 List<Staff> staffs = StaffDatabase.getInstance().findByRules(s -> s.checkUsername(staffName));
                 if (staffs.size() == 0) 
@@ -167,7 +171,7 @@ public class CampManager
                 } 
                 else if (staffs.size() == 1) 
                 {
-                    CampManager.createCamp(campName, staffs.get(0).getID(), staffs.get(0).getFaculty());
+                    CampManager.createCamp(campName, staffs.get(0).getID(), staffs.get(0).getFaculty(), location, description);
                 } 
                 else 
                 {
@@ -216,7 +220,7 @@ public class CampManager
         return CampDatabase.getInstance().getByID(campID);
     }
 
-    public static List<Camp> getAllAvailableProject() 
+    public static List<Camp> getAllAvailableCamps() 
     {
         return CampDatabase.getInstance().findByRules(p -> p.getStatus() == CampStatus.AVAILABLE);
     }

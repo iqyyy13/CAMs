@@ -15,29 +15,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * SupervisorManager class
- */
 public class StaffManager 
 {
 
-    public static int MAX_NUM_OF_STUDENTS_PER_STAFF = 20;
+    public static int MAX_NUM_OF_STUDENTS_PER_STAFF = 30;
 
-    /**
-     * View all requests
-     *
-     * @param supervisorID the supervisor ID of the supervisor that is going to view all requests
-     */
+
     public static List<Request> viewRequest(String staffID) 
     {
         return RequestDatabase.getInstance().findByRules(request -> request.getID().equals(staffID));
     }
 
-    /**
-     * get all pending requests by supervisor
-     * @param supervisorID the supervisor ID of the supervisor that is going to view all pending requests
-     * @return list of pending requests
-     */
     public static List<Request> getPendingRequestsByStaff(String staffID) 
     {
         if (!StaffDatabase.getInstance().contains(staffID)) {
@@ -50,12 +38,6 @@ public class StaffManager
         );
     }
 
-    /**
-     * get all request history by supervisor
-     * @param supervisor the supervisor that is going to view all request history
-     *
-     * @return list of request history
-     */
     public static List<Request> getAllRequestHistory(Staff staff) 
     {
         return RequestDatabase.getInstance().findByRules(
@@ -65,12 +47,6 @@ public class StaffManager
         );
     }
 
-    /**
-     * get number of students that a supervisor is supervising
-     * @param supervisorID the supervisor ID of the supervisor
-     *
-     * @return number of students that a supervisor is supervising
-     */
     public static int getNumOfStudents(String staffID) 
     {
         return CampDatabase.getInstance().findByRules(
@@ -80,11 +56,6 @@ public class StaffManager
         ).size();
     }
 
-    /**
-     * get all supervisors that are not available
-     *
-     * @return list of supervisors that are not available
-     */
     public static List<Staff> getAllUnavailableStaff() 
     {
         List<Staff> staffs = new ArrayList<>();
