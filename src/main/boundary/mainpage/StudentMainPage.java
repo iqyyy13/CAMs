@@ -141,6 +141,9 @@ public class StudentMainPage {
             try
             {
                 student.registerCamp(student,campID);
+                Camp camp1 = CampDatabase.getInstance().getByID(campID);
+                camp1.decrementAvailableSlots();
+                CampDatabase.getInstance().update(camp1);
                 System.out.println("Register Success!");
                 System.out.println("Press enter to go back.");
                 Scanner scanner = new Scanner(System.in);
@@ -176,13 +179,21 @@ public class StudentMainPage {
 
         System.out.println("Please enter the Camp ID that you would like to remove yourself from: ");
         String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
-        
         student.deregisterCamp(student, campID);
-        System.out.println("Deregistration is successful. Please do note that you are unable to register yourself to this camp again.");
-        System.out.println("Press enter to go back.");
-        Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
-        StudentMainPage.studentMainPage(student);
+        try
+        {
+            Camp camp = CampDatabase.getInstance().getByID(campID);
+            camp.incrementAvailableSlots();
+            CampDatabase.getInstance().update(camp);
+            System.out.println("Deregistration is successful. Please do note that you are unable to register yourself to this camp again.");
+            System.out.println("Press enter to go back.");
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
+            StudentMainPage.studentMainPage(student);
+        } catch (Exception e)
+        {
+            StudentMainPage.studentMainPage(student);
+        }
     }
 }
 

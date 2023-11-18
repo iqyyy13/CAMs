@@ -227,6 +227,7 @@ public class Camp implements Model, Displayable
         {
             availableSlots--;
             System.out.println("The number of available slots now are : " + getAvailableSlots());
+
         }
         else
         {
@@ -240,6 +241,35 @@ public class Camp implements Model, Displayable
         {
             availableSlots--;
             System.out.println("The number of available slots now are : " + getAvailableCCSlots());
+
+        }
+        else
+        {
+            System.out.println("No available slots for regular registration");
+        }
+    }
+
+    public void incrementAvailableSlots()
+    {
+        if(availableSlots > 0)
+        {
+            availableSlots++;
+            System.out.println("The number of available slots now are : " + getAvailableSlots());
+            
+        }
+        else
+        {
+            System.out.println("No available slots for regular registration");
+        }
+    }
+
+    public void incrementAvailableCCSlots()
+    {
+        if(availableSlots > 0)
+        {
+            availableSlots++;
+            System.out.println("The number of available slots now are : " + getAvailableCCSlots());
+
         }
         else
         {
