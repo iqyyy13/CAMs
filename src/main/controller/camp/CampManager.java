@@ -14,9 +14,11 @@ import main.utils.exception.UserAlreadyExistsException;
 import main.utils.exception.UserErrorException;
 import main.utils.iocontrol.CSVReader;
 import main.utils.parameters.EmptyID;
+import main.utils.ui.ChangePage;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 
 public class CampManager 
@@ -24,6 +26,17 @@ public class CampManager
     public static void changeCampTitle(String campID, String newTitle) throws UserErrorException 
     {
         Camp camp = CampDatabase.getInstance().getByID(campID);
+        camp.setCampTitle(newTitle);
+        CampDatabase.getInstance().update(camp);
+        CampManager.updateCampsStatus();
+    }
+
+    public static void changeCampTitle(String campID) throws UserErrorException 
+    {
+        ChangePage.changePage();
+        Camp camp = CampDatabase.getInstance().getByID(campID);
+        System.out.println("Enter the new title for your camp: ");
+        String newTitle = new Scanner(System.in).nextLine().trim();
         camp.setCampTitle(newTitle);
         CampDatabase.getInstance().update(camp);
         CampManager.updateCampsStatus();

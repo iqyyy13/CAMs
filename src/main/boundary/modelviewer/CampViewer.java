@@ -1,5 +1,9 @@
 package main.boundary.modelviewer;
 
+import main.boundary.account.Logout;
+import main.boundary.account.ResetPassword;
+import main.boundary.account.ViewUserProfile;
+import main.boundary.mainpage.StaffMainPage;
 import main.controller.camp.CampManager;
 import main.database.camp.CampDatabase;
 import main.database.user.StaffDatabase;
@@ -7,6 +11,8 @@ import main.model.camp.Camp;
 import main.model.camp.CampStatus;
 import main.model.user.Student;
 import main.model.user.StudentStatus;
+import main.model.user.UserType;
+import main.model.user.Staff;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
 import main.utils.iocontrol.IntGetter;
@@ -77,7 +83,8 @@ public class CampViewer
     {
         System.out.println("Please enter the StaffID to search: ");
         String s1 = new Scanner(System.in).nextLine();
-        if (!StaffDatabase.getInstance().contains(s1)) {
+        if (!StaffDatabase.getInstance().contains(s1)) 
+        {
             System.out.println("Staff Not Found.");
             System.out.println("Press Enter to retry");
             String input = new Scanner(System.in).nextLine().trim();
@@ -172,11 +179,11 @@ public class CampViewer
      *
      * @throws PageBackException if the user wants to go back
      */
-    public static void viewAllCamps() throws PageBackException 
+    public static void viewAllCamp() throws PageBackException 
     {
         ChangePage.changePage();
         System.out.println("View All Camps");
-        ModelViewer.displayListOfDisplayable(CampManager.viewAllCamps());
+        ModelViewer.displayListOfDisplayable(CampManager.viewAllCamp());
         System.out.println("Press Enter to go back.");
         new Scanner(System.in).nextLine();
         throw new PageBackException();
@@ -204,5 +211,95 @@ public class CampViewer
         System.out.println("Press Enter to go back.");
         new Scanner(System.in).nextLine();
         throw new PageBackException();
+    }
+
+    public static void generateCreatedCamp(Staff staff) throws PageBackException
+    {
+        ChangePage.changePage();
+        System.out.println("View Created Camps");
+        List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staff.getID()));
+        ModelViewer.displayListOfDisplayable(campList);
+        System.out.println("Enter <Enter> to continue");
+        new Scanner(System.in).nextLine();
+        throw new PageBackException();
+    }
+
+    public static void editCampDetails(Staff staff) throws PageBackException
+    {
+        ChangePage.changePage();
+        System.out.println("View Created Camps");
+        List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staff.getID()));
+        ModelViewer.displayListOfDisplayable(campList);
+        System.out.println("");
+        System.out.println("Enter the CampID that you would like to edit: ");
+        String option = new Scanner(System.in).nextLine().trim();
+
+        if(!option.isEmpty())
+        {
+            Camp campToEdit = findCampByID(campList, option);
+            ChangePage.changePage();
+            generateCampToEdit(campToEdit);
+            if(campToEdit != null)
+            {
+                modifyCampDetails(campToEdit);
+                System.out.println("Camp details edited successfully.");
+                ModelViewer.displayListOfDisplayable(campList);
+            }
+            else
+            {
+                System.out.println("Camp not found with the specified Camp ID.");
+            }
+        }
+    }
+
+    private static Camp findCampByID(List<Camp> campList, String campID)
+    {
+        for(Camp camp : campList)
+        {
+            if(camp.getID().equalsIgnoreCase(campID))
+            {
+                return camp;
+            }
+        }
+        return null;
+    }
+
+    private static void modifyCampDetails(Camp campToEdit) throws PageBackException
+    {
+        System.out.println("Editing camp with CampID: " + campToEdit.getID());
+        String ID = campToEdit.getID();
+        System.out.println("\t1. Edit Camp Title");
+        System.out.println("\t2. Change Camp Status");
+        System.out.println("\t3. Edit Start Date");
+        System.out.println("\t4. Edit End Date");
+
+        System.out.println();
+        System.out.print("Please enter your choice: ");
+
+        int choice = IntGetter.readInt();
+
+        try {
+                switch (choice) {
+                    case 1 -> CampManager.changeCampTitle(ID);
+                    //case 2 -> ResetPassword.changePassword(UserType.STAFF, staff.getID());
+                    //case 3 -> createCamp(staff);
+                    //case 4 -> CampViewer.viewAllCamp();
+                    //case 7 -> deregisterForProject(student);
+                    //case 8 -> changeTitleForProject(student);
+                    default -> {
+                        System.out.println("Invalid choice. Please press enter to try again.");
+                        new Scanner(System.in).nextLine();
+                        throw new PageBackException();
+                    }
+                }
+            } catch (Exception e) {
+                modifyCampDetails(campToEdit);
+            }
+    }
+
+    public static void generateCampToEdit(Camp campToEdit)
+    {
+        ModelViewer.displaySingleDisplayable(campToEdit);
+        return;
     }
 }
