@@ -14,13 +14,9 @@ import java.util.List;
 
 public class StudentManager 
 {
-    public static String registerStudent(String campID, String studentID) throws UserErrorException
+    public static List<Student> viewAllStudents()
     {
-        Camp camp = CampDatabase.getInstance().getByID(campID);
-        Student student = StudentDatabase.getInstance().getByID(studentID);
-
-        
-
+        return StudentDatabase.getInstance().getList();
     }
     
 }

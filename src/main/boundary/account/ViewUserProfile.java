@@ -13,7 +13,8 @@ public class ViewUserProfile {
      *
      * @param user the user whose profile is to be displayed.
      */
-    public static void viewUserProfile(User user) {
+    public static void viewUserProfile(User user) 
+    {
         String userType = UserTypeGetter.getUserTypeInCamelCase(user);
         System.out.println("Welcome to View " + userType + " Profile");
         System.out.println("┌--------------------------------------------------------------------------------------┐");
@@ -29,12 +30,19 @@ public class ViewUserProfile {
      * @param user the user whose profile is to be displayed.
      * @throws PageBackException if the user chooses to go back to the previous page.
      */
-    public static void viewUserProfilePage(User user) throws PageBackException {
+    public static void viewUserProfilePage(User user) throws PageBackException 
+    {
         ChangePage.changePage();
         viewUserProfile(user);
         System.out.println("Press enter to go back.");
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
         throw new PageBackException();
+    }
+
+    public static void viewMultipleUserProfilePage(User user) throws PageBackException
+    {
+        ChangePage.changePage();
+
     }
 }

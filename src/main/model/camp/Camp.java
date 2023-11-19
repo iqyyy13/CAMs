@@ -271,21 +271,6 @@ public class Camp implements Model, Displayable
         }
     }
 
-    private String getCampStudentInformationString() {
-        if (EmptyID.isEmptyID(studentID)) 
-        {
-            return "";
-        }
-        try 
-        {
-            Student student = StudentDatabase.getInstance().getByID(studentID);
-            return String.format("| Student Name                | %-65s |\n", student.getUserName()) +
-                   String.format("| Student Email Address       | %-65s |\n", student.getEmail());
-        } catch (UserErrorException e) {
-            throw new IllegalStateException("Cannot find the student.");
-        }
-    }
-
     private String getCampInformationString() 
     {
         return String.format("| Location                    | %-65s |\n", getLocation()) +

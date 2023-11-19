@@ -41,15 +41,16 @@ public class StaffMainPage {
             System.out.println("\t3. Create a camp");
             System.out.println("\t4. View all camps");
             System.out.println("\t5. View all created camps");
-            System.out.println("\t6. Edit camp");
-            System.out.println("\t7. Delete camp");
-            System.out.println("\t8. View all pending enquiries");
-            System.out.println("\t9. Reply enquiries");
-            System.out.println("\t10. View all pending suggestions");
-            System.out.println("\t11. Approve/Reject suggestions");
-            System.out.println("\t12. Generate report of students");
-            System.out.println("\t13. Generate performance report of CCs");
-            System.out.println("\t14. Logout");
+            System.out.println("\t6. View registered students");
+            System.out.println("\t7. Edit camp");
+            System.out.println("\t8. Delete camp");
+            System.out.println("\t9. View all pending enquiries");
+            System.out.println("\t10. Reply enquiries");
+            System.out.println("\t11. View all pending suggestions");
+            System.out.println("\t12. Approve/Reject suggestions");
+            System.out.println("\t13. Generate report of students");
+            System.out.println("\t14. Generate performance report of CCs");
+            System.out.println("\t15. Logout");
 
             System.out.println();
             System.out.print("Please enter your choice: ");
@@ -69,8 +70,9 @@ public class StaffMainPage {
                     case 3 -> createCamp(staff);
                     case 4 -> CampViewer.viewAllCamp();
                     case 5 -> CampViewer.generateCreatedCamp(staff);
-                    case 6 -> CampViewer.editCampDetails(staff);
-                    case 7 -> deleteCamp(staff);
+                    case 6 -> CampViewer.viewRegisteredStudents(staff);
+                    case 7 -> CampViewer.editCampDetails(staff);
+                    case 8 -> deleteCamp(staff);
                     //case 8 -> changeTitleForCamp(student);
                     case 14 -> Logout.logout();
                     default -> {

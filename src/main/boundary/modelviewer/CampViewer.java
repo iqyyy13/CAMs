@@ -7,6 +7,7 @@ import main.boundary.mainpage.StaffMainPage;
 import main.controller.camp.CampManager;
 import main.database.camp.CampDatabase;
 import main.database.user.StaffDatabase;
+import main.database.user.StudentDatabase;
 import main.model.camp.Camp;
 import main.model.camp.CampStatus;
 import main.model.user.Student;
@@ -320,6 +321,61 @@ public class CampViewer
             throw new PageBackException();
         }
     }
+ 
+    public static void viewRegisteredStudents(Staff staff) throws PageBackException
+    {
+        try
+        {
+            ChangePage.changePage();
+            List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staff.getID()));
+            ModelViewer.displayListOfDisplayable(campList);
+            System.out.println("");
+            System.out.println("Enter the CampID that you would like to view the list of registered students: ");
+            String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
+            
+            if(!campID.isEmpty())
+            {
+                Camp campToEdit = findCampByID(campList, campID);
+                ChangePage.changePage();
+                generateCampToEdit(campToEdit);
+                if(campToEdit != null)
+                {
+                    String registeredStudentID = campToEdit.getStudentID();
 
-
+                    if(registeredStudentID != null && !registeredStudentID.isEmpty())
+                    {
+                        String[] studentIDs = registeredStudentID.split(",");
+                        for(String studentID : studentIDs)
+                        {
+                            try
+                            {
+                                Student student = StudentDatabase.getInstance().getByID(studentID.trim());
+                                if(student != null)
+                                {
+                                    ModelViewer.displaySingleDisplayable(student);
+                                    //ViewUserProfile.viewUserProfilePage(student);
+                                    //StaffMainPage.staffMainPage(staff);
+                                }
+                            } catch (Exception e)
+                            {
+                                System.out.println("");
+                            }
+                        }
+                    }
+                    System.out.println("Press Enter to go back.");
+                    Scanner scanner = new Scanner(System.in);
+                    scanner.nextLine();
+                    throw new PageBackException();
+                }
+                else
+                {
+                    System.out.println("Camp not found with the specified Camp ID.");
+                }
+            }
+        } catch (Exception e)
+        {
+            System.out.println("");
+        }
+        
+    }
 }

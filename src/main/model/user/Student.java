@@ -3,6 +3,7 @@ package main.model.user;
 import main.boundary.mainpage.StudentMainPage;
 import main.database.camp.CampDatabase;
 import main.database.user.StudentDatabase;
+import main.model.Displayable;
 import main.model.camp.Camp;
 import main.utils.exception.PageBackException;
 import main.utils.parameters.EmptyID;
@@ -17,7 +18,7 @@ import java.util.List;
  * This class represents a student, which is a type of user.
  * It extends the User class and includes a student ID field.
  */
-public class Student implements User 
+public class Student implements User, Displayable
 {
     private String studentID;
 
@@ -296,5 +297,27 @@ public class Student implements User
             }
         }
         return false;
+    }
+
+
+    private String getStudentInformationString() 
+    {
+        return "|------------------------------------------------------|\n" +
+               String.format("| Name                    | %-26s |\n", getUserName()) +
+               String.format("| StudentID               | %-26s |\n", getID()) +
+               String.format("| Email                   | %-26s |\n", getEmail()) +
+               String.format("| Role                    | %-26s |\n", getUserType());
+    }
+    
+    @Override
+    public String getDisplayableString() 
+    {
+        return getStudentInformationString();
+    }
+
+    @Override
+    public String getSplitter() 
+    {
+        return "========================================================";
     }
 }
