@@ -50,8 +50,8 @@ public class CCMainPage
             System.out.println("\t7. View assigned camp");
             System.out.println("\t8. View enquiry");
             System.out.println("\t9. Edit enquiry");
-            System.out.println("\t10. Reply Enquiry");
-            System.out.println("\t11. Delete Enquiry");
+            System.out.println("\t10. Reply enquiry");
+            System.out.println("\t11. Delete enquiry");
             System.out.println("\t12. Logout");
 
             System.out.println();
