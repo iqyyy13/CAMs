@@ -23,17 +23,14 @@ import main.utils.iocontrol.IntGetter;
 import main.utils.parameters.EmptyID;
 import main.utils.ui.ChangePage;
 
-public class StudentMainPage {
-    /**
-     * This method displays the main page of a student. It takes a User object as a parameter and displays a menu of options for the student to choose from. The user's choice is then processed using a switch statement, which calls different methods based on the choice.
-     *
-     * @param user The user object of the student.
-     */
-    public static void studentMainPage(User user) {
+public class CCMainPage 
+{
+
+    public static void ccMainPage(User user) {
         if (user instanceof Student student) 
         {
             ChangePage.changePage();
-            System.out.println("Welcome to Student Main Page");
+            System.out.println("Welcome to CC Main Page");
             System.out.println("Hello, " + student.getUserName() + "!");
             System.out.println();
             System.out.println("\t1. View my profile");
@@ -44,8 +41,8 @@ public class StudentMainPage {
             System.out.println("\t6. Withdraw from a camp");
             System.out.println("\t7. View enquiry");
             System.out.println("\t8. Edit enquiry");
-            System.out.println("\t9. Delete Enquiry");
-            System.out.println("\t10. Switch to CC Main Page");
+            System.out.println("\t9. Reply Enquiry");
+            System.out.println("\t10. Delete Enquiry");
             System.out.println("\t11. Logout");
 
             System.out.println();
@@ -70,7 +67,6 @@ public class StudentMainPage {
                     //case 6 -> register(student);
                     //case 7 -> deregisterFor(student);
                     //case 8 -> changeTitleFor(student);
-                    case 10 -> verifyCC(student);
                     case 11 -> Logout.logout();
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
@@ -231,26 +227,6 @@ public class StudentMainPage {
         } catch (Exception e)
         {
             StudentMainPage.studentMainPage(student);
-        }
-    }
-
-    private static void verifyCC(Student student)
-    {
-        if(student.getCCId().equals("0"))
-        {
-            System.out.println("You are not a Camp Committee member of any camp.");
-            System.out.print("Press Enter to go back: ");
-            Scanner scanner = new Scanner(System.in);
-            scanner.nextLine();
-            StudentMainPage.studentMainPage(student);
-        }
-        else
-        {
-            System.out.println("You are a Camp Committee member of Camp " + student.getCCId());
-            System.out.print("Press Enter to go to CC Main Page: ");
-            Scanner scanner = new Scanner(System.in);
-            scanner.nextLine();
-            CCMainPage.ccMainPage(student);
         }
     }
 }
