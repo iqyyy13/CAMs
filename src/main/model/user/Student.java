@@ -14,10 +14,6 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * This class represents a student, which is a type of user.
- * It extends the User class and includes a student ID field.
- */
 public class Student implements User, Displayable
 {
     private String studentID;
@@ -40,14 +36,6 @@ public class Student implements User, Displayable
     private String registeredCampIDs;
     private String deregisteredCampIDs;
 
-    /**
-     * Constructs a new Student object with the specified student ID and default password.
-     *
-     * @param studentID   the ID of the student.
-     * @param studentName the name of the student.
-     * @param email       the email of the student.
-     * @param faculty     the faculty of the student
-     */
     public Student(UserType userType, String studentID, String studentName, String email, String faculty) 
     {
         this.userType = UserType.STUDENT;
@@ -62,15 +50,6 @@ public class Student implements User, Displayable
         this.deregisteredCampIDs = "";
     }
 
-    /**
-     * Constructs a new Student object with the specified student ID and password.
-     *
-     * @param studentID      the ID of the student.
-     * @param studentName    the name of the student.
-     * @param email          the email of the student.
-     * @param faculty        the faculty of the student
-     * @param password       the password of the student.
-     */
     public Student(UserType userType, String studentID, String studentName, String email, String faculty, @NotNull String password) {
         this.userType  = UserType.STUDENT;
         this.studentID = studentID;
@@ -83,19 +62,11 @@ public class Student implements User, Displayable
         this.password = password;
     }
 
-    /**
-     * Constructs a new Student object with the specified student ID and password.
-     *
-     * @param informationMap the map
-     */
     public Student(Map<String, String> informationMap) 
     {
         fromMap(informationMap);
     }
 
-    /**
-     * default constructor for Student class
-     */
     public Student() 
     {
         super();
@@ -108,14 +79,6 @@ public class Student implements User, Displayable
         this.status = StudentStatus.UNREGISTERED;
     }
 
-    /**
-
-     Creates a new Student object based on the information in the provided map.
-     The map should contain the necessary information to construct the Student object,
-     such as the student's name, email, and ID.
-     @param informationMap a map containing the information required to create a new Student object
-     @return a new Student object with the information provided in the map
-     */
     public static User getUser(Map<String, String> informationMap) 
     {
         return new Student(informationMap);
@@ -251,13 +214,16 @@ public class Student implements User, Displayable
             if(this.deregisteredCampIDs == null)
             {
                 this.deregisteredCampIDs = campID;
-                StudentDatabase.getInstance().update(student);
+                Camp camp = CampDatabase.getInstance().getByID(campID);
+                camp.removeStudentID(student, camp);
             }
             else if(!this.deregisteredCampIDs.contains(campID))
             {
                 this.deregisteredCampIDs += "," + campID;
-                StudentDatabase.getInstance().update(student);
+                Camp camp = CampDatabase.getInstance().getByID(campID);
+                camp.removeStudentID(student, camp);
             }
+            StudentDatabase.getInstance().update(student);
         } catch(Exception e)
         {
             System.out.println("CampID cannot find");
@@ -298,7 +264,6 @@ public class Student implements User, Displayable
         }
         return false;
     }
-
 
     private String getStudentInformationString() 
     {

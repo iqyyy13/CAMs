@@ -72,16 +72,6 @@ public class Camp implements Model, Displayable
         }
     }
 
-    private void displayStudentInformation() {
-        try {
-            Student student = StudentDatabase.getInstance().getByID(studentID);
-            System.out.println("Student Name: " + student.getUserName());
-            System.out.println("Student Email Address: " + student.getEmail());
-        } catch (UserErrorException e) {
-            System.out.println("No Student Yet");
-        }
-    }
-
     private void displayCampID() 
     {
         System.out.println("Camp ID: " + campID);
@@ -255,7 +245,20 @@ public class Camp implements Model, Displayable
             CampDatabase.getInstance().update(camp);
         } catch (Exception e)
         {
-            System.out.println("Error storing student ID in camp: ");
+            System.out.println("Error storing student ID in camp");
+        }
+    }
+
+    public void removeStudentID(Student student, Camp camp)
+    {
+        try
+        {
+            String studentID = student.getID();
+            this.studentID = this.studentID.replace(studentID, "").replace(",,",",").trim();
+            CampDatabase.getInstance().update(camp);
+        } catch (Exception e)
+        {
+            System.out.println("Error finding Student ID in camp");
         }
     }
     
