@@ -30,7 +30,6 @@ public class UserFind
         {
             case STUDENT -> findStudent(userID);
             case STAFF -> findStaff(userID);
-            case CC -> findStudent(userID);
         };
     }
 }
