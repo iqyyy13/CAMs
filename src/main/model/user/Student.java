@@ -48,8 +48,6 @@ public class Student implements User, Displayable
         this.status = StudentStatus.UNREGISTERED;
         staffID = EmptyID.EMPTY_ID;
         campID = EmptyID.EMPTY_ID;
-        this.registeredCampIDs = "";
-        this.deregisteredCampIDs = "";
         this.CC = "0";
     }
 
@@ -64,6 +62,8 @@ public class Student implements User, Displayable
         campID = EmptyID.EMPTY_ID;
         this.password = password;
         this.CC = "0";
+        this.registeredCampIDs = "0";
+        this.deregisteredCampIDs = "0";
     }
 
     public Student(Map<String, String> informationMap) 
@@ -170,7 +170,12 @@ public class Student implements User, Displayable
 
     public String getCCId()
     {
-        return CC;
+        return this.CC;
+    }
+
+    public String setCCId(String campID)
+    {
+        return this.CC = campID;
     }
 
     public void registerCamp(Student student, String campID)
@@ -195,7 +200,7 @@ public class Student implements User, Displayable
             }
             else
             {
-                if(this.registeredCampIDs == null)
+                if(registeredCampIDs.equals("0"))
                 {
                     this.registeredCampIDs = campID;
                     Camp camp = CampDatabase.getInstance().getByID(campID);
@@ -220,8 +225,12 @@ public class Student implements User, Displayable
         try
         {
             this.registeredCampIDs = this.registeredCampIDs.replace(campID, "").replace(",,",",").trim();
+            if(this.registeredCampIDs.isEmpty())
+            {
+                this.registeredCampIDs = "0";
+            }
 
-            if(this.deregisteredCampIDs == null)
+            if(deregisteredCampIDs.equals("0"))
             {
                 this.deregisteredCampIDs = campID;
                 Camp camp = CampDatabase.getInstance().getByID(campID);
@@ -281,7 +290,7 @@ public class Student implements User, Displayable
                String.format("| Name                    | %-26s |\n", getUserName()) +
                String.format("| StudentID               | %-26s |\n", getID()) +
                String.format("| Email                   | %-26s |\n", getEmail()) +
-               String.format("| Role                    | %-26s |\n", getUserType());
+               String.format("| Role                    | %-26s |\n", getRoleDisplay());
     }
     
     @Override
@@ -298,10 +307,18 @@ public class Student implements User, Displayable
 
     public void registerAsCC(Student student, Camp camp)
     {
-        if("0".equals(this.CC))
+        if("0".equals(getCCId()))
         {
-            this.CC = camp.getID();
-            System.out.println("Student successfully registered as a committee member for CampID: " + camp.getID());
+            try
+            {
+                String campID = camp.getID();
+                student.setCCId(campID);
+                StudentDatabase.getInstance().update(student);
+                System.out.println("Student successfully registered as a committee member for CampID: " + campID);
+            } catch(Exception e)
+            {
+                System.out.println("");
+            }
         }
         else
         {
@@ -310,6 +327,20 @@ public class Student implements User, Displayable
             Scanner scanner = new Scanner(System.in);
             scanner.nextLine();
             StudentMainPage.studentMainPage(student);
+        }
+    }
+
+    public String getRoleDisplay()
+    {
+        if("0".equals(getCCId()))
+        {
+            String string = "STUDENT";
+            return string;
+        }
+        else
+        {
+            String string = "CC";
+            return string;
         }
     }
 }

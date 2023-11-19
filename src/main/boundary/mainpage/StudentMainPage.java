@@ -151,6 +151,8 @@ public class StudentMainPage {
                     student.registerAsCC(student, camp1);
                     camp1.decrementAvailableCCSlots();
                     CampDatabase.getInstance().update(camp1);
+                    camp1.storeStudentID(student, camp1);
+                    CampDatabase.getInstance().update(camp1);
                     System.out.println("Register Success!");
                     System.out.println("Press enter to go back.");
                     Scanner scanner = new Scanner(System.in);
@@ -175,6 +177,7 @@ public class StudentMainPage {
                 {
                     student.registerCamp(student,campID);
                     camp1.decrementAvailableSlots();
+                    camp1.storeStudentID(student, camp1);
                     CampDatabase.getInstance().update(camp1);
                     System.out.println("Register Success!");
                     System.out.println("Press enter to go back.");
