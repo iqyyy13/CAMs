@@ -24,11 +24,7 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
         listOfModelObjects = new ArrayList<>();
     }
 
-    
-    /** 
-     * @param getAll(
-     * @return String
-     */
+  
     /**
      * Gets the path of the repository file.
      *
@@ -197,21 +193,10 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
 
     /**
      * Finds all model objects in the repository that match the specified rules.
-     * <p>
+     * 
      * Multiple rules can be specified, and all rules must be satisfied for a model object to be considered a match.
-     * <p>
+     * 
      * The rules are specified as lambda expressions that take a model object as a parameter and return a boolean.
-     * <p>
-     * Here is an example of how to use this method:
-     *
-     * <pre>
-     * List&lt;Student&gt; modelObjects = repository.findByRules(
-     *     student -&gt; student.getFirstName().equals("John"),
-     *     student -&gt; student.getLastName().equals("Smith")
-     * );
-     * </pre>
-     * <p>
-     * This will return a list of all students whose first name is "John" and whose last name is "Smith".
      *
      * @param rules the rules to match
      * @return a list of all model objects in the repository that match the specified rules

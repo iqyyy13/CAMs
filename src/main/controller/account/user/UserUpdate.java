@@ -7,23 +7,41 @@ import main.model.user.Student;
 import main.model.user.User;
 import main.utils.exception.UserErrorException;
 
+/**
+ * Handles the updating of user information in the respective databases
+ */
 public class UserUpdate 
 {
     
     /** 
-     * @param student
-     * @throws UserErrorException
+     * Updates the information of a student in the student database
+     * 
+     * @param student               The student to be updated
+     * @throws UserErrorException   If an error occurs during the update process
      */
     private static void updateStudent(Student student) throws UserErrorException 
     {
         StudentDatabase.getInstance().update(student);
     }
 
+    /**
+     * Updates the information of a staff in the staff database
+     * 
+     * @param staff                 The staff to be updated
+     * @throws UserErrorException   If an error occurs during the update process
+     */
     private static void updateStaff(Staff staff) throws UserErrorException
     {
         StaffDatabase.getInstance().update(staff);
     }
 
+    /**
+     * Updates the information of a user based on the user's type. Supports
+     * both students and staff
+     * 
+     * @param user                  The user to be updated
+     * @throws UserErrorException   If an error occurs during the update process
+     */
     public static void updateUser(User user) throws UserErrorException 
     {
         if(user instanceof Student student) 

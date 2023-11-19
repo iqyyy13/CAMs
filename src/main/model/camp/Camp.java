@@ -12,32 +12,83 @@ import main.utils.parameters.EmptyID;
 
 import java.util.Map;
 
+/**
+ * Represents a camp, including its status, ID, staff, students, title, faculty,
+ * location, description, maximum slots, available slots and related
+ * functionalities
+ */
 public class Camp implements Model, Displayable 
 {
+    /**
+     * The status of a camp
+     */
     CampStatus status;
 
+    /**
+     * The unique identifier of a camp
+     */
     private String campID;
 
+    /**
+     * The staffID associated with the camp
+     */
     private String staffID;
 
+    /**
+     * The studentID associated with the camp
+     */
     private String studentID;
 
+    /**
+     * The title of the camp
+     */
     private String campTitle;
 
+    /**
+     * The faculty associated with the camp
+     */
     private String faculty;
 
+    /**
+     * The maximum number of slots available for regular participants
+     */
     private int maxSlots;
 
+    /**
+     * The maximum number of slots available for committee members
+     */
     private int maxCCSlots;
 
+    /**
+     * The number of available slots for regular participants
+     */
     private int availableSlots;
 
+    /**
+     * The number of available slots for committee members
+     */
     private int availableCCSlots;
     
+    /**
+     * The location of the camp
+     */
     private String location;
 
+    /**
+     * The description of the camp
+     */
     private String description;
 
+    /**
+     * Constructs a new Camp object with the specified parameters.
+     * 
+     * @param campID        The unique identifier of a camp
+     * @param campTitle     The title of the camp
+     * @param staffID       The staffID associated with the camp
+     * @param faculty       The faculty associated with the camp
+     * @param location      The location of the camp
+     * @param description   The description of the camp
+     */
     public Camp(String campID, String campTitle, String staffID, String faculty, String location, String description) 
     {
         this.campID = campID;
@@ -55,6 +106,11 @@ public class Camp implements Model, Displayable
 
     }
 
+    /**
+     * Constructs a new Camp object with information from the specified map
+     * 
+     * @param map The map containing information about the camp
+     */
     public Camp(Map<String, String> map) 
     {
         fromMap(map);
@@ -62,7 +118,9 @@ public class Camp implements Model, Displayable
 
     
     /** 
-     * @param staffID
+     * Displays staff information based on the provided staff ID.
+     * 
+     * @param staffID The staff ID for which information should be displayed.
      */
     private void displayStaffInformation(String staffID) 
     {
@@ -76,17 +134,26 @@ public class Camp implements Model, Displayable
         }
     }
 
+    /**
+     * Displays the camp ID.
+     */
     private void displayCampID() 
     {
         System.out.println("Camp ID: " + campID);
     }
 
+    /**
+     * Displays camp information including its title and status
+     */
     private void displayCampInformation() 
     {
         System.out.println("Camp Title: " + campTitle);
         System.out.println("Camp Status: " + status);
     }
 
+    /**
+     * Displays the entire camp information
+     */
     public void displayCamp() 
     {
         displayCampID();
@@ -94,94 +161,154 @@ public class Camp implements Model, Displayable
         displayCampInformation();
     }
 
-    
-    /** 
-     * @param studentID
-     * @throws IllegalStateException
-     */
-    public void assignStudent(String studentID) throws IllegalStateException 
-    {
-        if (status != CampStatus.AVAILABLE) 
-        {
-            throw new IllegalStateException("Camp is not available for allocation.");
-        }
-        this.studentID = studentID;
-        this.status = CampStatus.ALLOCATED;
-    }
 
+    /**
+     * Retrieves the student ID associated with the camp
+     * 
+     * @return the student ID associated with the camp
+     */
     public String getStudentID() 
     {
         return studentID;
     }
 
+    /**
+     * Retrieves the staff ID associated with the camp
+     * 
+     * @return the staff ID associated with the camp
+     */
     public String getStaffID() 
     {
         return staffID;
     }
 
+    /**
+     * Sets the staff ID of the camp with the given parameter
+     * 
+     * @param staffID the staff ID to set with
+     */
     public void setStaffID(String staffID) {
         this.staffID = staffID;
     }
 
+    /**
+     * Retrieves the title of the camp
+     * 
+     * @return the title of the camp
+     */
     public String getCampTitle() {
         return campTitle;
     }
 
+    /**
+     * Sets the title of the camp with the given parameter
+     * 
+     * @param campTitle the title of the camp to set with
+     */
     public void setCampTitle(String campTitle) 
     {
         this.campTitle = campTitle;
     }
 
+    /**
+     * Gets the status of the camp
+     * 
+     * @return the status of the camp
+     */
     public CampStatus getStatus() 
     {
         return status;
     }
 
+    /**
+     * Sets the status of the camp with the given parameter
+     * @param status The status of the camp
+     */
     public void setStatus(CampStatus status) 
     {
         this.status = status;
     }
 
+    /**
+     * Retrieves the unique identifier of the camp
+     * @return the unique identifier of the camp
+     */
     @Override
     public String getID() {
         return campID;
     }
 
+    /**
+     * Retrieves the faculty associated with the camp
+     * @return the faculty of the camp
+     */
     public String getFaculty() 
     {
         return this.faculty;
     }
 
+    /**
+     * Retrieves the max number of slots associated with the camp
+     * @return the max number of slots associated with the camp
+     */
     public int getMaxSlots()
     {
         return maxSlots;
     }
 
+    /**
+     * Retrieves the max number of camp committee slots associated with the camp
+     * 
+     * @return the max number of camp committee slots associated with the camp
+     */
     public int getCCMaxSlots()
     {
         return maxCCSlots;
     }
 
+    /**
+     * Retrives the number of available slots associated with the camp
+     * 
+     * @return the number of available slots associated with the camp
+     */
     public int getAvailableSlots()
     {
         return availableSlots;
     }
 
+    /**
+     * Retrieves the number of available Camp Committee slots associated with the camp
+     * 
+     * @return the number of available Camp Committee slots associated with the camp
+     */
     public int getAvailableCCSlots()
     {
         return availableCCSlots;
     }
 
+    /**
+     * Retrieves the location associated with the camp
+     * 
+     * @return the location associated with the camp
+     */
     public String getLocation()
     {
         return location;
     }
 
+    /**
+     * Retrieves the description associated with the camp
+     * 
+     * @return the description associated with the camp
+     */
     public String getDescription()
     {
         return description;
     }
 
+    /**
+     * Decremets the available regular slots
+     */
     public void decrementAvailableSlots()
     {
         if(availableSlots > 0)
@@ -196,6 +323,9 @@ public class Camp implements Model, Displayable
         }
     }
 
+    /**
+     * Decrements the available committee member slots
+     */
     public void decrementAvailableCCSlots()
     {
         if(availableSlots > 0)
@@ -210,6 +340,9 @@ public class Camp implements Model, Displayable
         }
     }
 
+    /**
+     * Increments the available regular slots
+     */
     public void incrementAvailableSlots()
     {
         if(availableSlots > 0)
@@ -224,6 +357,9 @@ public class Camp implements Model, Displayable
         }
     }
 
+    /**
+     * Increments the available committee member slots
+     */
     public void incrementAvailableCCSlots()
     {
         if(availableSlots > 0)
@@ -238,6 +374,12 @@ public class Camp implements Model, Displayable
         }
     }
 
+    /**
+     * Stores the student ID associated with the camp
+     * 
+     * @param student   The student to be stored
+     * @param camp      The camp to associate the student with     
+     */
     public void storeStudentID(Student student, Camp camp)
     {
         try
@@ -258,6 +400,12 @@ public class Camp implements Model, Displayable
         }
     }
 
+    /**
+     * Removes the student ID associated with the camp
+     * 
+     * @param student   The student to be removed
+     * @param camp      The camp to dissociate the student from
+     */
     public void removeStudentID(Student student, Camp camp)
     {
         try
@@ -363,12 +511,23 @@ public class Camp implements Model, Displayable
                 titleLine4 +
                 "|=================================================================================================|\n";
     }
+
+    /**
+     * Retrieves a displayable string representing the camp
+     * 
+     * @return The displayable string
+     */
     @Override
     public String getDisplayableString() 
     {
         return getSingleCampString();
     }
 
+    /**
+     * Retrieves the splitter string for display formatting
+     * 
+     * @return The splitter string
+     */
     @Override
     public String getSplitter() 
     {

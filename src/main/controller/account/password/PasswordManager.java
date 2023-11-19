@@ -4,15 +4,16 @@ import main.model.user.User;
 import main.utils.exception.PasswordIncorrectException;
 
 /**
- * A class manages the password of a user
+ * Manages user passwords, providing methods to check and change passwords.
  */
-public class PasswordManager {
+public class PasswordManager 
+{
     /**
-     * Checks if the password is correct
+     * Checks if the provided password is correct for the user
      *
-     * @param user     the user whose password is to be checked
-     * @param password the password to be checked
-     * @return true if the password is correct, false otherwise
+     * @param user      The user whose password is to be checked
+     * @param password  The password to be checked
+     * @return          True if the password is correct, false otherwise
      */
     public static boolean checkPassword(User user, String password) 
     {
@@ -22,10 +23,10 @@ public class PasswordManager {
     /**
      * Changes the password of the user
      *
-     * @param user        the user whose password is to be changed
-     * @param oldPassword the old password
-     * @param newPassword the new password
-     * @throws PasswordIncorrectException if the old password is incorrect
+     * @param user                          The user whose password is to be changed
+     * @param oldPassword                   The old password
+     * @param newPassword                   The new password
+     * @throws PasswordIncorrectException   If the old password is incorrect
      */
     public static void changePassword(User user, String oldPassword, String newPassword) throws PasswordIncorrectException 
     {
