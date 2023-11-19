@@ -126,39 +126,72 @@ public class StudentMainPage {
         }
         ChangePage.changePage();
         System.out.println("Here is the Camp Information");
+        Camp camp1;
         try
         {
-            Camp camp1 = CampDatabase.getInstance().getByID(campID);
+            camp1 = CampDatabase.getInstance().getByID(campID);
             ModelViewer.displaySingleDisplayable(camp1);
         } catch (UserErrorException e)
         {
             throw new RuntimeException(e);
         }
+        System.out.println("\t1. Student");
+        System.out.println("\t2. Camp Committee Member");
+        System.out.println("Press 1 to register as a student or 2 as a camp committee member: ");
+        int role = new Scanner(System.in).nextInt();
         System.out.println("Are you sure you want to register for this Camp? ([y]/[n])");
         String choice = new Scanner(System.in).nextLine();
         if(choice.equalsIgnoreCase("y"))
         {
-            try
+            if(role == 2)
             {
-                student.registerCamp(student,campID);
-                Camp camp1 = CampDatabase.getInstance().getByID(campID);
-                camp1.decrementAvailableSlots();
-                CampDatabase.getInstance().update(camp1);
-                System.out.println("Register Success!");
-                System.out.println("Press enter to go back.");
-                Scanner scanner = new Scanner(System.in);
-                scanner.nextLine();
-                throw new PageBackException();
-            } catch (Exception e) {
-                System.out.println("Enter [b] to go back or press Enter to retry.");
-                String option = new Scanner(System.in).nextLine();
-                if(option.equals("b"))
+                try
                 {
+                    student.registerCamp(student,campID);
+                    student.registerAsCC(student, camp1);
+                    camp1.decrementAvailableCCSlots();
+                    CampDatabase.getInstance().update(camp1);
+                    System.out.println("Register Success!");
+                    System.out.println("Press enter to go back.");
+                    Scanner scanner = new Scanner(System.in);
+                    scanner.nextLine();
                     throw new PageBackException();
+                } catch (Exception e) {
+                    System.out.println("Enter [b] to go back or press Enter to retry.");
+                    String option = new Scanner(System.in).nextLine();
+                    if(option.equals("b"))
+                    {
+                        throw new PageBackException();
+                    }
+                    else
+                    {
+                        registerCamp(student);
+                    }
                 }
-                else
+            }
+            else
+            {
+                try
                 {
-                    registerCamp(student);
+                    student.registerCamp(student,campID);
+                    camp1.decrementAvailableSlots();
+                    CampDatabase.getInstance().update(camp1);
+                    System.out.println("Register Success!");
+                    System.out.println("Press enter to go back.");
+                    Scanner scanner = new Scanner(System.in);
+                    scanner.nextLine();
+                    throw new PageBackException();
+                } catch (Exception e) {
+                    System.out.println("Enter [b] to go back or press Enter to retry.");
+                    String option = new Scanner(System.in).nextLine();
+                    if(option.equals("b"))
+                    {
+                        throw new PageBackException();
+                    }
+                    else
+                    {
+                        registerCamp(student);
+                    }
                 }
             }
         }

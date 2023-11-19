@@ -191,7 +191,7 @@ public class Camp implements Model, Displayable
     {
         if(availableSlots > 0)
         {
-            availableSlots--;
+            availableCCSlots--;
             System.out.println("The number of available slots now are : " + getAvailableCCSlots());
 
         }
@@ -219,7 +219,7 @@ public class Camp implements Model, Displayable
     {
         if(availableSlots > 0)
         {
-            availableSlots++;
+            availableCCSlots++;
             System.out.println("The number of available slots now are : " + getAvailableCCSlots());
 
         }

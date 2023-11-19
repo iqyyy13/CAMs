@@ -353,7 +353,6 @@ public class CampViewer
                                 if(student != null)
                                 {
                                     ModelViewer.displaySingleDisplayable(student);
-                                    //ViewUserProfile.viewUserProfilePage(student);
                                     //StaffMainPage.staffMainPage(staff);
                                 }
                             } catch (Exception e)
@@ -365,7 +364,7 @@ public class CampViewer
                     System.out.println("Press Enter to go back.");
                     Scanner scanner = new Scanner(System.in);
                     scanner.nextLine();
-                    throw new PageBackException();
+                    StaffMainPage.staffMainPage(staff);
                 }
                 else
                 {

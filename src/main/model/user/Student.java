@@ -36,6 +36,8 @@ public class Student implements User, Displayable
     private String registeredCampIDs;
     private String deregisteredCampIDs;
 
+    private String CC;
+
     public Student(UserType userType, String studentID, String studentName, String email, String faculty) 
     {
         this.userType = UserType.STUDENT;
@@ -48,6 +50,7 @@ public class Student implements User, Displayable
         campID = EmptyID.EMPTY_ID;
         this.registeredCampIDs = "";
         this.deregisteredCampIDs = "";
+        this.CC = "0";
     }
 
     public Student(UserType userType, String studentID, String studentName, String email, String faculty, @NotNull String password) {
@@ -60,6 +63,7 @@ public class Student implements User, Displayable
         staffID = EmptyID.EMPTY_ID;
         campID = EmptyID.EMPTY_ID;
         this.password = password;
+        this.CC = "0";
     }
 
     public Student(Map<String, String> informationMap) 
@@ -77,6 +81,7 @@ public class Student implements User, Displayable
         this.userType = UserType.STUDENT;
         //this.password = EmptyID.EMPTY_ID;
         this.status = StudentStatus.UNREGISTERED;
+        this.CC = "0";
     }
 
     public static User getUser(Map<String, String> informationMap) 
@@ -161,6 +166,11 @@ public class Student implements User, Displayable
     public String getDeregisteredCampIDs()
     {
         return deregisteredCampIDs;
+    }
+
+    public String getCCId()
+    {
+        return CC;
     }
 
     public void registerCamp(Student student, String campID)
@@ -284,5 +294,22 @@ public class Student implements User, Displayable
     public String getSplitter() 
     {
         return "========================================================";
+    }
+
+    public void registerAsCC(Student student, Camp camp)
+    {
+        if("0".equals(this.CC))
+        {
+            this.CC = camp.getID();
+            System.out.println("Student successfully registered as a committee member for CampID: " + camp.getID());
+        }
+        else
+        {
+            System.out.println("Student is already registered as a committee member for CampID " + this.CC);
+            System.out.println("Press enter to go back.");
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
+            StudentMainPage.studentMainPage(student);
+        }
     }
 }

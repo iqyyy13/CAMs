@@ -74,7 +74,7 @@ public class StaffMainPage {
                     case 7 -> CampViewer.editCampDetails(staff);
                     case 8 -> deleteCamp(staff);
                     //case 8 -> changeTitleForCamp(student);
-                    case 14 -> Logout.logout();
+                    case 15 -> Logout.logout();
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
                         new Scanner(System.in).nextLine();
