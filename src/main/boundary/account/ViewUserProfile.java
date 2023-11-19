@@ -40,6 +40,11 @@ public class ViewUserProfile {
         throw new PageBackException();
     }
 
+    
+    /** 
+     * @param user
+     * @throws PageBackException
+     */
     public static void viewMultipleUserProfilePage(User user) throws PageBackException
     {
         ChangePage.changePage();

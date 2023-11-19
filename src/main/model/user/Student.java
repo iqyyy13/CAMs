@@ -14,30 +14,81 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents a student, a type of user
+ * Extends the User and Displayable class
+ * Includes a student ID field
+ */
 public class Student implements User, Displayable
 {
+    /**
+     * ID of a student
+     */
     private String studentID;
-
+    
+    /**
+     * Name of a student
+     */
     private String studentName;
 
+    /**
+     * Email of a student
+     */
     private String email;
 
+    /**
+     * Faculty of a student
+     */
     private String faculty;
 
+    /**
+     * Status of a student
+     */
     private StudentStatus status;
 
+    /**
+     * ID of a staff
+     */
     private String staffID;
 
+    /**
+     * ID of a camp
+     */
     private String campID;
+
+    /**
+     * Password of a student
+     */
     private String password;
 
+    /**
+     * userType of a student
+     */
     private UserType userType;
 
+    /**
+     * The campIDs that the student has registered
+     */
     private String registeredCampIDs;
+
+    /**
+     * The campIDs that the student has deregistered
+     */
     private String deregisteredCampIDs;
 
+    /**
+     * The campID that the student is a CC of
+     */
     private String CC;
 
+    /**
+     * Constructs a new Student object with the student ID and default password
+     * @param userType          usertype of the student
+     * @param studentID         ID of the student
+     * @param studentName       name of the student
+     * @param email             email of the student
+     * @param faculty           faculty of the student
+     */
     public Student(UserType userType, String studentID, String studentName, String email, String faculty) 
     {
         this.userType = UserType.STUDENT;
@@ -51,6 +102,15 @@ public class Student implements User, Displayable
         this.CC = "0";
     }
 
+    /**
+     * Constructs a new Student object with the specified student ID and password
+     * @param userType          usertype of the student
+     * @param studentID         ID of the student
+     * @param studentName       name of the student
+     * @param email             email of the student
+     * @param faculty           faculty of the student
+     * @param password          password of the student
+     */
     public Student(UserType userType, String studentID, String studentName, String email, String faculty, @NotNull String password) {
         this.userType  = UserType.STUDENT;
         this.studentID = studentID;
@@ -66,11 +126,18 @@ public class Student implements User, Displayable
         this.deregisteredCampIDs = "0";
     }
 
+    /**
+     * Constructs a new student object with the specified student ID and password
+     * @param informationMap
+     */
     public Student(Map<String, String> informationMap) 
     {
         fromMap(informationMap);
     }
 
+    /**
+     * default constructor for a Student class
+     */
     public Student() 
     {
         super();
@@ -84,100 +151,181 @@ public class Student implements User, Displayable
         this.CC = "0";
     }
 
+    /**
+     * Creates a new Student object based on the information in the map
+     * Map contains necessary information to create a Student object such as
+     * the Student's name, email, studentID and faculty
+     * @param informationMap a map containing information required to create a new Student object
+     * @return a new Student object with information provided in the map
+     */
     public static User getUser(Map<String, String> informationMap) 
     {
         return new Student(informationMap);
     }
 
+    
+    /** 
+     * Gets the studentID of the user
+     * @return the studentID of the user
+     */
     @Override
     public String getID() 
     {
         return this.studentID;
     }
 
+    /**
+     * Gets the username of the user
+     * @return the username of the user
+     */
     @Override
     public String getUserName() 
     {
         return this.studentName;
     }
 
+    /**
+     * Gets the email of the user
+     * @return the email of the user
+     */
     @Override
     public String getEmail() 
     {
         return this.email;
     }
 
+    /**
+     * Gets the faculty of the user
+     * @return the faculty of the user
+     */
     @Override
     public String getFaculty() 
     {
         return this.faculty;
     }
 
+    /**
+     * Gets the status of the user
+     * @return the status of the user
+     */
     public StudentStatus getStatus() 
     {
         return this.status;
     }
 
+    /**
+     * Sets the status of the user
+     * @param status The status to set the user
+     */
     public void setStatus(StudentStatus status) 
     {
         this.status = status;
     }
 
+    /**
+     * Gets the campID of the user
+     * @return the campID of the user
+     */
     public String getCampID() 
     {
         return campID;
     }
 
+    /**
+     * Sets the campID of the user
+     * @param campID The campID to set for the user
+     */
     public void setCampID(String campID) 
     {
         this.campID = campID;
     }
 
+    /**
+     * Gets the password of the user
+     * @return the password of the user
+     */
     public String getPassword() 
     {
         return password;
     }
 
+    /**
+     * Sets the password of the user
+     * @param password The password to set for the user
+     */
     public void setPassword(String password) 
     {
         this.password = password;
     }
 
+    /**
+     * Gets the userType of the user
+     */
     public UserType getUserType() 
     {
         return userType;
     }
 
+    /**
+     * Gets the staffID of the user
+     * @return the staffID of the user
+     */
     public String getStaffID()
     {
         return staffID;
     }
 
+    /**
+     * Sets the staffID of the user
+     * @param staffID The staffID to set for the user
+     */
     public void setStaffID(String staffID)
     {
         this.staffID = staffID;
     }
 
+    /**
+     * Gets the CampIDs that the student has registered
+     * @return the CampIDs that the student has registered
+     */
     public String getRegisteredCampIDs()
     {
         return registeredCampIDs;
     }
 
+    /**
+     * Gets the CampIDs that the student has deregistered from
+     * @return the CampIDs that the student has deregistered
+     */
     public String getDeregisteredCampIDs()
     {
         return deregisteredCampIDs;
     }
 
+    /**
+     * Gets the CampID that the student is a CC of
+     * @return the CampID that the student is a CC of
+     */
     public String getCCId()
     {
         return this.CC;
     }
 
+    /**
+     * Sets the CampID that the student is a cc of
+     * @param campID the CampID that the student has registered to be a CC of
+     * @return the CampID that the student is a CC of
+     */
     public String setCCId(String campID)
     {
         return this.CC = campID;
     }
 
+    /**
+     * Registers the student for a camp
+     * @param student The student to register
+     * @param campID The ID of the camp to register for
+     */
     public void registerCamp(Student student, String campID)
     {
         try
@@ -220,6 +368,11 @@ public class Student implements User, Displayable
         }
     }
 
+    /**
+     * Deregisters the student from a camp
+     * @param student The student to deregister
+     * @param campID The ID of a camp to deregister from
+     */
     public void deregisterCamp(Student student, String campID)
     {
         try
@@ -249,6 +402,11 @@ public class Student implements User, Displayable
         }
     }
 
+    /**
+     * Verify whether the Student has registered the campID before
+     * @param campID The ID of a camp to verify with
+     * @return True if camp is registered
+     */
     private boolean isCampAlreadyRegistered(String campID)
     {
         if(registeredCampIDs != null && !registeredCampIDs.isEmpty())
@@ -267,6 +425,11 @@ public class Student implements User, Displayable
         return false;
     }
 
+    /**
+     * Verify whether the Student has deregistered the campID before
+     * @param campID The ID of a camp to check verify with
+     * @return True if camp is deregistered
+     */
     private boolean isCampAlreadyDeregistered(String campID)
     {
         if(deregisteredCampIDs != null && !deregisteredCampIDs.isEmpty())
@@ -284,6 +447,10 @@ public class Student implements User, Displayable
         return false;
     }
 
+    /**
+     * Prints the relevant information of a student
+     * @return the relevenat information of a student
+     */
     private String getStudentInformationString() 
     {
         return "|------------------------------------------------------|\n" +
@@ -293,18 +460,29 @@ public class Student implements User, Displayable
                String.format("| Role                    | %-26s |\n", getRoleDisplay());
     }
     
+    /**
+     * Gets the String to display
+     */
     @Override
     public String getDisplayableString() 
     {
         return getStudentInformationString();
     }
 
+    /**
+     * Splits the String
+     */
     @Override
     public String getSplitter() 
     {
         return "========================================================";
     }
 
+    /**
+     * Register a student as a committee member for a camp
+     * @param student The student to register as a committee member
+     * @param camp    The camp for which the student is registering as a committee member
+     */
     public void registerAsCC(Student student, Camp camp)
     {
         if("0".equals(getCCId()))
@@ -330,6 +508,10 @@ public class Student implements User, Displayable
         }
     }
 
+    /**
+     * Gets the role display of the USER (either "STUDENT" or "CC")
+     * @return The role display of the user.
+     */
     public String getRoleDisplay()
     {
         if("0".equals(getCCId()))

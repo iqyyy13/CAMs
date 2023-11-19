@@ -14,6 +14,10 @@ import java.util.Scanner;
 
 public class LoginUI 
 {
+    
+    /** 
+     * @throws PageBackException
+     */
     public static void login() throws PageBackException 
     {
         ChangePage.changePage();

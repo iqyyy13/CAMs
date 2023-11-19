@@ -29,6 +29,11 @@ public class UserAdd {
         }
     }
 
+    
+    /** 
+     * @param student
+     * @throws UserAlreadyExistsException
+     */
     private static void addStudent(Student student) throws UserAlreadyExistsException 
     {
         StudentDatabase.getInstance().add(student);

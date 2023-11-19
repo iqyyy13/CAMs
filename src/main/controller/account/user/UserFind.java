@@ -8,6 +8,12 @@ import main.utils.exception.UserErrorException;
 
 public class UserFind 
 {
+    
+    /** 
+     * @param userID
+     * @return User
+     * @throws UserErrorException
+     */
     public static User findStudent(String userID) throws UserErrorException 
     {
         return StudentDatabase.getInstance().getByID(userID);

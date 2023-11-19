@@ -19,6 +19,10 @@ public class StaffDatabase extends Database<Staff> {
         load();
     }
 
+    
+    /** 
+     * @return StaffDatabase
+     */
     public static StaffDatabase getInstance() 
     {
         return new StaffDatabase();

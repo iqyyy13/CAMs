@@ -5,13 +5,14 @@ package main.utils.exception;
  * in a repository.
  * It extends the {@link Exception} class.
  */
-public class UserErrorException extends Exception {
-
+public class UserErrorException extends Exception 
+{
     /**
      * Creates a new instance of the {@link UserErrorException} class with a default error message.
      * The default message is "Model not found".
      */
-    public UserErrorException() {
+    public UserErrorException() 
+    {
         super("User not found");
     }
 
@@ -20,7 +21,8 @@ public class UserErrorException extends Exception {
      *
      * @param message The custom error message to be used.
      */
-    public UserErrorException(String message) {
+    public UserErrorException(String message) 
+    {
         super(message);
     }
 }

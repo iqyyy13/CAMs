@@ -91,6 +91,11 @@ public class StaffMainPage {
         }
     }
 
+    
+    /** 
+     * @param staff
+     * @throws PageBackException
+     */
     private static void createCamp(Staff staff) throws PageBackException
     {
         ChangePage.changePage();

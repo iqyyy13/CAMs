@@ -5,13 +5,14 @@ package main.utils.exception;
  * model to a repository that already contains a model with the same ID.
  * It extends the {@link Exception} class.
  */
-public class UserAlreadyExistsException extends Exception {
-
+public class UserAlreadyExistsException extends Exception 
+{
     /**
      * Creates a new instance of the {@link ModelAlreadyExistsException} class with a default error message.
      * The default message is "Model already exists".
      */
-    public UserAlreadyExistsException() {
+    public UserAlreadyExistsException() 
+    {
         super("User already exists");
     }
 
@@ -20,7 +21,8 @@ public class UserAlreadyExistsException extends Exception {
      *
      * @param message The custom error message to be used.
      */
-    public UserAlreadyExistsException(String message) {
+    public UserAlreadyExistsException(String message) 
+    {
         super(message);
     }
 }

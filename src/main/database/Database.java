@@ -24,6 +24,11 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
         listOfModelObjects = new ArrayList<>();
     }
 
+    
+    /** 
+     * @param getAll(
+     * @return String
+     */
     /**
      * Gets the path of the repository file.
      *

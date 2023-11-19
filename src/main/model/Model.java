@@ -8,7 +8,8 @@ import main.utils.iocontrol.Mappable;
  It extends the Mappable interface, which allows it to be serialized and deserialized as a map of key-value pairs.
  The interface requires implementations to provide a unique ID string and defines how the ID can be retrieved.
  */
-public interface Model extends Mappable {
+public interface Model extends Mappable 
+{
     /**
      * Returns the ID of the model as a string.
      *

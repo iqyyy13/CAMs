@@ -88,6 +88,11 @@ public class StudentMainPage {
         }
     }
 
+    
+    /** 
+     * @param student
+     * @throws PageBackException
+     */
     private static void registerCamp(Student student) throws PageBackException
     {
         ChangePage.changePage();

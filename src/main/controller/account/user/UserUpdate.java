@@ -9,6 +9,11 @@ import main.utils.exception.UserErrorException;
 
 public class UserUpdate 
 {
+    
+    /** 
+     * @param student
+     * @throws UserErrorException
+     */
     private static void updateStudent(Student student) throws UserErrorException 
     {
         StudentDatabase.getInstance().update(student);

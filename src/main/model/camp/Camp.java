@@ -60,6 +60,10 @@ public class Camp implements Model, Displayable
         fromMap(map);
     }
 
+    
+    /** 
+     * @param staffID
+     */
     private void displayStaffInformation(String staffID) 
     {
         try 
@@ -90,6 +94,11 @@ public class Camp implements Model, Displayable
         displayCampInformation();
     }
 
+    
+    /** 
+     * @param studentID
+     * @throws IllegalStateException
+     */
     public void assignStudent(String studentID) throws IllegalStateException 
     {
         if (status != CampStatus.AVAILABLE) 

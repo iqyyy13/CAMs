@@ -4,9 +4,33 @@ import java.util.*;
 
 import static main.utils.iocontrol.ObjectOutputControlCharacters.DELIMITER_STRING;
 import static main.utils.iocontrol.ObjectOutputControlCharacters.SEPARATOR_STRING;
-
+/**
+ * The StringAndMapConvertor class provides a method to convert a String representation of a map to a Map object and vice versa
+ */
 public class StringAndMapConvertor 
 {
+    /**
+     * Converts a Map object to a String representation of the map.
+     * 
+     * @param map is the Map object to convert.
+     * @return A String representation of the map.
+     */
+    public static String mapToString(Map<String, String> map) 
+    {
+        List<String> pairs = new ArrayList<>();
+        for (Map.Entry<String, String> entry : map.entrySet()) 
+        {
+            pairs.add(entry.getKey() + DELIMITER_STRING + entry.getValue());
+        }
+        return String.join(SEPARATOR_STRING, pairs);
+    }
+
+    /** 
+     * Converts a String representation of a map to a Map object
+     * @param string The String representation of the map.
+     * @return Map<String, String> is a Map object that contains the key-value pairs from the String representation.
+     * @throws IllegalArgumentException if the input string contains invalid key-value pairs.
+     */
     public static Map<String, String> stringToMap(String string) 
     {
         Map<String, String> map = new HashMap<>();
@@ -21,13 +45,5 @@ public class StringAndMapConvertor
             map.put(keyValue[0], keyValue[1]);
         }
         return map;
-    }
-
-    public static String mapToString(Map<String, String> map) {
-        List<String> pairs = new ArrayList<>();
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            pairs.add(entry.getKey() + DELIMITER_STRING + entry.getValue());
-        }
-        return String.join(SEPARATOR_STRING, pairs);
     }
 }

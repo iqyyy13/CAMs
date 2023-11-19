@@ -9,6 +9,10 @@ import main.utils.iocontrol.IntGetter;
 
 public class AttributeGetter 
 {
+    
+    /** 
+     * @return UserType
+     */
     public static UserType getRole() 
     {
         System.out.println("1. Student");

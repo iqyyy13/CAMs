@@ -18,6 +18,10 @@ public class CampDatabase extends Database<Camp>
         load();
     }
 
+    
+    /** 
+     * @return CampDatabase
+     */
     public static CampDatabase getInstance()
     {
         return new CampDatabase();

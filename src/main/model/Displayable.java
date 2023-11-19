@@ -4,7 +4,8 @@ package main.model;
 
  This interface represents an object that can be displayed in a formatted string and a splitter.
  */
-public interface Displayable {
+public interface Displayable 
+{
     /**
      Returns the formatted string representation of the object.
      @return the formatted string representation of the object.

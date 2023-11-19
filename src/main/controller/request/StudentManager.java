@@ -14,6 +14,10 @@ import java.util.List;
 
 public class StudentManager 
 {
+    
+    /** 
+     * @return List<Student>
+     */
     public static List<Student> viewAllStudents()
     {
         return StudentDatabase.getInstance().getList();

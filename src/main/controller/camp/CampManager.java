@@ -25,6 +25,12 @@ import java.util.Set;
 
 public class CampManager 
 {
+    
+    /** 
+     * @param campID
+     * @param newTitle
+     * @throws UserErrorException
+     */
     public static void changeCampTitle(String campID, String newTitle) throws UserErrorException 
     {
         Camp camp = CampDatabase.getInstance().getByID(campID);

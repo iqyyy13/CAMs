@@ -12,6 +12,12 @@ import java.util.Scanner;
 
 public class ResetPassword 
 {
+    
+    /** 
+     * @param userType
+     * @param userID
+     * @throws PageBackException
+     */
     public static void askToRetry(UserType userType, String userID) throws PageBackException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Press Enter to try again or [b] to go back.");

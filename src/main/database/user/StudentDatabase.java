@@ -18,6 +18,10 @@ public class StudentDatabase extends Database<Student> {
         load();
     }
 
+    
+    /** 
+     * @return StudentDatabase
+     */
     public static StudentDatabase getInstance()
     {
         return new StudentDatabase();

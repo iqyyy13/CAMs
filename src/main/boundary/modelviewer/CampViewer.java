@@ -25,6 +25,11 @@ import java.util.Scanner;
 
 public class CampViewer 
 {
+    
+    /** 
+     * @return CampStatus
+     * @throws PageBackException
+     */
     public static CampStatus getCampStatus() throws PageBackException
     {
         System.out.println("\t1. Available");

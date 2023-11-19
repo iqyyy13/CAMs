@@ -7,6 +7,10 @@ import main.controller.camp.CampManager;
 public class UIBootup 
 {
 
+    
+    /** 
+     * @return boolean
+     */
     private static boolean onBootUp()
     {
         return CampManager.repositoryIsEmpty();

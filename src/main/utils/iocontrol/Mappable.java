@@ -9,8 +9,8 @@ import java.util.Map;
 /**
  * Interface for objects that can be mapped to/from a Map.
  */
-public interface Mappable {
-
+public interface Mappable
+{
     /**
      * Converts the object to a map
      *
@@ -24,7 +24,8 @@ public interface Mappable {
         {
             try {
                 field.setAccessible(true);
-                try {
+                try
+                {
                     map.put(field.getName(), field.get(this).toString());
                 } catch (NullPointerException e) {
                     map.put(field.getName(), EmptyID.EMPTY_ID);
@@ -41,10 +42,13 @@ public interface Mappable {
      *
      * @param map the map
      */
-    default void fromMap(Map<String, String> map) {
+    default void fromMap(Map<String, String> map)
+    {
         Field[] fields = getClass().getDeclaredFields();
-        for (Field field : fields) {
-            try {
+        for (Field field : fields) 
+        {
+            try 
+            {
                 field.setAccessible(true);
                 if (field.getType().isEnum()) 
                 {

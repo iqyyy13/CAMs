@@ -1,13 +1,29 @@
 package main.model.camp;
 
+/**
+ * Enumeration representing the status of a camp
+ */
 public enum CampStatus 
 {
+    /**
+     * Camp is available
+     */
     AVAILABLE,
 
+    /**
+     * Camp is allocated
+     */
     ALLOCATED,
 
+    /**
+     * Camp is unavailable
+     */
     UNAVAILABLE;
 
+    /**
+     * Returns a color-coded string representation of the camp status
+     * @return A color-coded string representation.
+     */
     public String colorString() 
     {
         return switch (this) 

@@ -5,13 +5,14 @@ package main.utils.exception;
  * where it is not allowed.
  * It extends the {@link Exception} class.
  */
-public class PageBackException extends Exception {
-
+public class PageBackException extends Exception 
+{
     /**
      * Creates a new instance of the {@link PageBackException} class with a default error message.
      * The default message is "Page back".
      */
-    public PageBackException() {
+    public PageBackException() 
+    {
         super("Page back");
     }
 }

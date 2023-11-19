@@ -12,6 +12,11 @@ import java.util.Map;
  */
 public abstract class Preservable<MappableObject extends Mappable> {
 
+    
+    /** 
+     * @param FILE_PATH
+     * @return List<MappableObject>
+     */
     /**
      * Gets the list of mappable objects.
      *
@@ -32,10 +37,13 @@ public abstract class Preservable<MappableObject extends Mappable> {
      * @param FILE_PATH the path of the file to save to
      * @throws RuntimeException if the data could not be saved to the file
      */
-    protected void save(final String FILE_PATH) {
-        try (PrintWriter printWriter = new PrintWriter(new FileWriter(FILE_PATH))) {
+    protected void save(final String FILE_PATH)
+    {
+        try (PrintWriter printWriter = new PrintWriter(new FileWriter(FILE_PATH))) 
+        {
             final List<MappableObject> listOfMappableObjects = getAll();
-            for (MappableObject mappableObject : listOfMappableObjects) {
+            for (MappableObject mappableObject : listOfMappableObjects) 
+            {
                 printWriter.println(StringAndMapConvertor.mapToString(mappableObject.toMap()));
             }
         } catch (IOException e) {
@@ -49,18 +57,22 @@ public abstract class Preservable<MappableObject extends Mappable> {
      * @param FILE_PATH the path of the file to load from
      * @throws RuntimeException if the data could not be loaded from the file
      */
-    protected void load(final String FILE_PATH) {
+    protected void load(final String FILE_PATH) 
+    {
         List<Map<String, String>> listOfMappableObjects = new ArrayList<>();
         BufferedReader bufferedReader;
-        try {
+        try
+        {
             bufferedReader = new BufferedReader(new FileReader(FILE_PATH));
         } catch (FileNotFoundException e) {
             File file = new File(FILE_PATH);
             File parent = file.getParentFile();
-            if (parent != null && !parent.exists()) {
+            if (parent != null && !parent.exists()) 
+            {
                 parent.mkdirs();
             }
-            try {
+            try
+            {
                 file.createNewFile();
                 bufferedReader = new BufferedReader(new FileReader(file));
             } catch (IOException ex) {
@@ -68,8 +80,10 @@ public abstract class Preservable<MappableObject extends Mappable> {
             }
         }
         String line;
-        try {
-            while ((line = bufferedReader.readLine()) != null) {
+        try 
+        {
+            while ((line = bufferedReader.readLine()) != null) 
+            {
                 listOfMappableObjects.add(StringAndMapConvertor.stringToMap(line));
             }
         } catch (IOException e) {

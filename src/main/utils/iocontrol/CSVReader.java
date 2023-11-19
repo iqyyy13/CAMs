@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
  * contents as a list of rows, each represented as a list of
  * strings.
  */
-public class CSVReader {
-
+public class CSVReader
+{
     /**
      * Reads a CSV file and returns its contents as a list of rows,
      * each represented as a list of strings.
@@ -24,12 +24,15 @@ public class CSVReader {
      *                  a header row
      * @return a list of rows, each represented as a list of strings
      */
-    public static List<List<String>> read(String filePath, boolean hasHeader) {
+    public static List<List<String>> read(String filePath, boolean hasHeader) 
+    {
         List<List<String>> list = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) 
+        {
             String line;
-            if (hasHeader) {
+            if (hasHeader) 
+            {
                 // Skip the first line, assuming it's a header
                 br.readLine();
             }

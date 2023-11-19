@@ -17,6 +17,15 @@ import java.util.List;
 
 public class AccountManager 
 {
+    
+    /** 
+     * @param userType
+     * @param userID
+     * @param oldPassword
+     * @param newPassword
+     * @throws PasswordIncorrectException
+     * @throws UserErrorException
+     */
     public static void changePassword(UserType userType, String userID, String oldPassword, String newPassword)
             throws PasswordIncorrectException, UserErrorException {
         User user = UserFind.findUser(userID, userType);

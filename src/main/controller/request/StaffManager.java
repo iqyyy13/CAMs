@@ -21,6 +21,11 @@ public class StaffManager
     public static int MAX_NUM_OF_STUDENTS_PER_STAFF = 30;
 
 
+    
+    /** 
+     * @param staffID
+     * @return List<Request>
+     */
     public static List<Request> viewRequest(String staffID) 
     {
         return RequestDatabase.getInstance().findByRules(request -> request.getID().equals(staffID));

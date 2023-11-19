@@ -26,6 +26,10 @@ import main.utils.ui.ChangePage;
 public class CCMainPage 
 {
 
+    
+    /** 
+     * @param user
+     */
     public static void ccMainPage(User user) {
         if (user instanceof Student student) 
         {
