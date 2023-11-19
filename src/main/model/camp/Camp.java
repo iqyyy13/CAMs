@@ -1,5 +1,6 @@
 package main.model.camp;
 
+import main.database.camp.CampDatabase;
 import main.database.user.StaffDatabase;
 import main.database.user.StudentDatabase;
 import main.model.Displayable;
@@ -96,10 +97,6 @@ public class Camp implements Model, Displayable
     {
         displayCampID();
         displayStaffInformation(this.staffID);
-        if (status == CampStatus.ALLOCATED)
-        {
-            displayStudentInformation();
-        }
         displayCampInformation();
     }
 
@@ -241,6 +238,26 @@ public class Camp implements Model, Displayable
             System.out.println("No available slots for regular registration");
         }
     }
+
+    public void storeStudentID(Student student, Camp camp)
+    {
+        try
+        {
+            String studentID = student.getID();
+            if(this.studentID == null)
+            {
+                this.studentID = studentID;
+            }
+            else if (!this.studentID.contains(studentID)) 
+            {
+                this.studentID += "," + studentID;
+            }
+            CampDatabase.getInstance().update(camp);
+        } catch (Exception e)
+        {
+            System.out.println("Error storing student ID in camp: ");
+        }
+    }
     
 
     private String getCampStaffInformationString() {
@@ -342,7 +359,6 @@ public class Camp implements Model, Displayable
                 "|-------------------------------------------------------------------------------------------------|\n" +
                 String.format("| Camp ID                     | %-65s |\n", getID()) +
                 getCampStaffInformationString() +
-                getCampStudentInformationString() +
                 getCampInformationString() +
                 "|=================================================================================================|\n" +
                 titleLine3 +

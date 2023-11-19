@@ -1,7 +1,9 @@
 package main.model.user;
 
 import main.boundary.mainpage.StudentMainPage;
+import main.database.camp.CampDatabase;
 import main.database.user.StudentDatabase;
+import main.model.camp.Camp;
 import main.utils.exception.PageBackException;
 import main.utils.parameters.EmptyID;
 import main.utils.parameters.NotNull;
@@ -222,10 +224,14 @@ public class Student implements User
                 if(this.registeredCampIDs == null)
                 {
                     this.registeredCampIDs = campID;
+                    Camp camp = CampDatabase.getInstance().getByID(campID);
+                    camp.storeStudentID(student, camp);
                 }
                 else if (!this.registeredCampIDs.contains(campID)) 
                 {
                     this.registeredCampIDs += "," + campID;
+                    Camp camp = CampDatabase.getInstance().getByID(campID);
+                    camp.storeStudentID(student, camp);
                 }
                 StudentDatabase.getInstance().update(student);
             }
