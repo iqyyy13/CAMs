@@ -118,11 +118,6 @@ public class Camp implements Model, Displayable
         return studentID;
     }
 
-    public void setStudentID(String studentID) 
-    {
-        this.studentID = studentID;
-    }
-
     public String getStaffID() 
     {
         return staffID;
@@ -141,11 +136,13 @@ public class Camp implements Model, Displayable
         this.campTitle = campTitle;
     }
 
-    public CampStatus getStatus() {
+    public CampStatus getStatus() 
+    {
         return status;
     }
 
-    public void setStatus(CampStatus status) {
+    public void setStatus(CampStatus status) 
+    {
         this.status = status;
     }
 

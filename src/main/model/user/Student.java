@@ -192,6 +192,11 @@ public class Student implements User
         return registeredCampIDs;
     }
 
+    public String getDeregisteredCampIDs()
+    {
+        return deregisteredCampIDs;
+    }
+
     public void registerCamp(Student student, String campID)
     {
         try

@@ -6,7 +6,7 @@ import main.controller.account.user.UserFind;
 import main.controller.account.user.UserUpdate;
 import main.model.user.User;
 import main.model.user.UserType;
-import main.model.user.UserFactory;
+import main.model.user.UserCreate;
 import main.utils.config.Location;
 import main.utils.exception.PasswordIncorrectException;
 import main.utils.exception.UserAlreadyExistsException;
@@ -40,7 +40,7 @@ public class AccountManager
 
     public static User register(UserType userType, String userID, String password, String name, String email, String faculty) throws UserAlreadyExistsException 
     {
-        User user = UserFactory.create(userType, userID, password, name, email, faculty);
+        User user = UserCreate.create(userType, userID, password, name, email, faculty);
         UserAdd.addUser(user);
         return user;
     }

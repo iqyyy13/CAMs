@@ -95,63 +95,6 @@ public class CampManager
         return "P" + (max + 1);
     }
 
-    public static void deallocateCamp(String campID) throws UserErrorException 
-    {
-        Camp c = CampDatabase.getInstance().getByID(campID);
-        if (c.getStatus() != CampStatus.ALLOCATED) 
-        {
-            throw new IllegalStateException("The camp status is not ALLOCATED");
-        }
-        Student student;
-        try 
-        {
-            student = StudentDatabase.getInstance().getByID(c.getStudentID());
-        } catch (UserErrorException e) {
-            throw new IllegalStateException("Student not found");
-        }
-
-        String staffID = c.getStaffID();
-        Staff staff = StaffDatabase.getInstance().getByID(staffID);
-        student.setCampID(EmptyID.EMPTY_ID);
-        student.setStaffID(EmptyID.EMPTY_ID);
-        student.setStatus(StudentStatus.UNREGISTERED);
-        c.setStudentID(EmptyID.EMPTY_ID);
-        c.setStatus(CampStatus.AVAILABLE);
-        CampDatabase.getInstance().update(c);
-        StudentDatabase.getInstance().update(student);
-        StaffDatabase.getInstance().update(staff);
-        CampManager.updateCampsStatus();
-    }
-
-    public static void allocateCamp(String campID, String studentID) throws UserErrorException 
-    {
-        Camp c = CampDatabase.getInstance().getByID(campID);
-        Student student;
-        try 
-        {
-            student = StudentDatabase.getInstance().getByID(studentID);
-        } catch (UserErrorException e) {
-            throw new IllegalStateException("Student not found");
-        }
-        if (c.getStatus() == CampStatus.ALLOCATED) {
-            throw new IllegalStateException("Camp is already allocated");
-        }
-        if (student.getStatus() == StudentStatus.REGISTERED) {
-            throw new IllegalStateException("Student is already registered");
-        }
-        c.setStatus(CampStatus.ALLOCATED);
-        c.setStudentID(studentID);
-        student.setCampID(campID);
-        student.setStaffID(c.getStaffID());
-        student.setStatus(StudentStatus.REGISTERED);
-        String staffID = c.getStaffID();
-        Staff staff = StaffDatabase.getInstance().getByID(staffID);
-        CampDatabase.getInstance().update(c);
-        StudentDatabase.getInstance().update(student);
-        StaffDatabase.getInstance().update(staff);
-        CampManager.updateCampsStatus();
-    }
-
     public static void loadCamps() 
     {
         List<List<String>> camps = CSVReader.read(Location.RESOURCE_LOCATION + "/resources/CampList.csv", true);
