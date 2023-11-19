@@ -23,14 +23,18 @@ import main.utils.iocontrol.IntGetter;
 import main.utils.parameters.EmptyID;
 import main.utils.ui.ChangePage;
 
+/**
+ * Represents the main page for a Camp Committee (CC) member, providing various options and functionalities
+ */
 public class CCMainPage 
 {
-
-    
     /** 
-     * @param user
+     * Displays the main page for a CC member, allowing them to choose from various options.
+     * 
+     * @param user  The user object representing the CC member
      */
-    public static void ccMainPage(User user) {
+    public static void ccMainPage(User user) 
+    {
         if (user instanceof Student student) 
         {
             ChangePage.changePage();
@@ -43,11 +47,12 @@ public class CCMainPage
             System.out.println("\t4. View registered camps");
             System.out.println("\t5. Register for a camp");
             System.out.println("\t6. Withdraw from a camp");
-            System.out.println("\t7. View enquiry");
-            System.out.println("\t8. Edit enquiry");
-            System.out.println("\t9. Reply Enquiry");
-            System.out.println("\t10. Delete Enquiry");
-            System.out.println("\t11. Logout");
+            System.out.println("\t7. View assigned camp");
+            System.out.println("\t8. View enquiry");
+            System.out.println("\t9. Edit enquiry");
+            System.out.println("\t10. Reply Enquiry");
+            System.out.println("\t11. Delete Enquiry");
+            System.out.println("\t12. Logout");
 
             System.out.println();
             System.out.print("Please enter your choice: ");
@@ -68,10 +73,10 @@ public class CCMainPage
                     case 4 -> CampViewer.viewRegisteredCamps(student);
                     case 5 -> registerCamp(student);
                     case 6 -> deregisterCamp(student);
-                    //case 6 -> register(student);
+                    case 7 -> CampViewer.viewAssignedCamp(student);
                     //case 7 -> deregisterFor(student);
                     //case 8 -> changeTitleFor(student);
-                    case 11 -> Logout.logout();
+                    case 12 -> Logout.logout();
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
                         new Scanner(System.in).nextLine();
@@ -88,6 +93,12 @@ public class CCMainPage
         }
     }
 
+    /** 
+     * Registers a student for a camp, providing information about available camps and handling the registration process
+     * 
+     * @param student               The student registering for the camp
+     * @throws PageBackException    If the user chooses to go back during the operation
+     */
     private static void registerCamp(Student student) throws PageBackException
     {
         ChangePage.changePage();
@@ -202,6 +213,11 @@ public class CCMainPage
         }
     }
 
+    /**
+     * Deregisters a student from a camp, providing information about available camps and handling the deregistration process
+     * 
+     * @param student   The student deregistering from the camp
+     */
     private static void deregisterCamp(Student student)
     {
         ChangePage.changePage();

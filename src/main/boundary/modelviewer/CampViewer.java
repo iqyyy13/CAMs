@@ -3,7 +3,9 @@ package main.boundary.modelviewer;
 import main.boundary.account.Logout;
 import main.boundary.account.ResetPassword;
 import main.boundary.account.ViewUserProfile;
+import main.boundary.mainpage.CCMainPage;
 import main.boundary.mainpage.StaffMainPage;
+import main.boundary.mainpage.StudentMainPage;
 import main.controller.camp.CampManager;
 import main.database.camp.CampDatabase;
 import main.database.user.StaffDatabase;
@@ -270,6 +272,42 @@ public class CampViewer
         System.out.println("Enter <Enter> to continue");
         new Scanner(System.in).nextLine();
         throw new PageBackException();
+    }
+
+    /**
+     * Views the camp assigned to the CC member
+     * 
+     * @param student               The CC member viewing the assigned camp
+     * @throws PageBackException    If the user chooses to go back during the operation
+     */
+    public static void viewAssignedCamp(Student student) throws PageBackException
+    {
+        ChangePage.changePage();
+        System.out.println("View Assigned Camp");
+        String campID = student.getCCId();
+
+        if(campID.equals(""))
+        {
+            System.out.println("No camp ID assigned. Returning to Student Main Page");
+            System.out.println("Press Enter to go back");
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
+            StudentMainPage.studentMainPage(student);
+        }
+        else
+        {
+            try
+            {
+                Camp assignedCamp = CampDatabase.getInstance().getByID(campID);
+                ModelViewer.displaySingleDisplayable(assignedCamp);
+                System.out.println("Press Enter to go back");
+                new Scanner(System.in).nextLine();
+                CCMainPage.ccMainPage(student);
+            } catch (Exception e)
+            {
+                System.out.println("Camp ID not found");
+            }
+        }
     }
 
     /**

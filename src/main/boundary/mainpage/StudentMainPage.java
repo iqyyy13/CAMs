@@ -23,13 +23,18 @@ import main.utils.iocontrol.IntGetter;
 import main.utils.parameters.EmptyID;
 import main.utils.ui.ChangePage;
 
-public class StudentMainPage {
+/**
+ * Represents the main page for a student user, providing various options and functionalities
+ */
+public class StudentMainPage 
+{
     /**
-     * This method displays the main page of a student. It takes a User object as a parameter and displays a menu of options for the student to choose from. The user's choice is then processed using a switch statement, which calls different methods based on the choice.
+     * Displays the main page for a student user, allowing them to choose from various options
      *
-     * @param user The user object of the student.
+     * @param user The user object representing the student
      */
-    public static void studentMainPage(User user) {
+    public static void studentMainPage(User user) 
+    {
         if (user instanceof Student student) 
         {
             ChangePage.changePage();
@@ -90,8 +95,10 @@ public class StudentMainPage {
 
     
     /** 
-     * @param student
-     * @throws PageBackException
+     * Registers a student for a camp, providing information about available camps and handling the registration process
+     * 
+     * @param student               The student registering for the camp
+     * @throws PageBackException    If the user chooses to go back during the operation
      */
     private static void registerCamp(Student student) throws PageBackException
     {
@@ -207,6 +214,11 @@ public class StudentMainPage {
         }
     }
 
+    /**
+     * Deregisters a student from a camp, providing information about available camps and handling the deregistration process
+     * 
+     * @param student   The student deregistering from the camp
+     */
     private static void deregisterCamp(Student student)
     {
         ChangePage.changePage();
@@ -239,6 +251,11 @@ public class StudentMainPage {
         }
     }
 
+    /**
+     * Verifies if a student is a Camp Committee member and navigates to the CC Main Page if applicable.
+     * 
+     * @param student The student to be verified.
+     */
     private static void verifyCC(Student student)
     {
         if(student.getCCId().equals("0"))

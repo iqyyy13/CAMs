@@ -24,11 +24,15 @@ import main.utils.iocontrol.IntGetter;
 import main.utils.parameters.EmptyID;
 import main.utils.ui.ChangePage;
 
-public class StaffMainPage {
+/**
+ * Represents the main page for a staff user, providing various options and functionalities
+ */
+public class StaffMainPage 
+{
     /**
-     * This method displays the main page of a student. It takes a User object as a parameter and displays a menu of options for the student to choose from. The user's choice is then processed using a switch statement, which calls different methods based on the choice.
+     * Displays the main page for a staff user, allowing them to choose from various options.
      *
-     * @param user The user object of the student.
+     * @param user The user object representing the staff member
      */
     public static void staffMainPage(User user) {
         if (user instanceof Staff staff) {
@@ -91,10 +95,12 @@ public class StaffMainPage {
         }
     }
 
-    
     /** 
-     * @param staff
-     * @throws PageBackException
+     * Creates a new camp with information provided by the staff member, displaying the details
+     * and confirming the creation
+     * 
+     * @param staff                 The staff member creating the camp
+     * @throws PageBackException    If the user chooses to go back during the operation
      */
     private static void createCamp(Staff staff) throws PageBackException
     {
@@ -136,6 +142,12 @@ public class StaffMainPage {
         throw new PageBackException();
     }
 
+    /**
+     * Deletes a camp created by the staff member, confirming the deletion after displaying the camp details
+     * 
+     * @param staff                 The staff member deleting the camp
+     * @throws PageBackException    If the user chooses to go back during the operation
+     */
     public static void deleteCamp(Staff staff) throws PageBackException
     {
         ChangePage.changePage();
