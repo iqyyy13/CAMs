@@ -338,6 +338,7 @@ public class CCMainPage
             System.out.println("Your suggestion has been created");
             System.out.println("Press Enter to continue");
             scanner.nextLine();
+            CCMainPage.ccMainPage(student);
         } catch(PageBackException e)
         {
             CCMainPage.ccMainPage(student);
