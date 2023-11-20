@@ -174,7 +174,6 @@ public class Camp implements Model, Displayable
         displayCampInformation();
     }
 
-
     /**
      * Retrieves the student ID associated with the camp
      * 
