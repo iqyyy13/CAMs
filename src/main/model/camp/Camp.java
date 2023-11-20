@@ -10,6 +10,8 @@ import main.model.user.Staff;
 import main.utils.exception.UserErrorException;
 import main.utils.parameters.EmptyID;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
@@ -79,6 +81,13 @@ public class Camp implements Model, Displayable
      */
     private String description;
 
+    private String startDate;
+
+    private String endDate;
+
+    private String closingDate;
+
+
     /**
      * Constructs a new Camp object with the specified parameters.
      * 
@@ -89,7 +98,8 @@ public class Camp implements Model, Displayable
      * @param location      The location of the camp
      * @param description   The description of the camp
      */
-    public Camp(String campID, String campTitle, String staffID, String faculty, String location, String description) 
+    public Camp(String campID, String campTitle, String staffID, String faculty, String location, String description, String startDate,
+                String endDate, String closingDate) 
     {
         this.campID = campID;
         this.campTitle = campTitle;
@@ -103,6 +113,9 @@ public class Camp implements Model, Displayable
         this.description = description;
         this.availableSlots = maxSlots;
         this.availableCCSlots = maxCCSlots;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.closingDate = closingDate;
 
     }
 
@@ -306,6 +319,51 @@ public class Camp implements Model, Displayable
         return description;
     }
 
+    public void setStartDateString(String startDate)
+    {
+        this.startDate = startDate;
+    }
+
+    public String getStartDateString()
+    {
+        return startDate;
+    }
+
+    public LocalDate getStartDate()
+    {
+        return LocalDate.parse(startDate, DateTimeFormatter.ISO_LOCAL_DATE);
+    }
+
+    public void setEndDateString(String endDate)
+    {
+        this.endDate = endDate;
+    }
+
+    public String getEndDateString()
+    {
+        return endDate;
+    }
+
+    public LocalDate getEndDate()
+    {
+        return LocalDate.parse(endDate, DateTimeFormatter.ISO_LOCAL_DATE);
+    }
+
+    public void setClosingDateString(String closingDate)
+    {
+        this.closingDate = closingDate;
+    }
+
+    public String getClosingDateString()
+    {
+        return closingDate;
+    }
+
+    public LocalDate getClosingDate()
+    {
+        return LocalDate.parse(closingDate, DateTimeFormatter.ISO_LOCAL_DATE);
+    }
+
     /**
      * Decremets the available regular slots
      */
@@ -436,7 +494,10 @@ public class Camp implements Model, Displayable
         return String.format("| Location                    | %-65s |\n", getLocation()) +
                String.format("| Available Slots             | %-65s |\n", getAvailableSlots()) +
                String.format("| Available CC Slots          | %-65s |\n", getAvailableCCSlots()) +
-               String.format("| Camp Status                 | %-74s |\n", getStatus().colorString());
+               String.format("| Camp Status                 | %-74s |\n", getStatus().colorString()) +
+               String.format("| Start Date                  | %-65s |\n", getStartDateString()) +
+               String.format("| End Date                    | %-65s |\n", getEndDateString()) +
+               String.format("| Closing Registration Date   | %-65s |\n", getClosingDateString());
     }
 
     private String getSingleCampString() 

@@ -18,6 +18,7 @@ import main.utils.iocontrol.IntGetter;
 import main.utils.parameters.EmptyID;
 import main.utils.ui.ChangePage;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
@@ -94,10 +95,11 @@ public class CampManager
      * @param description                   The description associated with the camp
      * @throws UserAlreadyExistsException   If the camp ID already exists
      */
-    public static void createCamp(String campID, String campTitle, String staffID, String faculty, String location, String description) 
+    public static void createCamp(String campID, String campTitle, String staffID, String faculty, String location, String description, 
+    String startDate, String endDate, String closingDate) 
     throws UserAlreadyExistsException 
     {
-        Camp c = new Camp(campID, campTitle, staffID, faculty, location, description);
+        Camp c = new Camp(campID, campTitle, staffID, faculty, location, description, startDate, endDate, closingDate);
         CampDatabase.getInstance().add(c);
         CampManager.updateCampsStatus();
     }
@@ -113,10 +115,11 @@ public class CampManager
      * @return                              The newly created camp object
      * @throws UserAlreadyExistsException   If the camp ID already exists
      */
-    public static Camp createCamp(String campTitle, String staffID, String faculty, String location, String description) 
+    public static Camp createCamp(String campTitle, String staffID, String faculty, String location, String description, String startDate,
+    String endDate, String closingDate) 
     throws UserAlreadyExistsException 
     {
-        Camp c = new Camp(getNewCampID(), campTitle, staffID, faculty, location, description);
+        Camp c = new Camp(getNewCampID(), campTitle, staffID, faculty, location, description, startDate, endDate, closingDate);
         CampDatabase.getInstance().add(c);
         CampManager.updateCampsStatus();
         return c;
@@ -177,6 +180,9 @@ public class CampManager
                 String faculty = camp.get(2);
                 String location = camp.get(3);
                 String description = camp.get(4);
+                String startDate = camp.get(5);
+                String endDate = camp.get(6);
+                String closingDate = camp.get(7);
                 System.out.println("Checks works");
                 List<Staff> staffs = StaffDatabase.getInstance().findByRules(s -> s.checkUsername(staffName));
                 if (staffs.size() == 0) 
@@ -185,7 +191,8 @@ public class CampManager
                 } 
                 else if (staffs.size() == 1) 
                 {
-                    CampManager.createCamp(campName, staffs.get(0).getID(), staffs.get(0).getFaculty(), location, description);
+                    CampManager.createCamp(campName, staffs.get(0).getID(), staffs.get(0).getFaculty(), location, 
+                    description, startDate, endDate, closingDate);
                 } 
                 else 
                 {

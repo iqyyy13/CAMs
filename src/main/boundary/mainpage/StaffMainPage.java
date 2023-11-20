@@ -1,5 +1,7 @@
 package main.boundary.mainpage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -114,10 +116,20 @@ public class StaffMainPage
         String location = new Scanner(System.in).nextLine();
         System.out.println("Please give a brief description for the camp:");
         String description = new Scanner(System.in).nextLine();
+        System.out.println("Enter the startDate (YYYYMMDD):");
+        String startDate = new Scanner(System.in).nextLine();
+        System.out.println("Enter the endDate (YYYYMMDD): ");
+        String endDate = new Scanner(System.in).nextLine();
+        System.out.println("Enter the closing registration date (YYYYMMDD): ");
+        String closingDate = new Scanner(System.in).nextLine();
         Camp camp;
         try 
         {
-            camp = CampManager.createCamp(campTitle, staff.getID(), staff.getFaculty(), location, description);
+            //LocalDate startDate1 = LocalDate.parse(startDate, DateTimeFormatter.BASIC_ISO_DATE);
+            //LocalDate endDate1 = LocalDate.parse(endDate, DateTimeFormatter.BASIC_ISO_DATE);
+            //LocalDate closingDate1 = LocalDate.parse(closingDate, DateTimeFormatter.BASIC_ISO_DATE);
+
+            camp = CampManager.createCamp(campTitle, staff.getID(), staff.getFaculty(), location, description, startDate, endDate, closingDate);
         } catch (UserAlreadyExistsException e) {
             throw new RuntimeException(e);
         }
