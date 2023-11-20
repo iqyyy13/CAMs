@@ -19,6 +19,7 @@ import main.controller.request.StudentManager;
 import main.controller.suggestion.SuggestionManager;
 import main.database.user.StudentDatabase;
 import main.database.camp.CampDatabase;
+import main.database.suggestion.SuggestionDatabase;
 import main.model.camp.Camp;
 import main.model.camp.CampStatus;
 import main.model.suggestion.Suggestion;
@@ -56,16 +57,17 @@ public class CCMainPage
             System.out.println("\t5. Register for a camp");
             System.out.println("\t6. Withdraw from a camp");
             System.out.println("\t7. View assigned camp");
-            System.out.println("\t8. View enquiry");
-            System.out.println("\t9. Edit enquiry");
-            System.out.println("\t10. Reply enquiry");
-            System.out.println("\t11. Delete enquiry");
-            System.out.println("\t12. Submit suggestions");
-            System.out.println("\t13. View suggestions");
-            System.out.println("\t14. Edit suggestions");
-            System.out.println("\t15. Delete suggestions");
-            System.out.println("\t16. Generate report of students attending each camp");
-            System.out.println("\t17. Logout");
+            System.out.println("\t8. Create enquiry");
+            System.out.println("\t9. View enquiry");
+            System.out.println("\t10. Edit enquiry");
+            System.out.println("\t11. Reply enquiry");
+            System.out.println("\t12. Delete enquiry");
+            System.out.println("\t13. Submit suggestions");
+            System.out.println("\t14. View suggestions");
+            System.out.println("\t15. Edit suggestions");
+            System.out.println("\t16. Delete suggestions");
+            System.out.println("\t17. Generate report of students attending each camp");
+            System.out.println("\t18. Logout");
 
             System.out.println();
             System.out.print("Please enter your choice: ");
@@ -87,12 +89,12 @@ public class CCMainPage
                     case 5 -> registerCamp(student);
                     case 6 -> deregisterCamp(student);
                     case 7 -> CampViewer.viewAssignedCamp(student);
-                    case 12 -> createSuggestion(student);
-                    case 13 -> SuggestionViewer.viewOwnSuggestions(student);
-                    case 14 -> SuggestionViewer.editSuggestionDetails(student);
-                   // case 15 -> deleteSuggestion(student);
-                    case 16 -> generateReport(student);
-                    case 17 -> Logout.logout();
+                    case 13 -> createSuggestion(student);
+                    case 14 -> SuggestionViewer.viewOwnSuggestions(student);
+                    case 15 -> SuggestionViewer.editSuggestionDetails(student);
+                    case 16 -> deleteSuggestion(student);
+                    case 17 -> generateReport(student);
+                    case 18 -> Logout.logout();
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
                         new Scanner(System.in).nextLine();
@@ -354,16 +356,16 @@ public class CCMainPage
         }
     }
 
-    /*private static void deleteSuggestion(Student student) throws PageBackException
+    private static void deleteSuggestion(Student student) throws PageBackException
     {
         ChangePage.changePage();
-        System.out.println("View Created Camps");
-        List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staff.getID()));
-        ModelViewer.displayListOfDisplayable(campList);
+        String studentID = student.getID();
+        List<Suggestion> suggestionList = SuggestionDatabase.getInstance().findByRules(p->p.getCommitteeUserID().equalsIgnoreCase(studentID));
+        ModelViewer.displayListOfDisplayable(suggestionList);
         System.out.println("");
-        System.out.println("Enter the CampID that you would like to delete:");
+        System.out.println("Enter the SuggestionID that you would like to delete:");
         String option = new Scanner(System.in).nextLine().trim().toUpperCase();
-        System.out.println("You are about to delete Camp with Camp ID " + option + ". Are you sure?");
+        System.out.println("You are about to delete Suggestion with Suggestion ID " + option + ". Are you sure?");
         System.out.println("Press enter to confirm or [b] to go back.");
 
         String userInput = new Scanner(System.in).nextLine().trim();
@@ -373,24 +375,24 @@ public class CCMainPage
             try
             {
             System.out.println("Confirmed... Deleting.");
-            Camp campToDelete = CampViewer.findCampByID(campList, option);
-            if(campToDelete != null)
+            Suggestion suggestionToDelete = SuggestionViewer.findSuggestionByID(suggestionList, option);
+            if(suggestionToDelete != null)
             {
-                CampDatabase.getInstance().remove(campToDelete.getID());
-                System.out.println("Camp with Camp ID " + option + " deleted successfully.");
+                SuggestionDatabase.getInstance().remove(suggestionToDelete.getID());
+                System.out.println("Suggestion with Suggestion ID " + option + " deleted successfully.");
                 System.out.println("Press Enter to go back.");
                 new Scanner(System.in).nextLine();
                 throw new PageBackException();
             }
             else
             {
-                System.out.println("Camp not found with CampID " + option + ".");
+                System.out.println("Suggestion not found with SuggestionID " + option + ".");
             }
 
             throw new PageBackException();
             } catch (UserErrorException e)
             {
-                System.out.println("Error Deleting Camp");
+                System.out.println("Error Deleting Suggestion");
             }
         }
         else if(userInput.equalsIgnoreCase("b"))
@@ -401,8 +403,8 @@ public class CCMainPage
         else
         {
             System.out.println("Invalid choice. Please press enter to confirm or [b] to go back.");
-            deleteCamp(staff);
+            deleteSuggestion(student);
         }
-    }*/
+    }
 }
 

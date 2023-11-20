@@ -1,3 +1,1 @@
-msgI WANT TO GO HOMEcampIDP6suggestionID1approvenullcommitteeUserIDYCHERNstaffIDOURINstatusPENDING
-msgI WANT TO ORDcampIDP6suggestionID2approvenullcommitteeUserIDYCHERNstaffIDOURINstatusPENDING
 msgclosing date on christmascampIDP7suggestionID3approvenullcommitteeUserIDBR015staffIDOURINstatusPENDING
