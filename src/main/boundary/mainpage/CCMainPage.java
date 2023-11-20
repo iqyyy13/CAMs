@@ -82,7 +82,7 @@ public class CCMainPage
 
             try {
                 switch (choice) {
-                    case 1 -> ViewUserProfile.viewUserProfilePage(student);
+                    case 1 -> ViewUserProfile.viewStudentProfilePage(student);
                     case 2 -> ResetPassword.changePassword(UserType.STUDENT, student.getID());
                     case 3 -> CampViewer.viewAvailableCamps(student);
                     case 4 -> CampViewer.viewRegisteredCamps(student);

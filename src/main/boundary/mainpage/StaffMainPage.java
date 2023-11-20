@@ -96,6 +96,7 @@ public class StaffMainPage
                     case 11 -> SuggestionViewer.viewSuggestions(staff);
                     case 12 -> replySuggestions(staff);
                     case 13 -> generateReport(staff);
+                    case 14 -> generatePerformanceReport(staff);
                     case 15 -> Logout.logout();
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
@@ -228,6 +229,41 @@ public class StaffMainPage
             System.out.println("Invalid choice. Please press enter to confirm or [b] to go back.");
             deleteCamp(staff);
         }
+    }
+
+    private static void generatePerformanceReport(Staff staff)
+    {
+        ChangePage.changePage();
+        List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staff.getID()));
+        ModelViewer.displayListOfDisplayable(campList);
+        System.out.println("Enter the CampID to generate a performance report of:");
+        Scanner scanner = new Scanner(System.in);
+        String campID = scanner.nextLine();
+
+        Camp camp = CampViewer.findCampByID(campList, campID);
+        String registeredStudentID = camp.getStudentID();
+
+        if(registeredStudentID != null && !registeredStudentID.isEmpty())
+        {
+            String[] studentIDs = registeredStudentID.split(",");
+            for(String studentID : studentIDs)
+            {
+                try
+                {
+                    Student student = StudentDatabase.getInstance().getByID(studentID.trim());
+                    if(student.getCCId().equals(campID))
+                    {
+                        ModelViewer.displaySingleDisplayable(student);
+                    }
+                } catch (Exception e)
+                {
+                    System.out.println("");
+                }
+            }
+        }
+        System.out.println("Press Enter to go back");
+        scanner.nextLine();
+        StaffMainPage.staffMainPage(staff);
     }
 
     private static void generateReport(Staff staff)

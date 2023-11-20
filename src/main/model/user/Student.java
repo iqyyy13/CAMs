@@ -472,7 +472,8 @@ public class Student implements User, Displayable
                String.format("| Name                    | %-26s |\n", getUserName()) +
                String.format("| StudentID               | %-26s |\n", getID()) +
                String.format("| Email                   | %-26s |\n", getEmail()) +
-               String.format("| Role                    | %-26s |\n", getRoleDisplay());
+               String.format("| Role                    | %-26s |\n", getRoleDisplay()) +
+               String.format("| Points                  | %-26s |\n", getPoints());
     }
     
     /**
