@@ -36,9 +36,12 @@ public class SuggestionViewer
         String staffID = staff.getID();
         List<Suggestion> suggestionList = SuggestionDatabase.getInstance().findByRules(p-> p.getStaffID().equalsIgnoreCase(staffID));
         ModelViewer.displayListOfDisplayable(suggestionList);
-        System.out.println("Press Enter to go back.");
-        new Scanner(System.in).nextLine();
-        StaffMainPage.staffMainPage(staff);
+        System.out.println("Press Enter to continue or [b] to go back");
+        String userInput = new Scanner(System.in).nextLine().toLowerCase();
+        if(userInput.equals("b"))
+        {
+            StaffMainPage.staffMainPage(staff);
+        }
     }
     
     public static void viewOwnSuggestions(Student student)

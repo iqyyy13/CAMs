@@ -72,7 +72,8 @@ public class EnquiryManager {
         System.out.print("enquiry submitted successfully! \n");
         System.out.println("-------------------------------");
 
-        for (Enquiry c: enquiry_list) {
+        for (Enquiry c: enquiry_list) 
+        {
             if (c != null) {
                 c.setEnquiryID("E" + String.valueOf(index));
                 // c.getReplies().add("plholder");

@@ -81,6 +81,8 @@ public class Student implements User, Displayable
      */
     private String CC;
 
+    private int points;
+
     /**
      * Constructs a new Student object with the student ID and default password
      * @param userType          usertype of the student
@@ -100,6 +102,7 @@ public class Student implements User, Displayable
         staffID = EmptyID.EMPTY_ID;
         campID = EmptyID.EMPTY_ID;
         this.CC = "0";
+        this.points = 0;
     }
 
     /**
@@ -124,6 +127,7 @@ public class Student implements User, Displayable
         this.CC = "0";
         this.registeredCampIDs = "0";
         this.deregisteredCampIDs = "0";
+        this.points = 0;
     }
 
     /**
@@ -149,6 +153,7 @@ public class Student implements User, Displayable
         //this.password = EmptyID.EMPTY_ID;
         this.status = StudentStatus.UNREGISTERED;
         this.CC = "0";
+        this.points = 0;
     }
 
     /**
@@ -316,9 +321,19 @@ public class Student implements User, Displayable
      * @param campID the CampID that the student has registered to be a CC of
      * @return the CampID that the student is a CC of
      */
-    public String setCCId(String campID)
+    public void setCCId(String campID)
     {
-        return this.CC = campID;
+        this.CC = campID;
+    }
+
+    public int getPoints()
+    {
+        return this.points;
+    }
+
+    public void incrementPoint()
+    {
+        this.points++;
     }
 
     /**

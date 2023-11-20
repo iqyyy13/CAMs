@@ -20,10 +20,14 @@ import main.controller.camp.campClashTest;
 import main.controller.request.StudentManager;
 import main.database.camp.CampDatabase;
 import main.database.enquiry.EnquiryDatabase;
+import main.database.suggestion.SuggestionDatabase;
 import main.database.user.StaffDatabase;
+import main.database.user.StudentDatabase;
 import main.model.user.*;
+import main.model.Model;
 import main.model.camp.Camp;
 import main.model.suggestion.Suggestion;
+import main.model.suggestion.SuggestionStatus;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
 import main.utils.exception.UserAlreadyExistsException;
@@ -90,6 +94,7 @@ public class StaffMainPage
                     case 9 -> EnquiryManager.view_all_pending_enquiry();
                     case 10 -> EnquiryManager.reply_enquiry(null);
                     case 11 -> SuggestionViewer.viewSuggestions(staff);
+                    case 12 -> replySuggestions(staff);
                     case 13 -> generateReport(staff);
                     case 15 -> Logout.logout();
                     default -> {
@@ -273,6 +278,56 @@ public class StaffMainPage
         {
             System.out.println("Invalid date format. Please enter a date in the date format YYYYMMDD.");
             return null;
+        }
+    }
+
+    private static void replySuggestions(Staff staff) 
+    {
+        ChangePage.changePage();
+        SuggestionViewer.viewSuggestions(staff);
+        System.out.println("");
+        System.out.println("Enter the SuggestionID that you would want to approve/disapprove");
+        Scanner scanner = new Scanner(System.in);
+        String option = scanner.nextLine();
+        try
+        {
+            Suggestion suggestion = SuggestionDatabase.getInstance().getByID(option);
+            ChangePage.changePage();
+            ModelViewer.displaySingleDisplayable(suggestion);
+            System.out.println("");
+            System.out.println("1. Approve");
+            System.out.println("2. Disapprove");
+            System.out.print("Enter your option : ");
+            int reply = IntGetter.readInt();
+
+            switch(reply)
+            {
+                case 1 -> 
+                {
+                    suggestion.setStatus(SuggestionStatus.APPROVED);
+                    Student student = StudentDatabase.getInstance().getByID(suggestion.getCommitteeUserID());
+                    student.incrementPoint();
+                    StudentDatabase.getInstance().update(student);
+                }
+                case 2 -> suggestion.setStatus(SuggestionStatus.DISAPPROVED);
+                default ->
+                {
+                    System.out.println("Invalid Choice. Please try again");
+                    new Scanner(System.in);
+                    throw new PageBackException();
+                }
+            }
+            SuggestionDatabase.getInstance().update(suggestion);
+            System.out.println("Suggestion has been " + suggestion.getStatus());
+            System.out.println("Press Enter to go back");
+            scanner.nextLine();
+            StaffMainPage.staffMainPage(staff);
+        } catch(UserErrorException e)
+        {
+            System.err.println("Suggestion ID does not exist");
+        } catch (PageBackException e)
+        {
+            replySuggestions(staff);
         }
     }
 }
