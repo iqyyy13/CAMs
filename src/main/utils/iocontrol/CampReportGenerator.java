@@ -115,6 +115,12 @@ public class CampReportGenerator
         return RESOURCE_LOCATION + FILE_PATH;
     }
 
+    /**
+     * Checks if the provided role string indicates a camp attendee
+     * 
+     * @param role  The role string to be checked.
+     * @return {@code true} if the role indicates a camp attendee {@code false} otherwise.
+     */
     private static boolean isCampAttendee(String role)
     {
         if(role.equals("CAMP ATTENDEE"))
@@ -127,6 +133,12 @@ public class CampReportGenerator
         }
     }
 
+    /**
+     * Checks if the provided role string indicates a CC (Camp Committee) member
+     * 
+     * @param role  The role string to be checked.
+     * @return      {@code true} if the role indicates a CC member {@code false} otherwise.
+     */
     private static boolean isCC(String role)
     {
         if(role.equals("CC"))
