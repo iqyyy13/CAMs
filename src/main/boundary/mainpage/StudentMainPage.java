@@ -2,25 +2,29 @@ package main.boundary.mainpage;
 
 import java.util.Scanner;
 
-import javax.management.RuntimeErrorException;
+//import javax.management.RuntimeErrorException;
 
 import main.boundary.account.Logout;
 import main.boundary.account.ResetPassword;
 import main.boundary.account.ViewUserProfile;
 import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
-import main.controller.account.AccountManager;
+import main.controller.enquiry.EnquiryManager;
+//import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
-import main.controller.request.StudentManager;
+//import main.controller.request.StudentManager;
+//import main.database.enquiry.EnquiryDatabase;
 import main.database.user.StudentDatabase;
 import main.database.camp.CampDatabase;
+//import main.model.enquiry.Enquiry;
 import main.model.camp.Camp;
 import main.model.camp.CampStatus;
+import main.model.enquiry.Enquiry;
 import main.model.user.*;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
 import main.utils.iocontrol.IntGetter;
-import main.utils.parameters.EmptyID;
+//import main.utils.parameters.EmptyID;
 import main.utils.ui.ChangePage;
 
 public class StudentMainPage {
@@ -42,16 +46,20 @@ public class StudentMainPage {
             System.out.println("\t4. View registered camps");
             System.out.println("\t5. Register for a camp");
             System.out.println("\t6. Withdraw from a camp");
-            System.out.println("\t7. View enquiry");
-            System.out.println("\t8. Edit enquiry");
-            System.out.println("\t9. Delete Enquiry");
-            System.out.println("\t10. Switch to CC Main Page");
-            System.out.println("\t11. Logout");
+            System.out.println("\t7. New enquiry");
+            System.out.println("\t8. View enquiry");
+            System.out.println("\t9. Edit enquiry");
+            System.out.println("\t10. Delete Enquiry");
+            System.out.println("\t11. Switch to CC Main Page");
+            System.out.println("\t12. Logout");
 
             System.out.println();
             System.out.print("Please enter your choice: ");
 
             int choice = IntGetter.readInt();
+
+            // refresh Enquiry DB
+            EnquiryManager.refresh_enquiry_db();
 
             try {
                 student = StudentDatabase.getInstance().getByID(student.getID());
@@ -67,11 +75,13 @@ public class StudentMainPage {
                     case 4 -> CampViewer.viewRegisteredCamps(student);
                     case 5 -> registerCamp(student);
                     case 6 -> deregisterCamp(student);
-                    //case 6 -> register(student);
-                    //case 7 -> deregisterFor(student);
-                    //case 8 -> changeTitleFor(student);
-                    case 10 -> verifyCC(student);
-                    case 11 -> Logout.logout();
+                    case 7 -> EnquiryManager.new_enquiry(student.getRegisteredCampIDs(),student.getID());
+                    case 8 -> EnquiryManager.view_enquiry(student.getID());
+                    case 9 -> EnquiryManager.edit_enquiry(null);
+                    case 10 -> EnquiryManager.delete_enquiry(null);
+                    case 11 -> verifyCC(student);
+                    case 12 -> Logout.logout();
+                    // case 13 -> EnquiryManager.reply_enquiry(null);
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
                         new Scanner(System.in).nextLine();

@@ -1,7 +1,7 @@
 package main;
 
 import main.boundary.UIBootup;
-import main.controller.account.AccountManager;
+// import main.controller.account.AccountManager;
 public class Main 
 {
     

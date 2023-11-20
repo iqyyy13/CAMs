@@ -12,9 +12,11 @@ import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
 import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
+import main.controller.enquiry.EnquiryManager;
 import main.controller.request.StudentManager;
 import main.database.camp.CampDatabase;
 import main.database.user.StaffDatabase;
+import main.database.enquiry.EnquiryDatabase;
 import main.model.user.*;
 import main.model.camp.Camp;
 import main.utils.exception.UserErrorException;
@@ -57,6 +59,9 @@ public class StaffMainPage {
 
             int choice = IntGetter.readInt();
 
+            // refresh Enquiry DB
+            EnquiryManager.refresh_enquiry_db();
+
             try {
                 staff = StaffDatabase.getInstance().getByID(staff.getID());
             } catch (UserErrorException e) {
@@ -73,6 +78,8 @@ public class StaffMainPage {
                     case 6 -> CampViewer.viewRegisteredStudents(staff);
                     case 7 -> CampViewer.editCampDetails(staff);
                     case 8 -> deleteCamp(staff);
+                    case 9 -> EnquiryManager.view_all_pending_enquiry();
+                    case 10 -> EnquiryManager.reply_enquiry(null);
                     //case 8 -> changeTitleForCamp(student);
                     case 15 -> Logout.logout();
                     default -> {
