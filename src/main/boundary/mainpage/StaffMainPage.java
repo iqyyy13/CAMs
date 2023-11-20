@@ -20,6 +20,7 @@ import main.model.camp.Camp;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
 import main.utils.exception.UserAlreadyExistsException;
+import main.utils.iocontrol.CampReportGenerator;
 import main.utils.iocontrol.IntGetter;
 import main.utils.parameters.EmptyID;
 import main.utils.ui.ChangePage;
@@ -52,7 +53,7 @@ public class StaffMainPage
             System.out.println("\t10. Reply enquiries");
             System.out.println("\t11. View all pending suggestions");
             System.out.println("\t12. Approve/Reject suggestions");
-            System.out.println("\t13. Generate report of students");
+            System.out.println("\t13. Generate report of students attending each camp");
             System.out.println("\t14. Generate performance report of CCs");
             System.out.println("\t15. Logout");
 
@@ -78,6 +79,7 @@ public class StaffMainPage
                     case 7 -> CampViewer.editCampDetails(staff);
                     case 8 -> deleteCamp(staff);
                     //case 8 -> changeTitleForCamp(student);
+                    case 13 -> generateReport(staff);
                     case 15 -> Logout.logout();
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
@@ -197,6 +199,19 @@ public class StaffMainPage
             System.out.println("Invalid choice. Please press enter to confirm or [b] to go back.");
             deleteCamp(staff);
         }
+    }
+
+    public static void generateReport(Staff staff)
+    {
+        ChangePage.changePage();
+        List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staff.getID()));
+
+        CampReportGenerator.generateReportAndWriteToFile(campList);
+        System.out.println("File has been written");
+        System.out.println("Press Enter to go back");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+        StaffMainPage.staffMainPage(staff);
     }
 }
 
