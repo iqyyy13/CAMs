@@ -33,7 +33,7 @@ public class campClashTest
         return false;
     }
 
-    public static boolean registrationDateClash(Student student, String campID1)
+    public static String registrationDateClash(Student student, String campID1)
     {
         String registeredCampIDs = student.getRegisteredCampIDs();
 
@@ -46,7 +46,7 @@ public class campClashTest
                 {
                     if(testDateClash(registeredCampID, campID1) == true)
                     {
-                        return true;
+                        return registeredCampID;
                     }
                 }
             }
@@ -56,7 +56,7 @@ public class campClashTest
             System.out.println("");
         }
 
-        return false;
+        return null;
 
     }
 
