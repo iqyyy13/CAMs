@@ -434,7 +434,19 @@ public class CampViewer
                     Camp camp = CampDatabase.getInstance().getByID(campID.trim());
                     if(camp != null)
                     {
+                        String role = student.getCCId();
+                        String display;
+                        if(role.equals(campID))
+                        {
+                            display = "You are a Camp Committee member of this camp";
+                        }
+                        else
+                        {
+                            display = "You are a Camp Attendee of this camp";
+                        }
                         ModelViewer.displaySingleDisplayable(camp);
+                        System.out.println("");
+                        System.out.println(display);
                         throw new PageBackException();
                     }
                 } catch (Exception e)

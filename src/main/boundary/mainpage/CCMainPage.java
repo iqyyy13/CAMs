@@ -1,5 +1,6 @@
 package main.boundary.mainpage;
 
+import java.util.List;
 import java.util.Scanner;
 
 import javax.management.RuntimeErrorException;
@@ -11,6 +12,7 @@ import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
 import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
+import main.controller.camp.campClashTest;
 import main.controller.request.StudentManager;
 import main.database.user.StudentDatabase;
 import main.database.camp.CampDatabase;
@@ -19,6 +21,7 @@ import main.model.camp.CampStatus;
 import main.model.user.*;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
+import main.utils.iocontrol.CampReportGenerator;
 import main.utils.iocontrol.IntGetter;
 import main.utils.parameters.EmptyID;
 import main.utils.ui.ChangePage;
@@ -52,7 +55,8 @@ public class CCMainPage
             System.out.println("\t9. Edit enquiry");
             System.out.println("\t10. Reply enquiry");
             System.out.println("\t11. Delete enquiry");
-            System.out.println("\t12. Logout");
+            System.out.println("\t12. Generate report of students attending each camp");
+            System.out.println("\t13. Logout");
 
             System.out.println();
             System.out.print("Please enter your choice: ");
@@ -76,7 +80,8 @@ public class CCMainPage
                     case 7 -> CampViewer.viewAssignedCamp(student);
                     //case 7 -> deregisterFor(student);
                     //case 8 -> changeTitleFor(student);
-                    case 12 -> Logout.logout();
+                    case 12 -> generateReport(student);
+                    case 13 -> Logout.logout();
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
                         new Scanner(System.in).nextLine();
@@ -106,6 +111,14 @@ public class CCMainPage
         ModelViewer.displayListOfDisplayable(CampManager.getAllAvailableCamps());
         System.out.println("Please enter the Camp ID that you would like to register: ");
         String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
+        String clashValue = campClashTest.registrationDateClash(student, campID);
+        if(clashValue != null)
+        {
+            System.out.println("The camp that you have registered for has date clashes with camp ID " + clashValue);
+            System.out.println("Press Enter to go back");
+            new Scanner(System.in).nextLine();
+            StudentMainPage.studentMainPage(student);
+        }
 
         if(CampManager.notContainsCampByID(campID))
         {
@@ -233,6 +246,16 @@ public class CCMainPage
 
         System.out.println("Please enter the Camp ID that you would like to remove yourself from: ");
         String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
+
+        if(student.getCCId().equals(campID))
+        {
+            System.out.println("You are a camp committee member of the Camp ID " + campID);
+            System.out.println("You are unable to deregister yourself from this camp");
+            System.out.println("Press Enter to continue");
+            new Scanner(System.in).nextLine();
+            StudentMainPage.studentMainPage(student);
+        }
+        
         student.deregisterCamp(student, campID);
         try
         {
@@ -248,6 +271,46 @@ public class CCMainPage
         {
             StudentMainPage.studentMainPage(student);
         }
+    }
+
+    private static void generateReport(Student student)
+    {
+        ChangePage.changePage();        
+        System.out.println("1.Print all students");
+        System.out.println("2.Print all camp attendees");
+        System.out.println("3.Print all camp committee members");
+        System.out.println("");
+        System.out.println("Please Enter your choice: ");
+        int choice = IntGetter.readInt();
+        
+        try
+        {
+            Camp camp = CampDatabase.getInstance().getByID(student.getCCId());
+            switch(choice)
+            {
+                case 1 -> CampReportGenerator.generateCCReportAndWriteToFile(camp, "ALL");
+                case 2 -> CampReportGenerator.generateCCReportAndWriteToFile(camp, "CAMP ATTENDEE");
+                case 3 -> CampReportGenerator.generateCCReportAndWriteToFile(camp, "CC");
+                default -> 
+                {
+                    System.out.println("Invalid choice. Please try again.");
+                    new Scanner(System.in);
+                    throw new PageBackException();
+                }
+            }
+        } catch (PageBackException e)
+        {
+            generateReport(student);
+        } catch (Exception e)
+        {
+            System.out.println("");
+        }
+        //CampReportGenerator.generateReportAndWriteToFile(campList);
+        System.out.println("File has been written");
+        System.out.println("Press Enter to go back");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+        CCMainPage.ccMainPage(student);
     }
 }
 

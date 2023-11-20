@@ -1,5 +1,7 @@
 package main.boundary.mainpage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,6 +14,7 @@ import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
 import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
+import main.controller.camp.campClashTest;
 import main.controller.request.StudentManager;
 import main.database.camp.CampDatabase;
 import main.database.user.StaffDatabase;
@@ -78,7 +81,7 @@ public class StaffMainPage
                     case 6 -> CampViewer.viewRegisteredStudents(staff);
                     case 7 -> CampViewer.editCampDetails(staff);
                     case 8 -> deleteCamp(staff);
-                    //case 8 -> changeTitleForCamp(student);
+                    //case 9 -> 
                     case 13 -> generateReport(staff);
                     case 15 -> Logout.logout();
                     default -> {
@@ -114,10 +117,23 @@ public class StaffMainPage
         String location = new Scanner(System.in).nextLine();
         System.out.println("Please give a brief description for the camp:");
         String description = new Scanner(System.in).nextLine();
+        System.out.println("Enter the startDate (YYYYMMDD):");
+        String startDate = new Scanner(System.in).nextLine();
+        System.out.println("Enter the endDate (YYYYMMDD): ");
+        String endDate = new Scanner(System.in).nextLine();
+        System.out.println("Enter the closing registration date (YYYYMMDD): ");
+        String closingDate = new Scanner(System.in).nextLine();
         Camp camp;
         try 
         {
-            camp = CampManager.createCamp(campTitle, staff.getID(), staff.getFaculty(), location, description);
+            //LocalDate startDate1 = LocalDate.parse(startDate, DateTimeFormatter.BASIC_ISO_DATE);
+            //LocalDate endDate1 = LocalDate.parse(endDate, DateTimeFormatter.BASIC_ISO_DATE);
+            //LocalDate closingDate1 = LocalDate.parse(closingDate, DateTimeFormatter.BASIC_ISO_DATE);
+            startDate = formatDataString(startDate);
+            endDate = formatDataString(endDate);
+            closingDate = formatDataString(closingDate);
+
+            camp = CampManager.createCamp(campTitle, staff.getID(), staff.getFaculty(), location, description, startDate, endDate, closingDate);
         } catch (UserAlreadyExistsException e) {
             throw new RuntimeException(e);
         }
@@ -150,7 +166,7 @@ public class StaffMainPage
      * @param staff                 The staff member deleting the camp
      * @throws PageBackException    If the user chooses to go back during the operation
      */
-    public static void deleteCamp(Staff staff) throws PageBackException
+    private static void deleteCamp(Staff staff) throws PageBackException
     {
         ChangePage.changePage();
         System.out.println("View Created Camps");
@@ -201,7 +217,7 @@ public class StaffMainPage
         }
     }
 
-    public static void generateReport(Staff staff)
+    private static void generateReport(Staff staff)
     {
         ChangePage.changePage();
         List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staff.getID()));
@@ -236,6 +252,20 @@ public class StaffMainPage
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
         StaffMainPage.staffMainPage(staff);
+    }
+
+    private static String formatDataString(String date)
+    {
+        if(date != null && date.length() == 8)
+        {
+            return date.substring(0, 4) + "-" + date.substring(4,6) + "-" 
+            + date.substring(6, 8);
+        }
+        else
+        {
+            System.out.println("Invalid date format. Please enter a date in the date format YYYYMMDD.");
+            return null;
+        }
     }
 }
 

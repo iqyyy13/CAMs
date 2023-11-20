@@ -87,6 +87,63 @@ public class CampReportGenerator
         writeToFile(reportBuilder.toString(), getFilePath());
     }
     
+    public static void generateCCReportAndWriteToFile(Camp camp, String reportType)
+    {
+        StringBuilder reportBuilder = new StringBuilder();
+
+        reportBuilder.append("Camp Attendance Report\n\n");
+        reportBuilder.append("=============================================================================================\n");
+        
+        String campID = camp.getID();
+        String campName = camp.getCampTitle();
+            
+        reportBuilder.append(String.format("%-15s %-30s\n", "Camp ID", "Camp Name"));
+        reportBuilder.append(String.format("%-15s %-30s\n", campID, campName));
+        reportBuilder.append("---------------------------------------------------------------------------------------------\n");
+        reportBuilder.append(String.format("%-30s %-15s %-30s %-15s\n", "Student Name", "Student ID", "Email", "Role"));
+
+        String registeredStudentID = camp.getStudentID();
+        if(registeredStudentID != null && !registeredStudentID.isEmpty())
+        {
+            String[] studentIDs = registeredStudentID.split(",");
+            for(String studentID : studentIDs)
+            {
+                try
+                {
+                    Student student = StudentDatabase.getInstance().getByID(studentID.trim());
+                    String studentRole = student.getRoleDisplay(campID);
+
+                    String studentInfo = String.format("%-30s %-15s %-30s %-15s",
+                    student.getUserName(), 
+                    student.getID(), 
+                    student.getEmail(), 
+                    student.getRoleDisplay(campID));
+
+                    if("CAMP ATTENDEE".equalsIgnoreCase(reportType) && isCampAttendee(studentRole))
+                    {
+                        reportBuilder.append(studentInfo).append("\n");
+
+                    }
+                    else if("CC".equalsIgnoreCase(reportType) && isCC(studentRole))
+                    {
+                        reportBuilder.append(studentInfo).append("\n");
+                    }
+                    else if("ALL".equalsIgnoreCase(reportType))
+                    {
+                        reportBuilder.append(studentInfo).append("\n");
+                    }
+                } catch (Exception e)
+                {
+                        System.err.println("");
+                }
+            }
+
+            reportBuilder.append("---------------------------------------------------------------------------------------------\n");
+            reportBuilder.append("=============================================================================================\n");
+        }           
+
+        writeToFile(reportBuilder.toString(), getFilePath());
+    }
     /**
      * Writes the content to a file with the specified file name
      * 

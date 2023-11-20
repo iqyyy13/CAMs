@@ -11,6 +11,7 @@ import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
 import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
+import main.controller.camp.campClashTest;
 import main.controller.request.StudentManager;
 import main.database.user.StudentDatabase;
 import main.database.camp.CampDatabase;
@@ -66,7 +67,7 @@ public class StudentMainPage
 
             try {
                 switch (choice) {
-                    case 1 -> ViewUserProfile.viewUserProfilePage(student);
+                    case 1 -> ViewUserProfile.viewStudentProfilePage(student);
                     case 2 -> ResetPassword.changePassword(UserType.STUDENT, student.getID());
                     case 3 -> CampViewer.viewAvailableCamps(student);
                     case 4 -> CampViewer.viewRegisteredCamps(student);
@@ -107,6 +108,14 @@ public class StudentMainPage
         ModelViewer.displayListOfDisplayable(CampManager.getAllAvailableCamps());
         System.out.println("Please enter the Camp ID that you would like to register: ");
         String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
+        String clashValue = campClashTest.registrationDateClash(student, campID);
+        if(clashValue != null)
+        {
+            System.out.println("The camp that you have registered for has date clashes with camp ID " + clashValue);
+            System.out.println("Press Enter to go back");
+            new Scanner(System.in).nextLine();
+            StudentMainPage.studentMainPage(student);
+        }
 
         if(CampManager.notContainsCampByID(campID))
         {
@@ -234,6 +243,16 @@ public class StudentMainPage
 
         System.out.println("Please enter the Camp ID that you would like to remove yourself from: ");
         String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
+
+        if(student.getCCId().equals(campID))
+        {
+            System.out.println("You are a camp committee member of the Camp ID " + campID);
+            System.out.println("You are unable to deregister yourself from this camp");
+            System.out.println("Press Enter to continue");
+            new Scanner(System.in).nextLine();
+            StudentMainPage.studentMainPage(student);
+        }
+
         student.deregisterCamp(student, campID);
         try
         {
