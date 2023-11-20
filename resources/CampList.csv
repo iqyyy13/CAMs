@@ -1,6 +1,6 @@
-﻿Staff,Title,Faculty,Location,Description
-MADHUKUMAR,AI Nexus Retreat,SCSE,LT1,Explore the cutting-edge world of Artificial Intelligence in this retreat-style camp.
-ALEXEI,CreatiCon Artistry,ADM,LT3,"This camp celebrates various forms of art, from traditional to digital mediums."
-CHATTOPADHYAY,ElectroInnovate,EEE,LT23,This camp is designed for tech enthusiasts eager to explore the latest trends in electronics
-DATTA,VRVerse Voyage,SCSE,TCT-LT,Embark on a virtual reality adventure at VRVerse Voyage
-ARVIND,FutureFinance Festival,NBS,LHS-TR+9,Join the FutureFinance Festival to unravel the mysteries of the financial world.
+﻿Staff,Title,Faculty,Location,Description,StartDate,EndDate,ClosingDate
+MADHUKUMAR,AI Nexus Retreat,SCSE,LT1,Explore the cutting-edge world of Artificial Intelligence in this retreat-style camp.,2023-11-26,2023-11-28,2023-11-22
+ALEXEI,CreatiCon Artistry,ADM,LT3,"This camp celebrates various forms of art, from traditional to digital mediums.",2023-11-27,2023-11-29,2023-11-23
+CHATTOPADHYAY,ElectroInnovate,EEE,LT23,This camp is designed for tech enthusiasts eager to explore the latest trends in electronics,2023-11-30,2023-12-02,2023-11-26
+DATTA,VRVerse Voyage,SCSE,TCT-LT,Embark on a virtual reality adventure at VRVerse Voyage,2023-11-19,2023-11-22,2023-11-15
+ARVIND,FutureFinance Festival,NBS,LHS-TR+9,Join the FutureFinance Festival to unravel the mysteries of the financial world.,2023-12-01,2023-12-04,2023-11-27

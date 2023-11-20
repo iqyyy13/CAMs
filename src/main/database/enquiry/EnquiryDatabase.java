@@ -18,7 +18,11 @@ public class EnquiryDatabase extends Database<Enquiry>
         load();
     }
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
     /** 
      * @return EnquiryDatabase
      */
@@ -41,4 +45,8 @@ public class EnquiryDatabase extends Database<Enquiry>
             getAll().add(new Enquiry(map));
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61

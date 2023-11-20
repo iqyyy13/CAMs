@@ -10,13 +10,17 @@ import main.utils.ui.UserTypeGetter;
 
 import java.util.Scanner;
 
+/**
+ * Handles the process of changing the password for a user
+ */
 public class ResetPassword 
 {
-    
     /** 
-     * @param userType
-     * @param userID
-     * @throws PageBackException
+     * Asks the user to retry entering the password or go back to the previous page
+     *  
+     * @param userType              The type of the user whose password is being changed
+     * @param userID                The ID of the user whose password is being changed
+     * @throws PageBackException    If the user chooses to go back to the previous page
      */
     public static void askToRetry(UserType userType, String userID) throws PageBackException {
         Scanner scanner = new Scanner(System.in);
@@ -30,6 +34,13 @@ public class ResetPassword
         }
     }
 
+    /**
+     * Initiates the process of changing the password for a user
+     * 
+     * @param userType              The type of the user whose password is being changed
+     * @param userID                The ID of the user whose password is being changed
+     * @throws PageBackException    If the user chooses to go back to the previous page
+     */
     public static void changePassword(UserType userType, String userID) throws PageBackException {
         ChangePage.changePage();
         Scanner scanner = new Scanner(System.in);

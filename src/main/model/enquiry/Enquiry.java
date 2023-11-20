@@ -30,11 +30,19 @@ public class Enquiry implements Model, Displayable {
     {
         fromMap(map);
     }
+<<<<<<< HEAD
     
 	public ArrayList<String> getReplies() {
 		return replies;
 	}
 	
+=======
+
+	public ArrayList<String> getReplies() {
+		return replies;
+	}
+
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
 	public String getEnquiryID() {
 		return enquiryID;
 	}
@@ -42,6 +50,7 @@ public class Enquiry implements Model, Displayable {
 	public void setEnquiryID(String enquiry_id) {
 		this.enquiryID = enquiry_id;
 	}
+<<<<<<< HEAD
 	
 	public String getcampID() {
 		return campID;
@@ -51,6 +60,17 @@ public class Enquiry implements Model, Displayable {
 		this.campID = camp_id;
 	}
 	
+=======
+
+	public String getcampID() {
+		return campID;
+	}
+
+	public void setCampID(String camp_id) {
+		this.campID = camp_id;
+	}
+
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
 	public void setStudentID(String student_id) {
 		this.studentID = student_id;
 	}
@@ -62,6 +82,7 @@ public class Enquiry implements Model, Displayable {
 	public String enq_message() {
 		return message;
 	}
+<<<<<<< HEAD
 	
 	public String getStudentID() {
 		return studentID;
@@ -71,6 +92,17 @@ public class Enquiry implements Model, Displayable {
 		this.message = message;
 	}
 	
+=======
+
+	public String getStudentID() {
+		return studentID;
+	}
+
+	public void new_enq_message(String message) {
+		this.message = message;
+	}
+
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
 	public void set_status(boolean status) {
 		this.pending = status;
 	}

@@ -1,17 +1,18 @@
 package main.boundary.account;
 
-//import main.utils.ui.PasswordReader;
-
 import java.util.Scanner;
-
 import main.model.user.UserType;
 import main.utils.iocontrol.IntGetter;
 
+/**
+ * A utility class for obtaining user attributes such as role, password and User ID.
+ */
 public class AttributeGetter 
 {
     
     /** 
-     * @return UserType
+     * Gets the user type (role) from the user by displaying options and receiving input
+     * @return UserType The user type (role) selected by the user (STUDENT or STAFF)
      */
     public static UserType getRole() 
     {
@@ -42,6 +43,11 @@ public class AttributeGetter
         return userType;
     }
 
+    /**
+     * Gets the user's password from the user by receiving input
+     * 
+     * @return  The user's password entered by the user
+     */
     public static String getPassword() 
     {
         Scanner scanner = new Scanner(System.in);
@@ -49,11 +55,22 @@ public class AttributeGetter
         return scanner.nextLine();
     }
 
+    /**
+     * Gets a password input from the user without displaying a prompt
+     * 
+     * @return The password entered by the user
+     */
     public static String getPassword1() 
     {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
+
+    /**
+     * Gets the user's UserID from the user by displaying a prompt and receiving input
+     * 
+     * @return  The user's UserID entered by the user
+     */
     public static String getUserID() 
     {
         Scanner scanner = new Scanner(System.in);

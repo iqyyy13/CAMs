@@ -12,11 +12,16 @@ import main.utils.exception.PasswordIncorrectException;
 import main.utils.exception.UserErrorException;
 import java.util.Scanner;
 
+/**
+ * Handles the user login process, allowing users to log in based on their roles (STUDENT or STAFF)
+ */
 public class LoginUI 
 {
     
     /** 
-     * @throws PageBackException
+     * Initiates the user's login process, allowing users to log in based on their roles (STUDENT or STAFF)
+     * 
+     * @throws PageBackException if the user chooses to go back to the previous page during the login process
      */
     public static void login() throws PageBackException 
     {

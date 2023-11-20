@@ -23,7 +23,11 @@ public class EnquiryManager {
 
 
     static boolean check_empty = true;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
 
     public EnquiryManager() {
 
@@ -107,7 +111,11 @@ public class EnquiryManager {
         throw new PageBackException();
     }
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
     /**
      * Refreshes the DB upon returning to Student Main Page.
      */
@@ -176,7 +184,11 @@ public class EnquiryManager {
         throw new PageBackException();
     }
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
     /**
      * Allows user to view enquiries tagged to Student ID.
      */
@@ -212,7 +224,11 @@ public class EnquiryManager {
         throw new PageBackException();
     }
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
     /**
      * Allows user to edit enquiries they have submitted to the system.
      */
@@ -274,7 +290,11 @@ public class EnquiryManager {
         throw new PageBackException();
     }
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
     /**
      * Allows user to delete enquiries they have submitted into system
      */
@@ -332,7 +352,11 @@ public class EnquiryManager {
         throw new PageBackException();
     }
 
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
     /**
      * Allows user to reply to enquires submitted to system by providing Enquiry ID.
      */

@@ -525,4 +525,18 @@ public class Student implements User, Displayable
             return string;
         }
     }
+
+    public String getRoleDisplay(String campID)
+    {
+        if(campID.equals(getCCId()))
+        {
+            String string = "CC";
+            return string;
+        }
+        else
+        {
+            String string = "CAMP ATTENDEE";
+            return string;
+        }
+    }
 }

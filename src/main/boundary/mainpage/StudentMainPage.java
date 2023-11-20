@@ -10,10 +10,17 @@ import main.boundary.account.ViewUserProfile;
 import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
 import main.controller.enquiry.EnquiryManager;
+<<<<<<< HEAD
 //import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
 //import main.controller.request.StudentManager;
 //import main.database.enquiry.EnquiryDatabase;
+=======
+import main.controller.account.AccountManager;
+import main.controller.camp.CampManager;
+import main.controller.camp.campClashTest;
+import main.controller.request.StudentManager;
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
 import main.database.user.StudentDatabase;
 import main.database.camp.CampDatabase;
 //import main.model.enquiry.Enquiry;
@@ -27,13 +34,18 @@ import main.utils.iocontrol.IntGetter;
 //import main.utils.parameters.EmptyID;
 import main.utils.ui.ChangePage;
 
-public class StudentMainPage {
+/**
+ * Represents the main page for a student user, providing various options and functionalities
+ */
+public class StudentMainPage 
+{
     /**
-     * This method displays the main page of a student. It takes a User object as a parameter and displays a menu of options for the student to choose from. The user's choice is then processed using a switch statement, which calls different methods based on the choice.
+     * Displays the main page for a student user, allowing them to choose from various options
      *
-     * @param user The user object of the student.
+     * @param user The user object representing the student
      */
-    public static void studentMainPage(User user) {
+    public static void studentMainPage(User user) 
+    {
         if (user instanceof Student student) 
         {
             ChangePage.changePage();
@@ -46,7 +58,11 @@ public class StudentMainPage {
             System.out.println("\t4. View registered camps");
             System.out.println("\t5. Register for a camp");
             System.out.println("\t6. Withdraw from a camp");
+<<<<<<< HEAD
             System.out.println("\t7. New enquiry");
+=======
+            System.out.println("\t7. Create enquiry");
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
             System.out.println("\t8. View enquiry");
             System.out.println("\t9. Edit enquiry");
             System.out.println("\t10. Delete Enquiry");
@@ -58,7 +74,10 @@ public class StudentMainPage {
 
             int choice = IntGetter.readInt();
 
+<<<<<<< HEAD
             // refresh Enquiry DB
+=======
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
             EnquiryManager.refresh_enquiry_db();
 
             try {
@@ -69,19 +88,26 @@ public class StudentMainPage {
 
             try {
                 switch (choice) {
-                    case 1 -> ViewUserProfile.viewUserProfilePage(student);
+                    case 1 -> ViewUserProfile.viewStudentProfilePage(student);
                     case 2 -> ResetPassword.changePassword(UserType.STUDENT, student.getID());
                     case 3 -> CampViewer.viewAvailableCamps(student);
                     case 4 -> CampViewer.viewRegisteredCamps(student);
                     case 5 -> registerCamp(student);
                     case 6 -> deregisterCamp(student);
+<<<<<<< HEAD
                     case 7 -> EnquiryManager.new_enquiry(student.getRegisteredCampIDs(),student.getID());
+=======
+                    case 7 -> EnquiryManager.new_enquiry(student.getRegisteredCampIDs(), student.getID());
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
                     case 8 -> EnquiryManager.view_enquiry(student.getID());
                     case 9 -> EnquiryManager.edit_enquiry(null);
                     case 10 -> EnquiryManager.delete_enquiry(null);
                     case 11 -> verifyCC(student);
                     case 12 -> Logout.logout();
+<<<<<<< HEAD
                     // case 13 -> EnquiryManager.reply_enquiry(null);
+=======
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
                         new Scanner(System.in).nextLine();
@@ -100,8 +126,10 @@ public class StudentMainPage {
 
     
     /** 
-     * @param student
-     * @throws PageBackException
+     * Registers a student for a camp, providing information about available camps and handling the registration process
+     * 
+     * @param student               The student registering for the camp
+     * @throws PageBackException    If the user chooses to go back during the operation
      */
     private static void registerCamp(Student student) throws PageBackException
     {
@@ -110,6 +138,14 @@ public class StudentMainPage {
         ModelViewer.displayListOfDisplayable(CampManager.getAllAvailableCamps());
         System.out.println("Please enter the Camp ID that you would like to register: ");
         String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
+        String clashValue = campClashTest.registrationDateClash(student, campID);
+        if(clashValue != null)
+        {
+            System.out.println("The camp that you have registered for has date clashes with camp ID " + clashValue);
+            System.out.println("Press Enter to go back");
+            new Scanner(System.in).nextLine();
+            StudentMainPage.studentMainPage(student);
+        }
 
         if(CampManager.notContainsCampByID(campID))
         {
@@ -217,6 +253,11 @@ public class StudentMainPage {
         }
     }
 
+    /**
+     * Deregisters a student from a camp, providing information about available camps and handling the deregistration process
+     * 
+     * @param student   The student deregistering from the camp
+     */
     private static void deregisterCamp(Student student)
     {
         ChangePage.changePage();
@@ -232,6 +273,16 @@ public class StudentMainPage {
 
         System.out.println("Please enter the Camp ID that you would like to remove yourself from: ");
         String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
+
+        if(student.getCCId().equals(campID))
+        {
+            System.out.println("You are a camp committee member of the Camp ID " + campID);
+            System.out.println("You are unable to deregister yourself from this camp");
+            System.out.println("Press Enter to continue");
+            new Scanner(System.in).nextLine();
+            StudentMainPage.studentMainPage(student);
+        }
+
         student.deregisterCamp(student, campID);
         try
         {
@@ -249,6 +300,11 @@ public class StudentMainPage {
         }
     }
 
+    /**
+     * Verifies if a student is a Camp Committee member and navigates to the CC Main Page if applicable.
+     * 
+     * @param student The student to be verified.
+     */
     private static void verifyCC(Student student)
     {
         if(student.getCCId().equals("0"))
