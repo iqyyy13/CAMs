@@ -5,18 +5,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import main.boundary.modelviewer.ModelViewer;
 import main.database.user.StudentDatabase;
 import main.model.camp.Camp;
 import main.model.user.Student;
 
 import static main.utils.config.Location.RESOURCE_LOCATION;
 
+/**
+ * The CampReportGenerator class generates a camp attendance report and writes it to a file.
+ */
 public class CampReportGenerator 
 {
+    /**
+     * The file path where the report will be stored.
+     */
     private static final String FILE_PATH = "/data/report/CampAttendanceReport.txt";
 
-    public static void generateReportAndWriteToFile(List<Camp> campList)
+    /**
+     * Generates a camp attendance report based on the provided list of camps and writes it to a file
+     * 
+     * @param campList The list of camps for which the report will be generated
+     */
+    public static void generateReportAndWriteToFile(List<Camp> campList, String reportType)
     {
         StringBuilder reportBuilder = new StringBuilder();
 
@@ -32,8 +42,6 @@ public class CampReportGenerator
             reportBuilder.append(String.format("%-15s %-30s\n", campID, campName));
             reportBuilder.append("---------------------------------------------------------------------------------------------\n");
             reportBuilder.append(String.format("%-30s %-15s %-30s %-15s\n", "Student Name", "Student ID", "Email", "Role"));
-            //reportBuilder.append("Camp ID: ").append(camp.getID()).append("\n");
-            //reportBuilder.append("Camp: ").append(camp.getCampTitle()).append("\n");
 
             String registeredStudentID = camp.getStudentID();
             if(registeredStudentID != null && !registeredStudentID.isEmpty())
@@ -44,16 +52,30 @@ public class CampReportGenerator
                     try
                     {
                         Student student = StudentDatabase.getInstance().getByID(studentID.trim());
+                        String studentRole = student.getRoleDisplay(campID);
+
                         String studentInfo = String.format("%-30s %-15s %-30s %-15s",
                         student.getUserName(), 
                         student.getID(), 
                         student.getEmail(), 
                         student.getRoleDisplay(campID));
 
-                        reportBuilder.append(studentInfo).append("\n");
+                        if("CAMP ATTENDEE".equalsIgnoreCase(reportType) && isCampAttendee(studentRole))
+                        {
+                            reportBuilder.append(studentInfo).append("\n");
+
+                        }
+                        else if("CC".equalsIgnoreCase(reportType) && isCC(studentRole))
+                        {
+                            reportBuilder.append(studentInfo).append("\n");
+                        }
+                        else if("ALL".equalsIgnoreCase(reportType))
+                        {
+                            reportBuilder.append(studentInfo).append("\n");
+                        }
                     } catch (Exception e)
                     {
-                        System.out.println("");
+                        System.err.println("");
                     }
                 }
 
@@ -61,10 +83,16 @@ public class CampReportGenerator
                 reportBuilder.append("=============================================================================================\n");
             }           
         } 
+
         writeToFile(reportBuilder.toString(), getFilePath());
     }
     
-
+    /**
+     * Writes the content to a file with the specified file name
+     * 
+     * @param content   The content to be written to a file
+     * @param fileName  The name of the file to which the content will be written
+     */
     private static void writeToFile(String content, String fileName)
     {
         try(FileWriter fileWriter = new FileWriter(fileName))
@@ -77,8 +105,37 @@ public class CampReportGenerator
         }
     }
 
+    /**
+     * Gets the full file path for the report file
+     * 
+     * @return  The full file path for the report file
+     */
     public static String getFilePath()
     {
         return RESOURCE_LOCATION + FILE_PATH;
+    }
+
+    private static boolean isCampAttendee(String role)
+    {
+        if(role.equals("CAMP ATTENDEE"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private static boolean isCC(String role)
+    {
+        if(role.equals("CC"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

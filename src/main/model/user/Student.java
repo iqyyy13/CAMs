@@ -535,7 +535,7 @@ public class Student implements User, Displayable
         }
         else
         {
-            String string = "STUDENT";
+            String string = "CAMP ATTENDEE";
             return string;
         }
     }

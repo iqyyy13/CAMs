@@ -205,8 +205,32 @@ public class StaffMainPage
     {
         ChangePage.changePage();
         List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staff.getID()));
-
-        CampReportGenerator.generateReportAndWriteToFile(campList);
+        System.out.println("1.Print all students");
+        System.out.println("2.Print all camp attendees");
+        System.out.println("3.Print all camp committee members");
+        System.out.println("");
+        System.out.println("Please Enter your choice: ");
+        int choice = IntGetter.readInt();
+        
+        try
+        {
+            switch(choice)
+            {
+                case 1 -> CampReportGenerator.generateReportAndWriteToFile(campList, "ALL");
+                case 2 -> CampReportGenerator.generateReportAndWriteToFile(campList, "CAMP ATTENDEE");
+                case 3 -> CampReportGenerator.generateReportAndWriteToFile(campList, "CC");
+                default -> 
+                {
+                    System.out.println("Invalid choice. Please try again.");
+                    new Scanner(System.in);
+                    throw new PageBackException();
+                }
+            }
+        } catch (PageBackException e)
+        {
+            generateReport(staff);
+        }
+        //CampReportGenerator.generateReportAndWriteToFile(campList);
         System.out.println("File has been written");
         System.out.println("Press Enter to go back");
         Scanner scanner = new Scanner(System.in);
