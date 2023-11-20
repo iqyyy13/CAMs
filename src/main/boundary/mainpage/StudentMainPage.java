@@ -243,6 +243,16 @@ public class StudentMainPage
 
         System.out.println("Please enter the Camp ID that you would like to remove yourself from: ");
         String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
+
+        if(student.getCCId().equals(campID))
+        {
+            System.out.println("You are a camp committee member of the Camp ID " + campID);
+            System.out.println("You are unable to deregister yourself from this camp");
+            System.out.println("Press Enter to continue");
+            new Scanner(System.in).nextLine();
+            StudentMainPage.studentMainPage(student);
+        }
+        
         student.deregisterCamp(student, campID);
         try
         {

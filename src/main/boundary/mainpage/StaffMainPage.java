@@ -81,7 +81,7 @@ public class StaffMainPage
                     case 6 -> CampViewer.viewRegisteredStudents(staff);
                     case 7 -> CampViewer.editCampDetails(staff);
                     case 8 -> deleteCamp(staff);
-                    case 9 -> testtt(staff);
+                    //case 9 -> 
                     case 13 -> generateReport(staff);
                     case 15 -> Logout.logout();
                     default -> {
@@ -265,27 +265,6 @@ public class StaffMainPage
         {
             System.out.println("Invalid date format. Please enter a date in the date format YYYYMMDD.");
             return null;
-        }
-    }
-
-    private static void testtt(Staff staff)
-    {
-        ChangePage.changePage();
-        try 
-        {
-            System.out.println("View Created Camps");
-            List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staff.getID()));
-            ModelViewer.displayListOfDisplayable(campList);
-            System.out.println("Enter CampID 1");
-            String campID1 = new Scanner(System.in).nextLine();
-            System.out.println("Enter CampID 2");
-            String campID2 = new Scanner(System.in).nextLine();
-            campClashTest.testDateClash(campID1,campID2);
-            System.out.println("Press Enter to continue.");
-            new Scanner(System.in).nextLine();
-            StaffMainPage.staffMainPage(staff);
-        } catch (Exception e) {
-            testtt(staff);
         }
     }
 }
