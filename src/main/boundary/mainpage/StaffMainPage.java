@@ -14,6 +14,7 @@ import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
 import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
+import main.controller.camp.campClashTest;
 import main.controller.request.StudentManager;
 import main.database.camp.CampDatabase;
 import main.database.user.StaffDatabase;
@@ -80,7 +81,7 @@ public class StaffMainPage
                     case 6 -> CampViewer.viewRegisteredStudents(staff);
                     case 7 -> CampViewer.editCampDetails(staff);
                     case 8 -> deleteCamp(staff);
-                    //case 8 -> changeTitleForCamp(student);
+                    case 9 -> testtt(staff);
                     case 13 -> generateReport(staff);
                     case 15 -> Logout.logout();
                     default -> {
@@ -128,6 +129,9 @@ public class StaffMainPage
             //LocalDate startDate1 = LocalDate.parse(startDate, DateTimeFormatter.BASIC_ISO_DATE);
             //LocalDate endDate1 = LocalDate.parse(endDate, DateTimeFormatter.BASIC_ISO_DATE);
             //LocalDate closingDate1 = LocalDate.parse(closingDate, DateTimeFormatter.BASIC_ISO_DATE);
+            startDate = formatDataString(startDate);
+            endDate = formatDataString(endDate);
+            closingDate = formatDataString(closingDate);
 
             camp = CampManager.createCamp(campTitle, staff.getID(), staff.getFaculty(), location, description, startDate, endDate, closingDate);
         } catch (UserAlreadyExistsException e) {
@@ -162,7 +166,7 @@ public class StaffMainPage
      * @param staff                 The staff member deleting the camp
      * @throws PageBackException    If the user chooses to go back during the operation
      */
-    public static void deleteCamp(Staff staff) throws PageBackException
+    private static void deleteCamp(Staff staff) throws PageBackException
     {
         ChangePage.changePage();
         System.out.println("View Created Camps");
@@ -213,7 +217,7 @@ public class StaffMainPage
         }
     }
 
-    public static void generateReport(Staff staff)
+    private static void generateReport(Staff staff)
     {
         ChangePage.changePage();
         List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staff.getID()));
@@ -248,6 +252,41 @@ public class StaffMainPage
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
         StaffMainPage.staffMainPage(staff);
+    }
+
+    private static String formatDataString(String date)
+    {
+        if(date != null && date.length() == 8)
+        {
+            return date.substring(0, 4) + "-" + date.substring(4,6) + "-" 
+            + date.substring(6, 8);
+        }
+        else
+        {
+            System.out.println("Invalid date format. Please enter a date in the date format YYYYMMDD.");
+            return null;
+        }
+    }
+
+    private static void testtt(Staff staff)
+    {
+        ChangePage.changePage();
+        try 
+        {
+            System.out.println("View Created Camps");
+            List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staff.getID()));
+            ModelViewer.displayListOfDisplayable(campList);
+            System.out.println("Enter CampID 1");
+            String campID1 = new Scanner(System.in).nextLine();
+            System.out.println("Enter CampID 2");
+            String campID2 = new Scanner(System.in).nextLine();
+            campClashTest.testDateClash(campID1,campID2);
+            System.out.println("Press Enter to continue.");
+            new Scanner(System.in).nextLine();
+            StaffMainPage.staffMainPage(staff);
+        } catch (Exception e) {
+            testtt(staff);
+        }
     }
 }
 

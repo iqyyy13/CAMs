@@ -477,7 +477,6 @@ public class Camp implements Model, Displayable
         }
     }
     
-
     private String getCampStaffInformationString() {
         try {
             Staff staff = StaffDatabase.getInstance().getByID(staffID);

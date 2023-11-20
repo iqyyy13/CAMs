@@ -11,6 +11,7 @@ import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
 import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
+import main.controller.camp.campClashTest;
 import main.controller.request.StudentManager;
 import main.database.user.StudentDatabase;
 import main.database.camp.CampDatabase;
@@ -107,6 +108,14 @@ public class StudentMainPage
         ModelViewer.displayListOfDisplayable(CampManager.getAllAvailableCamps());
         System.out.println("Please enter the Camp ID that you would like to register: ");
         String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
+
+        if(campClashTest.registrationDateClash(student, campID) == true)
+        {
+            System.out.println("The camp that you have registered for has date clashes with other camps that you have registered.");
+            System.out.println("Press Enter to go back");
+            new Scanner(System.in).nextLine();
+            StudentMainPage.studentMainPage(student);
+        }
 
         if(CampManager.notContainsCampByID(campID))
         {
