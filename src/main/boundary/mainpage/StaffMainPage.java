@@ -12,6 +12,7 @@ import main.boundary.account.ResetPassword;
 import main.boundary.account.ViewUserProfile;
 import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
+import main.boundary.modelviewer.SuggestionViewer;
 import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
 import main.controller.camp.campClashTest;
@@ -20,6 +21,7 @@ import main.database.camp.CampDatabase;
 import main.database.user.StaffDatabase;
 import main.model.user.*;
 import main.model.camp.Camp;
+import main.model.suggestion.Suggestion;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
 import main.utils.exception.UserAlreadyExistsException;
@@ -82,6 +84,7 @@ public class StaffMainPage
                     case 7 -> CampViewer.editCampDetails(staff);
                     case 8 -> deleteCamp(staff);
                     //case 9 -> 
+                    case 11 -> SuggestionViewer.viewSuggestions(staff);
                     case 13 -> generateReport(staff);
                     case 15 -> Logout.logout();
                     default -> {

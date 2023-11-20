@@ -32,19 +32,23 @@ public class SuggestionManager
         return suggestion;  // Add this line if you want to return the created suggestion
     }
 
-    public static List<Suggestion> getAllSuggestions() {
+    public static List<Suggestion> getAllSuggestions() 
+    {
         return SuggestionDatabase.getInstance().getList();
     }
 
-    public static boolean repositoryIsEmpty() {
+    public static boolean repositoryIsEmpty() 
+    {
         return SuggestionDatabase.getInstance().isEmpty();
     }
 
-    public static boolean containsSuggestionByID(String suggestionID) {
+    public static boolean containsSuggestionByID(String suggestionID) 
+    {
         return SuggestionDatabase.getInstance().contains(suggestionID);
     }
 
-    public static Suggestion getByID(String suggestionID) throws UserErrorException {
+    public static Suggestion getByID(String suggestionID) throws UserErrorException
+    {
         return SuggestionDatabase.getInstance().getByID(suggestionID);
     }
 

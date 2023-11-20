@@ -10,6 +10,7 @@ import main.boundary.account.ResetPassword;
 import main.boundary.account.ViewUserProfile;
 import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
+import main.boundary.modelviewer.SuggestionViewer;
 import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
 import main.controller.camp.campClashTest;
@@ -87,9 +88,9 @@ public class CCMainPage
                     case 6 -> deregisterCamp(student);
                     case 7 -> CampViewer.viewAssignedCamp(student);
                     case 12 -> createSuggestion(student);
-                    //case 13
-                    //case 14
-                   // case 15 
+                    case 13 -> SuggestionViewer.viewOwnSuggestions(student);
+                    case 14 -> SuggestionViewer.editSuggestionDetails(student);
+                   // case 15 -> deleteSuggestion(student);
                     case 16 -> generateReport(student);
                     case 17 -> Logout.logout();
                     default -> {
@@ -351,10 +352,57 @@ public class CCMainPage
         {
             System.out.println("User does not exist");
         }
-        
-        
-
-
     }
+
+    /*private static void deleteSuggestion(Student student) throws PageBackException
+    {
+        ChangePage.changePage();
+        System.out.println("View Created Camps");
+        List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staff.getID()));
+        ModelViewer.displayListOfDisplayable(campList);
+        System.out.println("");
+        System.out.println("Enter the CampID that you would like to delete:");
+        String option = new Scanner(System.in).nextLine().trim().toUpperCase();
+        System.out.println("You are about to delete Camp with Camp ID " + option + ". Are you sure?");
+        System.out.println("Press enter to confirm or [b] to go back.");
+
+        String userInput = new Scanner(System.in).nextLine().trim();
+
+        if(userInput.isEmpty())
+        {
+            try
+            {
+            System.out.println("Confirmed... Deleting.");
+            Camp campToDelete = CampViewer.findCampByID(campList, option);
+            if(campToDelete != null)
+            {
+                CampDatabase.getInstance().remove(campToDelete.getID());
+                System.out.println("Camp with Camp ID " + option + " deleted successfully.");
+                System.out.println("Press Enter to go back.");
+                new Scanner(System.in).nextLine();
+                throw new PageBackException();
+            }
+            else
+            {
+                System.out.println("Camp not found with CampID " + option + ".");
+            }
+
+            throw new PageBackException();
+            } catch (UserErrorException e)
+            {
+                System.out.println("Error Deleting Camp");
+            }
+        }
+        else if(userInput.equalsIgnoreCase("b"))
+        {
+            System.out.println("Going back...");
+            throw new PageBackException();
+        }
+        else
+        {
+            System.out.println("Invalid choice. Please press enter to confirm or [b] to go back.");
+            deleteCamp(staff);
+        }
+    }*/
 }
 

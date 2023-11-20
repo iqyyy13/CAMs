@@ -1,12 +1,20 @@
 package main.model.suggestion;
 
+import main.database.suggestion.SuggestionDatabase;
+import main.database.user.StaffDatabase;
+import main.database.user.StudentDatabase;
 import main.model.Displayable;
 import main.model.Model;
+import main.model.camp.CampStatus;
+import main.model.user.Staff;
+import main.model.user.Student;
+import main.utils.exception.UserErrorException;
 
 import java.util.Map;
 
 public class Suggestion implements Model, Displayable
 {
+    SuggestionStatus status;
     private String msg;
     private int suggestionID;
     private String committeeUserID;
@@ -22,6 +30,7 @@ public class Suggestion implements Model, Displayable
         this.committeeUserID = committeeUserID;
         this.staffID = staffID;
         this.campID = campID;
+        this.status = SuggestionStatus.PENDING;
     }
 
     public Suggestion(String msg, String suggestionID, String approve, String committeeUserID, String staffID, String campID) 
@@ -32,6 +41,7 @@ public class Suggestion implements Model, Displayable
         this.committeeUserID = committeeUserID;
         this.staffID = staffID;
         this.campID = campID;
+        this.status = SuggestionStatus.PENDING;
     }
 
     public Suggestion(Map<String, String> map) 
@@ -109,6 +119,17 @@ public class Suggestion implements Model, Displayable
         this.approve = approve;
     }
 
+    public SuggestionStatus getStatus() 
+    {
+        return status;
+    }
+
+
+    public void setStatus(SuggestionStatus status) 
+    {
+        this.status = status;
+    }
+
     @Override
     public String getID() 
     {
@@ -116,19 +137,46 @@ public class Suggestion implements Model, Displayable
         return String.valueOf(suggestionID);
     }
 
+    private String getCCStudentInformationString() 
+    {
+        try {
+            Student student = StudentDatabase.getInstance().getByID(committeeUserID);
+            return  String.format("| Student Name                  | %-65s |\n", student.getUserName()) +
+                    String.format("| Student Email Address         | %-65s |\n", student.getEmail()) +
+                    String.format("| Staff Faculty                 | %-65s |\n", student.getFaculty()) +
+                    String.format("| Camp ID                       | %-65s |\n", student.getCCId());
+        } catch (UserErrorException e) {
+            return "No Student Assigned";
+        }
+    }
+
+    private String getSuggestionInformationString()
+    {
+        return  String.format("| Suggestion Name               | %-65s |\n", getMsg()) + 
+                String.format("| Suggestion ID                 | %-65s |\n", getSuggestionID()) +
+                String.format("| Suggestion Status             | %-74s |\n", getStatus().colorString());
+    }
+    
+    private String getSingleSuggestionString()
+    {
+        return getCCStudentInformationString() +
+               getSuggestionInformationString();
+    }
+
     // Implementation of Displayable interface
     @Override
     public String getDisplayableString() 
     {
         // Format the string representation of the object
-        return "Message: " + msg + ", ID: " + suggestionID + ", Approve: " + approve + ", Committee User ID: " + committeeUserID;
+        //return "Message: " + msg + ", ID: " + suggestionID + ", Approve: " + approve + ", Committee User ID: " + committeeUserID;
+        return getSingleSuggestionString();
     }
 
     @Override
     public String getSplitter() 
     {
         // Define the splitter used to separate fields in the formatted string representation
-        return ";"; // You can use any delimiter you prefer
+        return "====================================================================================================="; // You can use any delimiter you prefer
     }
 
    
