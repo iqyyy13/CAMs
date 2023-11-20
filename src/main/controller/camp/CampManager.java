@@ -64,6 +64,49 @@ public class CampManager
         CampManager.updateCampsStatus();
     }
 
+    public static void changeCampLocation(String campID) throws UserErrorException 
+    {
+        ChangePage.changePage();
+        Camp camp = CampDatabase.getInstance().getByID(campID);
+        System.out.println("Enter the new location for your camp: ");
+        String newLocation = new Scanner(System.in).nextLine().trim();
+        camp.setLocation(newLocation);
+        CampDatabase.getInstance().update(camp);
+        CampManager.updateCampsStatus();
+    }
+
+    public static void changeStartDate(String campID) throws UserErrorException
+    {
+        ChangePage.changePage();
+        Camp camp = CampDatabase.getInstance().getByID(campID);
+        System.out.println("Enter the new start date for your camp (YYYYMMDD): ");
+        String startDate = new Scanner(System.in).nextLine().trim();
+        camp.setStartDateString(startDate);
+        CampDatabase.getInstance().update(camp);
+        CampManager.updateCampsStatus();
+    }
+
+    public static void changeEndDate(String campID) throws UserErrorException
+    {
+        ChangePage.changePage();
+        Camp camp = CampDatabase.getInstance().getByID(campID);
+        System.out.println("Enter the new end date for your camp (YYYYMMDD): ");
+        String endDate = new Scanner(System.in).nextLine().trim();
+        camp.setEndDateString(endDate);
+        CampDatabase.getInstance().update(camp);
+        CampManager.updateCampsStatus();
+    }
+
+    public static void changeClosingDate(String campID) throws UserErrorException
+    {
+        ChangePage.changePage();
+        Camp camp = CampDatabase.getInstance().getByID(campID);
+        System.out.println("Enter the new closing registration date for your camp (YYYYMMDD): ");
+        String closingDate = new Scanner(System.in).nextLine().trim();
+        camp.setClosingDateString(closingDate);
+        CampDatabase.getInstance().update(camp);
+        CampManager.updateCampsStatus();
+    }
     /**
      * Retrieves a list of all camps
      * 

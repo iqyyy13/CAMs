@@ -308,6 +308,11 @@ public class Camp implements Model, Displayable
         return location;
     }
 
+    public void setLocation(String location)
+    {
+        this.location = location;
+    }
+
     /**
      * Retrieves the description associated with the camp
      * 
@@ -320,7 +325,7 @@ public class Camp implements Model, Displayable
 
     public void setStartDateString(String startDate)
     {
-        this.startDate = startDate;
+        this.startDate = formatDataString(startDate);
     }
 
     public String getStartDateString()
@@ -335,7 +340,7 @@ public class Camp implements Model, Displayable
 
     public void setEndDateString(String endDate)
     {
-        this.endDate = endDate;
+        this.endDate = formatDataString(endDate);
     }
 
     public String getEndDateString()
@@ -350,7 +355,7 @@ public class Camp implements Model, Displayable
 
     public void setClosingDateString(String closingDate)
     {
-        this.closingDate = closingDate;
+        this.closingDate = formatDataString(closingDate);
     }
 
     public String getClosingDateString()
@@ -361,6 +366,20 @@ public class Camp implements Model, Displayable
     public LocalDate getClosingDate()
     {
         return LocalDate.parse(closingDate, DateTimeFormatter.ISO_LOCAL_DATE);
+    }
+
+    private static String formatDataString(String date)
+    {
+        if(date != null && date.length() == 8)
+        {
+            return date.substring(0, 4) + "-" + date.substring(4,6) + "-" 
+            + date.substring(6, 8);
+        }
+        else
+        {
+            System.out.println("Invalid date format. Please enter a date in the date format YYYYMMDD.");
+            return null;
+        }
     }
 
     /**

@@ -383,8 +383,10 @@ public class CampViewer
         String ID = campToEdit.getID();
         System.out.println("\t1. Edit Camp Title");
         System.out.println("\t2. Change Camp Status");
-        System.out.println("\t3. Edit Start Date");
-        System.out.println("\t4. Edit End Date");
+        System.out.println("\t3. Edit location");
+        System.out.println("\t4. Edit Start Date");
+        System.out.println("\t5. Edit End Date");
+        System.out.println("\t6. Edit Closing Registration Date");
 
         System.out.println();
         System.out.print("Please enter your choice: ");
@@ -395,6 +397,10 @@ public class CampViewer
                 switch (choice) {
                     case 1 -> CampManager.changeCampTitle(ID);
                     case 2 -> CampManager.changeCampStatus(ID);
+                    case 3 -> CampManager.changeCampLocation(ID);
+                    case 4 -> CampManager.changeStartDate(ID);
+                    case 5 -> CampManager.changeEndDate(ID);
+                    case 6 -> CampManager.changeClosingDate(ID);
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
                         new Scanner(System.in).nextLine();
