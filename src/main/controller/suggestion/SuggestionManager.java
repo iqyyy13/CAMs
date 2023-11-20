@@ -9,24 +9,25 @@ import main.utils.ui.ChangePage;
 import java.util.List;
 import java.util.Scanner;
 
-public class SuggestionManager {
+public class SuggestionManager 
+{
     
-    public static List<Suggestion> viewAllSuggestions() {
+    public static List<Suggestion> viewAllSuggestions() 
+    {
         return SuggestionDatabase.getInstance().getList();
     }
 
-    public static void createSuggestion(String msg, int suggestionID, Boolean approve, String committeeUserID, String staffID, String campID)
-        throws UserAlreadyExistsException {
+    public static void createSuggestion(String msg, int suggestionID, String approve, String committeeUserID, String staffID, String campID)
+        throws UserAlreadyExistsException 
+        {
     Suggestion suggestion = new Suggestion(msg, suggestionID, approve, committeeUserID, staffID, campID);
     SuggestionDatabase.getInstance().add(suggestion);
 }
 
-    public static Suggestion createSuggestion(String msg, Boolean approve, String committeeUserID, String staffID, String campID)
-            throws UserAlreadyExistsException {
-        ChangePage.changePage();
-        System.out.println("Enter the suggestion message: ");
-        String newMsg = new Scanner(System.in).nextLine().trim();
-        Suggestion suggestion = new Suggestion(newMsg, getNewSuggestionID(), approve, committeeUserID, staffID, campID);
+    public static Suggestion createSuggestion(String msg, String approve, String committeeUserID, String staffID, String campID)
+            throws UserAlreadyExistsException 
+            {
+        Suggestion suggestion = new Suggestion(msg, getNewSuggestionID(), approve, committeeUserID, staffID, campID);
         SuggestionDatabase.getInstance().add(suggestion);
         return suggestion;  // Add this line if you want to return the created suggestion
     }
@@ -47,20 +48,23 @@ public class SuggestionManager {
         return SuggestionDatabase.getInstance().getByID(suggestionID);
     }
 
-    public static String getNewSuggestionID() {
+    public static String getNewSuggestionID() 
+    {
         int max = 0;
-        for (Suggestion s : SuggestionDatabase.getInstance()) {
+        for (Suggestion s : SuggestionDatabase.getInstance()) 
+        {
             int id = s.getSuggestionID();
-            if (id > max) {
+            if (id > max) 
+            {
                 max = id;
             }
         }
         return String.valueOf(max + 1);
     }
 
-    public static void updateAllSuggestions(List<Suggestion> suggestions) {
+    public static void updateAllSuggestions(List<Suggestion> suggestions) 
+    {
         SuggestionDatabase.getInstance().updateAll(suggestions);
     }
-    
     // You can add more methods based on your requirements
 }

@@ -300,9 +300,14 @@ public class CampViewer
             {
                 Camp assignedCamp = CampDatabase.getInstance().getByID(campID);
                 ModelViewer.displaySingleDisplayable(assignedCamp);
-                System.out.println("Press Enter to go back");
-                new Scanner(System.in).nextLine();
-                CCMainPage.ccMainPage(student);
+                System.out.println("Press Enter to exit or 'b' to go back to the main page");
+                Scanner scanner = new Scanner(System.in);
+                String userInput = scanner.nextLine().trim().toLowerCase();
+                if(userInput.equals("b"))
+                {
+                    CCMainPage.ccMainPage(student);
+                }
+                //CCMainPage.ccMainPage(student);
             } catch (Exception e)
             {
                 System.out.println("Camp ID not found");

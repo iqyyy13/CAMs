@@ -13,14 +13,18 @@ import main.boundary.modelviewer.ModelViewer;
 import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
 import main.controller.camp.campClashTest;
+import main.controller.suggestion.SuggestionManager;
 import main.controller.request.StudentManager;
+import main.controller.suggestion.SuggestionManager;
 import main.database.user.StudentDatabase;
 import main.database.camp.CampDatabase;
 import main.model.camp.Camp;
 import main.model.camp.CampStatus;
+import main.model.suggestion.Suggestion;
 import main.model.user.*;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
+import main.utils.exception.UserAlreadyExistsException;
 import main.utils.iocontrol.CampReportGenerator;
 import main.utils.iocontrol.IntGetter;
 import main.utils.parameters.EmptyID;
@@ -55,8 +59,12 @@ public class CCMainPage
             System.out.println("\t9. Edit enquiry");
             System.out.println("\t10. Reply enquiry");
             System.out.println("\t11. Delete enquiry");
-            System.out.println("\t12. Generate report of students attending each camp");
-            System.out.println("\t13. Logout");
+            System.out.println("\t12. Submit suggestions");
+            System.out.println("\t13. View suggestions");
+            System.out.println("\t14. Edit suggestions");
+            System.out.println("\t15. Delete suggestions");
+            System.out.println("\t16. Generate report of students attending each camp");
+            System.out.println("\t17. Logout");
 
             System.out.println();
             System.out.print("Please enter your choice: ");
@@ -78,10 +86,12 @@ public class CCMainPage
                     case 5 -> registerCamp(student);
                     case 6 -> deregisterCamp(student);
                     case 7 -> CampViewer.viewAssignedCamp(student);
-                    //case 7 -> deregisterFor(student);
-                    //case 8 -> changeTitleFor(student);
-                    case 12 -> generateReport(student);
-                    case 13 -> Logout.logout();
+                    case 12 -> createSuggestion(student);
+                    //case 13
+                    //case 14
+                   // case 15 
+                    case 16 -> generateReport(student);
+                    case 17 -> Logout.logout();
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
                         new Scanner(System.in).nextLine();
@@ -91,8 +101,6 @@ public class CCMainPage
             } catch (PageBackException e) {
                 StudentMainPage.studentMainPage(student);
             }
-
-
         } else {
             throw new IllegalArgumentException("User is not a student.");
         }
@@ -311,6 +319,41 @@ public class CCMainPage
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
         CCMainPage.ccMainPage(student);
+    }
+
+    private static void createSuggestion(Student student)
+    {
+        ChangePage.changePage();
+        try
+        {
+            Camp camp = CampDatabase.getInstance().getByID(student.getCCId());
+
+            CampViewer.viewAssignedCamp(student);
+            System.out.println("");
+            System.out.println("Enter the suggestion that you would like to suggest to the staff-in-charge: ");
+            Scanner scanner = new Scanner(System.in);
+            String suggestionMessage = scanner.nextLine();
+
+            SuggestionManager.createSuggestion(suggestionMessage, "null", student.getID(), camp.getStaffID(), student.getCCId());
+            System.out.println("Your suggestion has been created");
+            System.out.println("Press Enter to continue");
+            scanner.nextLine();
+        } catch(PageBackException e)
+        {
+            CCMainPage.ccMainPage(student);
+
+        } catch(UserAlreadyExistsException e)
+        {
+            System.out.println("");
+
+        } catch(UserErrorException e)
+        {
+            System.out.println("User does not exist");
+        }
+        
+        
+
+
     }
 }
 
