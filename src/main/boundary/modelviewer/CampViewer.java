@@ -3,7 +3,9 @@ package main.boundary.modelviewer;
 import main.boundary.account.Logout;
 import main.boundary.account.ResetPassword;
 import main.boundary.account.ViewUserProfile;
+import main.boundary.mainpage.CCMainPage;
 import main.boundary.mainpage.StaffMainPage;
+import main.boundary.mainpage.StudentMainPage;
 import main.controller.camp.CampManager;
 import main.database.camp.CampDatabase;
 import main.database.user.StaffDatabase;
@@ -23,12 +25,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * The class provides methods for viewing and interacting with camp details
+ */
 public class CampViewer 
 {
     
     /** 
+     * Retrieves the CampStatus based on user input
      * @return CampStatus
-     * @throws PageBackException
+     * @throws PageBackException if the user chooses to go back
      */
     public static CampStatus getCampStatus() throws PageBackException
     {
@@ -60,6 +66,11 @@ public class CampViewer
         };
     }
 
+    /**
+     * Generates and displays details for a camp based on the provided CampID
+     * 
+     * @throws PageBackException    if the user chooses to go back during the operation
+     */
     public static void generateDetailsByCampID() throws PageBackException 
     {
         System.out.println("Please Enter the CampID to search: ");
@@ -85,6 +96,11 @@ public class CampViewer
         throw new PageBackException();
     }
 
+    /**
+     * Generates and displays details for a camp based on the provided StaffID
+     * 
+     * @throws PageBackException if the user chooses to go back during the operation
+     */
     public static void generateDetailsByStaffID() throws PageBackException
     {
         System.out.println("Please enter the StaffID to search: ");
@@ -111,6 +127,11 @@ public class CampViewer
         throw new PageBackException();
     }
 
+    /**
+     * Generates and displays details for a camp based on the provided StudentID
+     * 
+     * @throws PageBackException    if the user chooses to go back during the operation
+     */
     public static void generateDetailsByStudentID() throws PageBackException 
     {
         System.out.println("Enter the StudentID to search");
@@ -121,6 +142,11 @@ public class CampViewer
         throw new PageBackException();
     }
 
+    /**
+     * Generates and displays details for a camp based on the provided Status
+     * 
+     * @throws PageBackException    if the user chooses to go back during the operation
+     */
     public static void generateDetailsByStatus() throws PageBackException 
     {
         CampStatus status = getCampStatus();
@@ -130,6 +156,11 @@ public class CampViewer
         throw new PageBackException();
     }
 
+    /**
+     * Generates and displays camp details based on user-selected search criteria
+     * 
+     * @throws PageBackException    if the user chooses to go back during the operation
+     */
     public static void generateCampDetails() throws PageBackException
     {
         ChangePage.changePage();
@@ -163,6 +194,13 @@ public class CampViewer
             generateCampDetails();
         }
     }
+
+    /**
+     * Displays the available camps for a student and allows navigation to the previous page
+     *   
+     * @param student               the student for whom available camps are to be displayed
+     * @throws PageBackException    if the user chooses to go back during the operation
+     */
     public static void viewAvailableCamps(Student student) throws PageBackException 
     {
         ChangePage.changePage();
@@ -180,6 +218,11 @@ public class CampViewer
         throw new PageBackException();
     }
 
+    /**
+     * Displays all camps and allows navigation to the previous page
+     * 
+     * @throws PageBackException    if the user chooses to go back during the operation
+     */
     public static void viewAllCamp() throws PageBackException 
     {
         ChangePage.changePage();
@@ -190,6 +233,12 @@ public class CampViewer
         throw new PageBackException();
     }
 
+    /**
+     * Displays the camp details for a student and allows navigation to the previous page
+     * 
+     * @param student               the student for whom the camp details are to be displayed
+     * @throws PageBackException    if the user chooses to go back during the operation
+     */
     public static void viewStudentCamp(Student student) throws PageBackException 
     {
         ChangePage.changePage();
@@ -208,6 +257,12 @@ public class CampViewer
         throw new PageBackException();
     }
 
+    /**
+     * Displays the camps created by a staff member and allows navigation to the previous page
+     * 
+     * @param staff                 the staff member for whom the camp details are to be displayed
+     * @throws PageBackException    if the user chooses to go back during the operation
+     */
     public static void generateCreatedCamp(Staff staff) throws PageBackException
     {
         ChangePage.changePage();
@@ -219,6 +274,53 @@ public class CampViewer
         throw new PageBackException();
     }
 
+    /**
+     * Views the camp assigned to the CC member
+     * 
+     * @param student               The CC member viewing the assigned camp
+     * @throws PageBackException    If the user chooses to go back during the operation
+     */
+    public static void viewAssignedCamp(Student student) throws PageBackException
+    {
+        ChangePage.changePage();
+        System.out.println("View Assigned Camp");
+        String campID = student.getCCId();
+
+        if(campID.equals(""))
+        {
+            System.out.println("No camp ID assigned. Returning to Student Main Page");
+            System.out.println("Press Enter to go back");
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
+            StudentMainPage.studentMainPage(student);
+        }
+        else
+        {
+            try
+            {
+                Camp assignedCamp = CampDatabase.getInstance().getByID(campID);
+                ModelViewer.displaySingleDisplayable(assignedCamp);
+                System.out.println("Press Enter to exit or 'b' to go back to the main page");
+                Scanner scanner = new Scanner(System.in);
+                String userInput = scanner.nextLine().trim().toLowerCase();
+                if(userInput.equals("b"))
+                {
+                    CCMainPage.ccMainPage(student);
+                }
+                //CCMainPage.ccMainPage(student);
+            } catch (Exception e)
+            {
+                System.out.println("Camp ID not found");
+            }
+        }
+    }
+
+    /**
+     * Allows a staff member to edit details of a camp they have created and allows navigation to the previous page
+     * 
+     * @param staff                 the staff member initiating the edit
+     * @throws PageBackException    if the user chooses to go back during the operation
+     */
     public static void editCampDetails(Staff staff) throws PageBackException
     {
         ChangePage.changePage();
@@ -250,6 +352,13 @@ public class CampViewer
         }
     }
 
+    /**
+     * Finds a camp in the list based on its unique ID
+     * 
+     * @param campList  the list of camps to search from
+     * @param campID    the ID of the camp to find in the list
+     * @return          the camp with the specified ID or null if not found
+     */
     public static Camp findCampByID(List<Camp> campList, String campID)
     {
         for(Camp camp : campList)
@@ -262,14 +371,22 @@ public class CampViewer
         return null;
     }
 
+    /**
+     * Modifies specific details of a camp based on the user input and allows navigation to the previous page
+     * 
+     * @param campToEdit            the camp to be modified
+     * @throws PageBackException    if the user chooses to go back during the operation
+     */
     private static void modifyCampDetails(Camp campToEdit) throws PageBackException
     {
         System.out.println("Editing camp with CampID: " + campToEdit.getID());
         String ID = campToEdit.getID();
         System.out.println("\t1. Edit Camp Title");
         System.out.println("\t2. Change Camp Status");
-        System.out.println("\t3. Edit Start Date");
-        System.out.println("\t4. Edit End Date");
+        System.out.println("\t3. Edit location");
+        System.out.println("\t4. Edit Start Date");
+        System.out.println("\t5. Edit End Date");
+        System.out.println("\t6. Edit Closing Registration Date");
 
         System.out.println();
         System.out.print("Please enter your choice: ");
@@ -280,6 +397,10 @@ public class CampViewer
                 switch (choice) {
                     case 1 -> CampManager.changeCampTitle(ID);
                     case 2 -> CampManager.changeCampStatus(ID);
+                    case 3 -> CampManager.changeCampLocation(ID);
+                    case 4 -> CampManager.changeStartDate(ID);
+                    case 5 -> CampManager.changeEndDate(ID);
+                    case 6 -> CampManager.changeClosingDate(ID);
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
                         new Scanner(System.in).nextLine();
@@ -291,12 +412,23 @@ public class CampViewer
             }
     }
 
+    /**
+     * Displays details of a camp to be edited
+     * 
+     * @param campToEdit    the camp to be displayed for editing
+     */
     public static void generateCampToEdit(Camp campToEdit)
     {
         ModelViewer.displaySingleDisplayable(campToEdit);
         return;
     }
 
+    /**
+     * Displays the camps that a student is registered for and allows navigation to the previous page
+     * 
+     * @param student               the student for whom registered camps are to be displayed
+     * @throws PageBackException    if the user chooses to go back during the operation
+     */
     public static void viewRegisteredCamps(Student student) throws PageBackException
     {
         ChangePage.changePage();
@@ -313,7 +445,19 @@ public class CampViewer
                     Camp camp = CampDatabase.getInstance().getByID(campID.trim());
                     if(camp != null)
                     {
+                        String role = student.getCCId();
+                        String display;
+                        if(role.equals(campID))
+                        {
+                            display = "You are a Camp Committee member of this camp";
+                        }
+                        else
+                        {
+                            display = "You are a Camp Attendee of this camp";
+                        }
                         ModelViewer.displaySingleDisplayable(camp);
+                        System.out.println("");
+                        System.out.println(display);
                         throw new PageBackException();
                     }
                 } catch (Exception e)
@@ -327,6 +471,12 @@ public class CampViewer
         }
     }
  
+    /**
+     * Displays the list of registered students for a specific camp, allowing navigation to the previous page
+     * 
+     * @param staff                 the staff member viewing the list of registered students
+     * @throws PageBackException    if the user chooses to go back during the operation
+     */
     public static void viewRegisteredStudents(Staff staff) throws PageBackException
     {
         try

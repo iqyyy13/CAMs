@@ -1,5 +1,7 @@
 package main.boundary.mainpage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,27 +12,39 @@ import main.boundary.account.ResetPassword;
 import main.boundary.account.ViewUserProfile;
 import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
+import main.boundary.modelviewer.SuggestionViewer;
 import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
 import main.controller.enquiry.EnquiryManager;
+<<<<<<< HEAD
+=======
+import main.controller.camp.campClashTest;
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
 import main.controller.request.StudentManager;
 import main.database.camp.CampDatabase;
+import main.database.enquiry.EnquiryDatabase;
 import main.database.user.StaffDatabase;
 import main.database.enquiry.EnquiryDatabase;
 import main.model.user.*;
 import main.model.camp.Camp;
+import main.model.suggestion.Suggestion;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
 import main.utils.exception.UserAlreadyExistsException;
+import main.utils.iocontrol.CampReportGenerator;
 import main.utils.iocontrol.IntGetter;
 import main.utils.parameters.EmptyID;
 import main.utils.ui.ChangePage;
 
-public class StaffMainPage {
+/**
+ * Represents the main page for a staff user, providing various options and functionalities
+ */
+public class StaffMainPage 
+{
     /**
-     * This method displays the main page of a student. It takes a User object as a parameter and displays a menu of options for the student to choose from. The user's choice is then processed using a switch statement, which calls different methods based on the choice.
+     * Displays the main page for a staff user, allowing them to choose from various options.
      *
-     * @param user The user object of the student.
+     * @param user The user object representing the staff member
      */
     public static void staffMainPage(User user) {
         if (user instanceof Staff staff) {
@@ -50,7 +64,7 @@ public class StaffMainPage {
             System.out.println("\t10. Reply enquiries");
             System.out.println("\t11. View all pending suggestions");
             System.out.println("\t12. Approve/Reject suggestions");
-            System.out.println("\t13. Generate report of students");
+            System.out.println("\t13. Generate report of students attending each camp");
             System.out.println("\t14. Generate performance report of CCs");
             System.out.println("\t15. Logout");
 
@@ -59,7 +73,10 @@ public class StaffMainPage {
 
             int choice = IntGetter.readInt();
 
+<<<<<<< HEAD
             // refresh Enquiry DB
+=======
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
             EnquiryManager.refresh_enquiry_db();
 
             try {
@@ -80,7 +97,12 @@ public class StaffMainPage {
                     case 8 -> deleteCamp(staff);
                     case 9 -> EnquiryManager.view_all_pending_enquiry(staff.getID());
                     case 10 -> EnquiryManager.reply_enquiry(null);
+<<<<<<< HEAD
                     //case 8 -> changeTitleForCamp(student);
+=======
+                    case 11 -> SuggestionViewer.viewSuggestions(staff);
+                    case 13 -> generateReport(staff);
+>>>>>>> 1da6f7914d4097ac015857754b7a2de9dfc47f61
                     case 15 -> Logout.logout();
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
@@ -98,10 +120,12 @@ public class StaffMainPage {
         }
     }
 
-    
     /** 
-     * @param staff
-     * @throws PageBackException
+     * Creates a new camp with information provided by the staff member, displaying the details
+     * and confirming the creation
+     * 
+     * @param staff                 The staff member creating the camp
+     * @throws PageBackException    If the user chooses to go back during the operation
      */
     private static void createCamp(Staff staff) throws PageBackException
     {
@@ -113,10 +137,23 @@ public class StaffMainPage {
         String location = new Scanner(System.in).nextLine();
         System.out.println("Please give a brief description for the camp:");
         String description = new Scanner(System.in).nextLine();
+        System.out.println("Enter the startDate (YYYYMMDD):");
+        String startDate = new Scanner(System.in).nextLine();
+        System.out.println("Enter the endDate (YYYYMMDD): ");
+        String endDate = new Scanner(System.in).nextLine();
+        System.out.println("Enter the closing registration date (YYYYMMDD): ");
+        String closingDate = new Scanner(System.in).nextLine();
         Camp camp;
         try 
         {
-            camp = CampManager.createCamp(campTitle, staff.getID(), staff.getFaculty(), location, description);
+            //LocalDate startDate1 = LocalDate.parse(startDate, DateTimeFormatter.BASIC_ISO_DATE);
+            //LocalDate endDate1 = LocalDate.parse(endDate, DateTimeFormatter.BASIC_ISO_DATE);
+            //LocalDate closingDate1 = LocalDate.parse(closingDate, DateTimeFormatter.BASIC_ISO_DATE);
+            startDate = formatDataString(startDate);
+            endDate = formatDataString(endDate);
+            closingDate = formatDataString(closingDate);
+
+            camp = CampManager.createCamp(campTitle, staff.getID(), staff.getFaculty(), location, description, startDate, endDate, closingDate);
         } catch (UserAlreadyExistsException e) {
             throw new RuntimeException(e);
         }
@@ -143,7 +180,13 @@ public class StaffMainPage {
         throw new PageBackException();
     }
 
-    public static void deleteCamp(Staff staff) throws PageBackException
+    /**
+     * Deletes a camp created by the staff member, confirming the deletion after displaying the camp details
+     * 
+     * @param staff                 The staff member deleting the camp
+     * @throws PageBackException    If the user chooses to go back during the operation
+     */
+    private static void deleteCamp(Staff staff) throws PageBackException
     {
         ChangePage.changePage();
         System.out.println("View Created Camps");
@@ -191,6 +234,57 @@ public class StaffMainPage {
         {
             System.out.println("Invalid choice. Please press enter to confirm or [b] to go back.");
             deleteCamp(staff);
+        }
+    }
+
+    private static void generateReport(Staff staff)
+    {
+        ChangePage.changePage();
+        List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(staff.getID()));
+        System.out.println("1.Print all students");
+        System.out.println("2.Print all camp attendees");
+        System.out.println("3.Print all camp committee members");
+        System.out.println("");
+        System.out.println("Please Enter your choice: ");
+        int choice = IntGetter.readInt();
+        
+        try
+        {
+            switch(choice)
+            {
+                case 1 -> CampReportGenerator.generateReportAndWriteToFile(campList, "ALL");
+                case 2 -> CampReportGenerator.generateReportAndWriteToFile(campList, "CAMP ATTENDEE");
+                case 3 -> CampReportGenerator.generateReportAndWriteToFile(campList, "CC");
+                default -> 
+                {
+                    System.out.println("Invalid choice. Please try again.");
+                    new Scanner(System.in);
+                    throw new PageBackException();
+                }
+            }
+        } catch (PageBackException e)
+        {
+            generateReport(staff);
+        }
+        //CampReportGenerator.generateReportAndWriteToFile(campList);
+        System.out.println("File has been written");
+        System.out.println("Press Enter to go back");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+        StaffMainPage.staffMainPage(staff);
+    }
+
+    private static String formatDataString(String date)
+    {
+        if(date != null && date.length() == 8)
+        {
+            return date.substring(0, 4) + "-" + date.substring(4,6) + "-" 
+            + date.substring(6, 8);
+        }
+        else
+        {
+            System.out.println("Invalid date format. Please enter a date in the date format YYYYMMDD.");
+            return null;
         }
     }
 }
