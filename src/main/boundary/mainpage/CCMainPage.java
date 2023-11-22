@@ -356,7 +356,7 @@ public class CCMainPage
         }
     }
 
-    private static void deleteSuggestion(Student student) throws PageBackException
+       private static void deleteSuggestion(Student student) throws PageBackException
     {
         ChangePage.changePage();
         String studentID = student.getID();
@@ -378,7 +378,7 @@ public class CCMainPage
             Suggestion suggestionToDelete = SuggestionViewer.findSuggestionByID(suggestionList, option);
             if(suggestionToDelete != null)
             {
-                SuggestionDatabase.getInstance().remove(suggestionToDelete.getID());
+                SuggestionManager.deleteSuggestion(suggestionToDelete.getID());
                 System.out.println("Suggestion with Suggestion ID " + option + " deleted successfully.");
                 System.out.println("Press Enter to go back.");
                 new Scanner(System.in).nextLine();
