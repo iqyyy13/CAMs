@@ -14,36 +14,38 @@ import java.util.Map;
 
 public class Suggestion implements Model, Displayable
 {
+    //Attribues for a suggestion object
     SuggestionStatus status;
     private String msg;
     private int suggestionID;
     private String committeeUserID;
-    private String approve;
     private String staffID;
     private String campID;
-
-    public Suggestion(String msg, int suggestionID, String approve, String committeeUserID, String staffID, String campID) 
+    //constructor creates a suggestion object
+    public Suggestion(String msg, int suggestionID, String committeeUserID, String staffID, String campID) 
     {
         this.msg = msg;
         this.suggestionID = suggestionID;
-        this.approve = approve;
         this.committeeUserID = committeeUserID;
         this.staffID = staffID;
         this.campID = campID;
         this.status = SuggestionStatus.PENDING;
     }
-
-    public Suggestion(String msg, String suggestionID, String approve, String committeeUserID, String staffID, String campID) 
+    //constructor that helps convert a string ID to int when making an object
+    public Suggestion(String msg, String suggestionID, String committeeUserID, String staffID, String campID) 
     {
         this.msg = msg;
         this.suggestionID = Integer.parseInt(suggestionID);
-        this.approve = approve;
         this.committeeUserID = committeeUserID;
         this.staffID = staffID;
         this.campID = campID;
         this.status = SuggestionStatus.PENDING;
     }
-
+    /**
+     * Constructs a new suggestion object with information from the specified map
+     * 
+     * @param map The map containing information about the suggestion
+     */
     public Suggestion(Map<String, String> map) 
     {
         fromMap(map);
@@ -107,24 +109,13 @@ public class Suggestion implements Model, Displayable
         this.committeeUserID = committeeUserID;
     }
 
-    // Getter for approve
-    public String getApprove() 
-    {
-        return approve;
-    }
-
-    // Setter for approve
-    public void setApprove(String approve) 
-    {
-        this.approve = approve;
-    }
-
+    // Getter for suggestionstatus
     public SuggestionStatus getStatus() 
     {
         return status;
     }
 
-
+    //set suggestion status
     public void setStatus(SuggestionStatus status) 
     {
         this.status = status;
@@ -136,6 +127,7 @@ public class Suggestion implements Model, Displayable
         // Assuming suggestionID is a unique identifier for the suggestion
         return String.valueOf(suggestionID);
     }
+    // Generate CC student info in string
 
     private String getCCStudentInformationString() 
     {
@@ -149,13 +141,14 @@ public class Suggestion implements Model, Displayable
             return "No Student Assigned";
         }
     }
-
+    // Generate Suggestion info in string
     private String getSuggestionInformationString()
     {
         return  String.format("| Suggestion Name               | %-65s |\n", getMsg()) + 
                 String.format("| Suggestion ID                 | %-65s |\n", getSuggestionID()) +
                 String.format("| Suggestion Status             | %-74s |\n", getStatus().colorString());
     }
+    //Return a combined string of info
     
     private String getSingleSuggestionString()
     {
