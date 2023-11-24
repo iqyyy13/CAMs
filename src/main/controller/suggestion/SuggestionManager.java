@@ -22,11 +22,11 @@ public class SuggestionManager
     /**
      * Creates suggestion based on user inputs.
      */
-    public static Suggestion createSuggestion(String msg, String approve, String committeeUserID, String staffID, String campID)
+    public static Suggestion createSuggestion(String msg, String committeeUserID, String staffID, String campID)
             throws UserAlreadyExistsException 
             {
                 // generates a unique id number
-        Suggestion suggestion = new Suggestion(msg, getNewSuggestionID(), approve, committeeUserID, staffID, campID);
+        Suggestion suggestion = new Suggestion(msg, getNewSuggestionID(), committeeUserID, staffID, campID);
         SuggestionDatabase.getInstance().add(suggestion);
         return suggestion;  
     }
