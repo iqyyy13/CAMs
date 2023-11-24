@@ -4,6 +4,8 @@ package main.controller.enquiry;
 import main.utils.exception.PageBackException;
 import java.io.FileNotFoundException;
 import main.utils.config.Location;
+import main.controller.camp.CampManager;
+import main.model.camp.Camp;
 import main.model.enquiry.Enquiry;
 import main.utils.ui.ChangePage;
 import java.io.FileOutputStream;
@@ -143,33 +145,41 @@ public class EnquiryManager {
         }
     }
 
-
     /**
      * Allows user (Staff) to view all pending enquiries.
      */
-    public static void view_all_pending_enquiry() throws PageBackException {
-
+    public static void view_all_pending_enquiry(String staff_id) throws PageBackException 
+    {
         ChangePage.changePage();
+
+        ArrayList<String> camp_ids = new ArrayList<>();
+
+        List<Camp> campList = CampManager.getAllCampsByStaff(staff_id);
+
+        for (Camp c : campList) 
+        {
+            camp_ids.add(c.getID());
+        }
 
         boolean found = false;
 
-        for (int i = 0; i < enquiry_list.size(); i++) {
-            if (enquiry_list.get(i).isPending() == true) {
+        for (int i = 0; i < enquiry_list.size(); i++) 
+        {
+            if (enquiry_list.get(i).isPending() == true && camp_ids.contains(enquiry_list.get(i).getcampID())) 
+            {
                 System.out.println("Enquiry ID: " + enquiry_list.get(i).getEnquiryID() + "\n" +
                 "Camp ID: " + enquiry_list.get(i).getcampID() + "\n" +
                 "Student ID: " + enquiry_list.get(i).getStudentID() + "\n" +
                 "Message: " + enquiry_list.get(i).enq_message());
                 found = true;
-
                 System.out.println("Replies: ");
                 System.out.println(enquiry_list.get(i).getReplies().get(0).replace("[, ", "").replace("]", "").replace("[", ""));
             }
         }
-
-        if (found == false) {
+        if (found == false) 
+        {
             System.out.println("You have no pending enquiries.");
         }
-
         System.out.println("Press enter to go back.");
         @SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);

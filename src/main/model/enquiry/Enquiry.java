@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Map;
 
 
-public class Enquiry implements Model, Displayable {
+public class Enquiry implements Model, Displayable 
+{
 
     private String enquiryID;
 

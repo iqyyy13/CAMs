@@ -91,7 +91,7 @@ public class StaffMainPage
                     case 6 -> CampViewer.viewRegisteredStudents(staff);
                     case 7 -> CampViewer.editCampDetails(staff);
                     case 8 -> deleteCamp(staff);
-                    case 9 -> EnquiryManager.view_all_pending_enquiry();
+                    case 9 -> EnquiryManager.view_all_pending_enquiry(staff.getID());
                     case 10 -> EnquiryManager.reply_enquiry(null);
                     case 11 -> SuggestionViewer.viewSuggestions(staff);
                     case 12 -> replySuggestions(staff);
