@@ -2,6 +2,7 @@ package main.controller.suggestion;
 
 import main.database.suggestion.SuggestionDatabase;
 import main.model.suggestion.Suggestion;
+import main.model.suggestion.SuggestionStatus;
 import main.utils.exception.UserAlreadyExistsException;
 import main.utils.exception.UserErrorException;
 import main.utils.ui.ChangePage;
@@ -58,4 +59,6 @@ public class SuggestionManager
     public static void deleteSuggestion(String suggestionID) throws UserErrorException {
         SuggestionDatabase.getInstance().remove(suggestionID);
     }
+
+    
 }

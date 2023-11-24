@@ -187,6 +187,39 @@ public class EnquiryManager {
         throw new PageBackException();
     }
 
+    /**
+     * Allows user (Student - CC) to view all pending enquiries.
+     */
+    public static void view_CC_pending_enquiry(String campID) throws PageBackException 
+    {
+        ChangePage.changePage();
+
+        boolean found = false;
+
+        for (int i = 0; i < enquiry_list.size(); i++) 
+        {
+            if (enquiry_list.get(i).isPending() == true && campID.contains(enquiry_list.get(i).getcampID())) 
+            {
+                System.out.println("Enquiry ID: " + enquiry_list.get(i).getEnquiryID() + "\n" +
+                "Camp ID: " + enquiry_list.get(i).getcampID() + "\n" +
+                "Student ID: " + enquiry_list.get(i).getStudentID() + "\n" +
+                "Message: " + enquiry_list.get(i).enq_message());
+                found = true;
+                System.out.println("Replies: ");
+                System.out.println(enquiry_list.get(i).getReplies().get(0).replace("[, ", "").replace("]", "").replace("[", ""));
+            }
+        }
+        if (found == false) 
+        {
+            System.out.println("You have no pending enquiries.");
+        }
+        System.out.println("Press enter to go back.");
+        @SuppressWarnings("resource")
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+        throw new PageBackException();
+    }
+
 
     /**
      * Allows user to view enquiries tagged to Student ID.
