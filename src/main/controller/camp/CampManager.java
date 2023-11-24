@@ -280,30 +280,6 @@ public class CampManager
     }
 
     /**
-     * Retrieves the camp associated with a student, if any.
-     * 
-     * @param student   The student whose associated camp is to be retrieved
-     * @return          The camp associated with the student, or null if not found
-     * @throws          IllegalStateException If an error occurs while retrieving the camp
-     */
-    public static Camp getStudentCamp(Student student)
-    {
-        if (EmptyID.isEmptyID(student.getCampID())) 
-        {
-            return null;
-        } 
-        else 
-        {
-            try 
-            {
-                return CampDatabase.getInstance().getByID(student.getCampID());
-            } catch (UserErrorException e) {
-                throw new IllegalStateException("Camp " + student.getCampID() + " not found");
-            }
-        }
-    }
-
-    /**
      * Retrieves a camp by its unique identifier
      * 
      * @param campID                The ID of the camp to retrieve

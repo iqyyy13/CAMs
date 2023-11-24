@@ -48,7 +48,7 @@ public class EnquiryManager {
         System.out.print("Enter the Camp ID you wish to submit enquiry: ");
         @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
-        String camp_id_input = sc.nextLine();
+        String camp_id_input = sc.nextLine().toUpperCase();
 
         if (camp_id.contains(camp_id_input)) {
             System.out.println("Camp ID found, enter your enquiry below...");
@@ -356,7 +356,7 @@ public class EnquiryManager {
         System.out.print("Enter the Enquiry ID to be replied: ");
         @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
-        String enquiry_id_input = sc.nextLine();
+        String enquiry_id_input = sc.nextLine().toUpperCase();
 
         for (int i = 0; i < enquiry_list.size(); i++) {
             if (enquiry_list.get(i).getEnquiryID().equals(enquiry_id_input)) {

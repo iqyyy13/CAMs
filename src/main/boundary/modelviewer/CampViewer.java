@@ -234,30 +234,6 @@ public class CampViewer
     }
 
     /**
-     * Displays the camp details for a student and allows navigation to the previous page
-     * 
-     * @param student               the student for whom the camp details are to be displayed
-     * @throws PageBackException    if the user chooses to go back during the operation
-     */
-    public static void viewStudentCamp(Student student) throws PageBackException 
-    {
-        ChangePage.changePage();
-        System.out.println("View Student Camp");
-        Camp camp = CampManager.getStudentCamp(student);
-        if (camp == null) 
-        {
-            System.out.println("Student has no camp yet.");
-        } 
-        else 
-        {
-            ModelViewer.displaySingleDisplayable(camp);
-        }
-        System.out.println("Press Enter to go back.");
-        new Scanner(System.in).nextLine();
-        throw new PageBackException();
-    }
-
-    /**
      * Displays the camps created by a staff member and allows navigation to the previous page
      * 
      * @param staff                 the staff member for whom the camp details are to be displayed
