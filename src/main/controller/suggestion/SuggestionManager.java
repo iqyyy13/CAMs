@@ -32,21 +32,6 @@ public class SuggestionManager
         return suggestion;  // Add this line if you want to return the created suggestion
     }
 
-    public static List<Suggestion> getAllSuggestions() 
-    {
-        return SuggestionDatabase.getInstance().getList();
-    }
-
-    public static boolean repositoryIsEmpty() 
-    {
-        return SuggestionDatabase.getInstance().isEmpty();
-    }
-
-    public static boolean containsSuggestionByID(String suggestionID) 
-    {
-        return SuggestionDatabase.getInstance().contains(suggestionID);
-    }
-
     public static Suggestion getByID(String suggestionID) throws UserErrorException
     {
         return SuggestionDatabase.getInstance().getByID(suggestionID);
@@ -70,5 +55,7 @@ public class SuggestionManager
     {
         SuggestionDatabase.getInstance().updateAll(suggestions);
     }
-    // You can add more methods based on your requirements
+    public static void deleteSuggestion(String suggestionID) throws UserErrorException {
+        SuggestionDatabase.getInstance().remove(suggestionID);
+    }
 }
