@@ -66,13 +66,14 @@ public class SuggestionManager
     public static void deleteSuggestion(String suggestionID) throws UserErrorException {
         SuggestionDatabase.getInstance().remove(suggestionID);
     }
-        /**
+    /**
      * Edit suggestion from list.
      */
     public static void editSuggestionDetails(Student student) throws PageBackException {
         ChangePage.changePage();
         SuggestionViewer.viewOwnSuggestions(student);
         String studentID = student.getID();
+        //find instance based on studentID
         List<Suggestion> suggestionList = SuggestionDatabase.getInstance().findByRules(p -> p.getCommitteeUserID().equalsIgnoreCase(studentID));
         System.out.println("");
         System.out.println("Enter the SuggestionID that you would like to edit: ");
