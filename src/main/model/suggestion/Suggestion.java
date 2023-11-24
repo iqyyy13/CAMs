@@ -51,24 +51,24 @@ public class Suggestion implements Model, Displayable
         fromMap(map);
     }
 
-    //Getter and setter for staff id
+    //Getter for staffID
 
     public String getStaffID() 
     {
         return staffID;
     }
-
+    //Setter for staffID
     public void setStaffID(String staffID)
     {
         this.staffID = staffID;
     }
 
-    // Getter and setter for campID
+    // Getter for campID
     public String getCampID() 
     {
         return campID;
     }
-
+    //Setter for campID
     public void setCampID(String campID) 
     {
         this.campID = campID;
