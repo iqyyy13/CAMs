@@ -100,6 +100,14 @@ public class ResetPassword
         }
     }
 
+    /**
+     * Checks if the given password is the default password
+     * 
+     * @param userType  The type of the user (STUDENT, STAFF)
+     * @param userID    The ID of the user
+     * @param password  The password to check
+     * @return          True if the password is the default password, false otherwise
+     */
     public static boolean checkDefaultPassword(UserType userType, String userID, String password)
     {
         if(password.equals("password"))
@@ -110,6 +118,14 @@ public class ResetPassword
         return false;
     }
 
+    /**
+     * Prompts the user to reset their password if it is the default password
+     * 
+     * @param userType  The type of the user (STUDENT, STAFF)
+     * @param userID    The ID of the user
+     * @param password  The current password
+     * @return          True if the user chooses to reset the password, false otherwise
+     */
     public static boolean promptUserForPasswordReset(UserType userType, String userID, String password)
     {
         if(checkDefaultPassword(userType, userID, password))
