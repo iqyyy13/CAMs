@@ -410,7 +410,8 @@ public class StaffMainPage
                 default ->
                 {
                     System.out.println("Invalid Choice. Please try again");
-                    new Scanner(System.in);
+                    System.out.println("Press Enter to retry");
+                    scanner.nextLine();
                     throw new PageBackException();
                 }
             }
@@ -422,6 +423,9 @@ public class StaffMainPage
         } catch(UserErrorException e)
         {
             System.err.println("Suggestion ID does not exist");
+            System.out.println("Press Enter to retry");
+            scanner.nextLine();
+            replySuggestions(staff);
         } catch (PageBackException e)
         {
             replySuggestions(staff);
