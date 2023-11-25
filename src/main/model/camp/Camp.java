@@ -87,6 +87,8 @@ public class Camp implements Model, Displayable
 
     private String closingDate;
 
+    private String openToNTU;
+
 
     /**
      * Constructs a new Camp object with the specified parameters.
@@ -116,7 +118,7 @@ public class Camp implements Model, Displayable
         this.startDate = startDate;
         this.endDate = endDate;
         this.closingDate = closingDate;
-
+        this.openToNTU = "false";
     }
 
     /**
@@ -199,7 +201,8 @@ public class Camp implements Model, Displayable
      * 
      * @param staffID the staff ID to set with
      */
-    public void setStaffID(String staffID) {
+    public void setStaffID(String staffID) 
+    {
         this.staffID = staffID;
     }
 
@@ -208,7 +211,8 @@ public class Camp implements Model, Displayable
      * 
      * @return the title of the camp
      */
-    public String getCampTitle() {
+    public String getCampTitle() 
+    {
         return campTitle;
     }
 
@@ -321,6 +325,16 @@ public class Camp implements Model, Displayable
     public String getDescription()
     {
         return description;
+    }
+
+    public String getOpenToNTU()
+    {
+        return openToNTU;
+    }
+
+    public void setOpenToNTU(String openToNTU)
+    {
+        this.openToNTU = openToNTU;
     }
 
     /**
