@@ -11,11 +11,6 @@ public enum CampStatus
     AVAILABLE,
 
     /**
-     * Camp is allocated
-     */
-    ALLOCATED,
-
-    /**
      * Camp is unavailable
      */
     UNAVAILABLE;
@@ -30,7 +25,6 @@ public enum CampStatus
         {
             case AVAILABLE -> "\u001B[32m" + this + "\u001B[0m"; // green
             case UNAVAILABLE -> "\u001B[31m" + this + "\u001B[0m"; // red
-            case ALLOCATED -> "\u001B[34m" + this + "\u001B[0m"; // blue
         };
     }
 

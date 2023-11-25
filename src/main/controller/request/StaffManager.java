@@ -32,8 +32,7 @@ public class StaffManager
     {
         return CampDatabase.getInstance().findByRules(
                 camp -> camp.getStaffID().equalsIgnoreCase(staffID),
-                camp -> camp.getStatus() == CampStatus.ALLOCATED ||
-                        camp.getStatus() == CampStatus.AVAILABLE
+                camp -> camp.getStatus() == CampStatus.AVAILABLE
         ).size();
     }
 
