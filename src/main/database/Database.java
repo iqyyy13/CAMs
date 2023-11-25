@@ -16,7 +16,7 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     List<ModelObject> listOfModelObjects;
 
     /**
-     * Creates a new instance of the Repository class.
+     * Creates a new instance of the Database class.
      */
     public Database() 
     {
@@ -26,9 +26,9 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
 
   
     /**
-     * Gets the path of the repository file.
+     * Gets the path of the database file.
      *
-     * @return the path of the repository file
+     * @return the path of the database file
      */
     public abstract String getFilePath();
 
@@ -63,10 +63,10 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     }
 
     /**
-     * Checks whether the repository contains a model object with the given ID.
+     * Checks whether the database contains a model object with the given ID.
      *
      * @param modelObjectID the ID of the model object to check
-     * @return true if the repository contains a model object with the given ID, false otherwise
+     * @return true if the database contains a model object with the given ID, false otherwise
      */
     public boolean contains(String modelObjectID) 
     {
@@ -80,10 +80,10 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     }
 
     /**
-     * Adds a model object to the repository.
+     * Adds a model object to the database.
      *
      * @param modelObject the model object to add
-     * @throws ModelAlreadyExistsException if a model object with the same ID already exists in the repository
+     * @throws ModelAlreadyExistsException if a model object with the same ID already exists in the database
      */
     public void add(ModelObject modelObject) throws UserAlreadyExistsException 
     {
@@ -99,7 +99,7 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     }
 
     /**
-     * Removes a model object from the repository by ID.
+     * Removes a model object from the database by ID.
      *
      * @param modelObjectID the ID of the model object to remove
      * @throws UserErrorException if the model object with the given ID does not exist
@@ -111,9 +111,9 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     }
 
     /**
-     * Checks whether the repository is empty.
+     * Checks whether the database is empty.
      *
-     * @return true if the repository is empty, false otherwise
+     * @return true if the database is empty, false otherwise
      */
     public boolean isEmpty() 
     {
@@ -121,9 +121,9 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     }
 
     /**
-     * Gets the size of the repository.
+     * Gets the size of the database.
      *
-     * @return the size of the repository
+     * @return the size of the database
      */
     public int size() 
     {
@@ -131,7 +131,7 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     }
 
     /**
-     * Removes all model objects from this repository.
+     * Removes all model objects from this database.
      */
     public void clear() 
     {
@@ -140,10 +140,10 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     }
 
     /**
-     * Updates the specified model object in the repository.
+     * Updates the specified model object in the database.
      *
      * @param modelObject the model object to update
-     * @throws UserErrorException if the specified model object is not found in the repository
+     * @throws UserErrorException if the specified model object is not found in the database
      */
     public void update(ModelObject modelObject) throws UserErrorException 
     {
@@ -153,7 +153,7 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     }
 
     /**
-     * Updates all model objects in the repository with the specified list of model objects.
+     * Updates all model objects in the database with the specified list of model objects.
      *
      * @param modelObjects the list of model objects to update
      */
@@ -164,7 +164,7 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     }
 
     /**
-     * Loads the list of model objects from the repository file.
+     * Loads the list of model objects from the database file.
      */
     public void load() 
     {
@@ -173,7 +173,7 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     }
 
     /**
-     * Saves the list of model objects to the repository file.
+     * Saves the list of model objects to the database file.
      */
     public void save() 
     {
@@ -192,14 +192,14 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     }
 
     /**
-     * Finds all model objects in the repository that match the specified rules.
+     * Finds all model objects in the database that match the specified rules.
      * 
      * Multiple rules can be specified, and all rules must be satisfied for a model object to be considered a match.
      * 
      * The rules are specified as lambda expressions that take a model object as a parameter and return a boolean.
      *
      * @param rules the rules to match
-     * @return a list of all model objects in the repository that match the specified rules
+     * @return a list of all model objects in the database that match the specified rules
      */
     @SafeVarargs
     public final List<ModelObject> findByRules(RepositoryRule<ModelObject>... rules) {
@@ -220,9 +220,9 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     }
 
     /**
-     * Gets a list of all model objects in the repository.
+     * Gets a list of all model objects in the database.
      *
-     * @return a list of all model objects in the repository
+     * @return a list of all model objects in the database
      */
     public List<ModelObject> getList()
     {
@@ -230,9 +230,9 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
     }
 
     /**
-     * Provides a rule for filtering model objects in the repository.
+     * Provides a rule for filtering model objects in the database.
      *
-     * @param <ModelObject> the type of model object stored in the repository
+     * @param <ModelObject> the type of model object stored in the database
      */
     public interface RepositoryRule<ModelObject>
     {
