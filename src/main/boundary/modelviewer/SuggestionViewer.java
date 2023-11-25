@@ -2,7 +2,7 @@ package main.boundary.modelviewer;
 
 import main.boundary.account.Logout;
 import main.boundary.account.ResetPassword;
-import main.boundary.account.ViewUserProfile;
+import main.boundary.account.ViewStaffProfile;
 import main.boundary.mainpage.CCMainPage;
 import main.boundary.mainpage.StaffMainPage;
 import main.boundary.mainpage.StudentMainPage;

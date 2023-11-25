@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Handles the display of the user profiles, providing methods to view a single user's profile
  * or multiple user profiles
  */
-public class ViewUserProfile 
+public class ViewStaffProfile 
 {
     /**
      * Displays the user's profile.
@@ -40,40 +40,6 @@ public class ViewUserProfile
     {
         ChangePage.changePage();
         viewUserProfile(user);
-        System.out.println("Press enter to go back.");
-        Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
-        throw new PageBackException();
-    }
-
-    public static void viewStudentProfile(Student student) 
-    {
-        String CC = "";
-
-        if(!student.getCCId().equals("0"))
-        {
-            CC = student.getCCId();
-        }
-
-        String userType = UserTypeGetter.getUserTypeInCamelCase(student);
-        System.out.println("Welcome to View " + userType + " Profile");
-        System.out.println("┌---------------------------------------------------------------------------------------------------┐");
-        System.out.printf("| %-15s | %-30s | %-15s | %-15s | %-10s |\n", "Name", "Email", userType + " ID", "CC", "Points");
-        System.out.println("|-----------------|--------------------------------|-----------------|-----------------|------------|");
-        System.out.printf("| %-15s | %-30s | %-15s | %-15s | %-10s |\n", student.getUserName(), student.getEmail(), student.getID(), CC, student.getPoints());
-        System.out.println("└---------------------------------------------------------------------------------------------------┘");
-    }
-
-    /**
-     * Displays the user's profile.
-     *
-     * @param user                  the user whose profile is to be displayed.
-     * @throws PageBackException    if the user chooses to go back to the previous page.
-     */
-    public static void viewStudentProfilePage(Student student) throws PageBackException 
-    {
-        ChangePage.changePage();
-        viewStudentProfile(student);
         System.out.println("Press enter to go back.");
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();

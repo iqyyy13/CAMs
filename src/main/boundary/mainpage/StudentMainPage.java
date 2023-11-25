@@ -4,15 +4,17 @@ import java.util.Scanner;
 
 import javax.management.RuntimeErrorException;
 
+import main.boundary.account.LoginUI;
 import main.boundary.account.Logout;
 import main.boundary.account.ResetPassword;
-import main.boundary.account.ViewUserProfile;
+import main.boundary.account.ViewStudentProfile;
+import main.boundary.account.ViewStaffProfile;
 import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
 import main.controller.enquiry.EnquiryManager;
 import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
-import main.controller.camp.campClashTest;
+import main.controller.camp.CampDateClash;
 import main.controller.request.StudentManager;
 import main.database.user.StudentDatabase;
 import main.database.camp.CampDatabase;
@@ -44,6 +46,33 @@ public class StudentMainPage
             System.out.println("Welcome to Student Main Page");
             System.out.println("Hello, " + student.getUserName() + "!");
             System.out.println();
+
+            boolean shouldResetPassword = ResetPassword.promptUserForPasswordReset(UserType.STUDENT, student.getID(), student.getPassword());
+
+            if(shouldResetPassword)
+            {
+                try 
+                {
+                    ResetPassword.changePassword(UserType.STUDENT, student.getID());
+                    StudentDatabase.getInstance().update(student);
+                    LoginUI.login();
+                } catch (PageBackException e)
+                {
+                    try
+                    {
+                        LoginUI.login();
+                    } catch (PageBackException e2)
+                    {
+
+                    }
+                    
+                } catch(UserErrorException e)
+                {
+                    System.err.println("User not found");
+                }
+            }
+
+
             System.out.println("\t1. View my profile");
             System.out.println("\t2. Change my password");
             System.out.println("\t3. View camps");
@@ -61,7 +90,7 @@ public class StudentMainPage
             System.out.print("Please enter your choice: ");
 
             int choice = IntGetter.readInt();
-
+            
             EnquiryManager.refresh_enquiry_db();
 
             try {
@@ -72,7 +101,7 @@ public class StudentMainPage
 
             try {
                 switch (choice) {
-                    case 1 -> ViewUserProfile.viewStudentProfilePage(student);
+                    case 1 -> ViewStudentProfile.viewStudentProfilePage(student);
                     case 2 -> ResetPassword.changePassword(UserType.STUDENT, student.getID());
                     case 3 -> CampViewer.viewAvailableCamps(student);
                     case 4 -> CampViewer.viewRegisteredCamps(student);
@@ -114,7 +143,7 @@ public class StudentMainPage
         ModelViewer.displayListOfDisplayable(CampManager.getAllAvailableCamps());
         System.out.println("Please enter the Camp ID that you would like to register: ");
         String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
-        String clashValue = campClashTest.registrationDateClash(student, campID);
+        String clashValue = CampDateClash.registrationDateClash(student, campID);
         if(clashValue != null)
         {
             System.out.println("The camp that you have registered for has date clashes with camp ID " + clashValue);
@@ -244,7 +273,7 @@ public class StudentMainPage
             CampViewer.viewRegisteredCamps(student);
         } catch (Exception e)
         {
-            System.out.println("");
+
         }
 
         System.out.println("Please enter the Camp ID that you would like to remove yourself from: ");

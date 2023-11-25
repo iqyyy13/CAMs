@@ -2,11 +2,12 @@ package main.boundary.modelviewer;
 
 import main.boundary.account.Logout;
 import main.boundary.account.ResetPassword;
-import main.boundary.account.ViewUserProfile;
+import main.boundary.account.ViewStaffProfile;
 import main.boundary.mainpage.CCMainPage;
 import main.boundary.mainpage.StaffMainPage;
 import main.boundary.mainpage.StudentMainPage;
 import main.controller.camp.CampManager;
+import main.controller.camp.CampUpdate;
 import main.database.camp.CampDatabase;
 import main.database.user.StaffDatabase;
 import main.database.user.StudentDatabase;
@@ -371,12 +372,12 @@ public class CampViewer
 
         try {
                 switch (choice) {
-                    case 1 -> CampManager.changeCampTitle(ID);
-                    case 2 -> CampManager.changeCampStatus(ID);
-                    case 3 -> CampManager.changeCampLocation(ID);
-                    case 4 -> CampManager.changeStartDate(ID);
-                    case 5 -> CampManager.changeEndDate(ID);
-                    case 6 -> CampManager.changeClosingDate(ID);
+                    case 1 -> CampUpdate.changeCampTitle(ID);
+                    case 2 -> CampUpdate.changeCampStatus(ID);
+                    case 3 -> CampUpdate.changeCampLocation(ID);
+                    case 4 -> CampUpdate.changeStartDate(ID);
+                    case 5 -> CampUpdate.changeEndDate(ID);
+                    case 6 -> CampUpdate.changeClosingDate(ID);
                     default -> {
                         System.out.println("Invalid choice. Please press enter to try again.");
                         new Scanner(System.in).nextLine();

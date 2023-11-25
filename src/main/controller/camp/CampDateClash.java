@@ -6,7 +6,7 @@ import main.database.camp.CampDatabase;
 import main.database.user.StudentDatabase;
 import main.model.camp.Camp;
 import main.model.user.Student;
-public class campClashTest 
+public class CampDateClash 
 {
     public static boolean testDateClash(String campID1, String campID2)
     {

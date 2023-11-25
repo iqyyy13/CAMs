@@ -2,6 +2,7 @@ package main.boundary.account;
 
 import main.controller.account.AccountManager;
 import main.model.user.UserType;
+import main.model.user.User;
 import main.utils.exception.PasswordIncorrectException;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
@@ -22,7 +23,8 @@ public class ResetPassword
      * @param userID                The ID of the user whose password is being changed
      * @throws PageBackException    If the user chooses to go back to the previous page
      */
-    public static void askToRetry(UserType userType, String userID) throws PageBackException {
+    public static void askToRetry(UserType userType, String userID) throws PageBackException 
+    {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Press Enter to try again or [b] to go back.");
         String choice = scanner.nextLine();
@@ -41,7 +43,8 @@ public class ResetPassword
      * @param userID                The ID of the user whose password is being changed
      * @throws PageBackException    If the user chooses to go back to the previous page
      */
-    public static void changePassword(UserType userType, String userID) throws PageBackException {
+    public static void changePassword(UserType userType, String userID) throws PageBackException 
+    {
         ChangePage.changePage();
         Scanner scanner = new Scanner(System.in);
 
@@ -96,4 +99,41 @@ public class ResetPassword
             throw new RuntimeException(e);
         }
     }
+
+    public static boolean checkDefaultPassword(UserType userType, String userID, String password)
+    {
+        if(password.equals("password"))
+        {
+            return true;
+        }
+        
+        return false;
+    }
+
+    public static boolean promptUserForPasswordReset(UserType userType, String userID, String password)
+    {
+        if(checkDefaultPassword(userType, userID, password))
+        {
+            System.out.println("Your password is still the default password.");
+            System.out.println("Would you like to change it? [y]/[n] : ");
+            Scanner scanner = new Scanner(System.in);
+            String option = scanner.nextLine().toLowerCase();
+
+            if(option.equals("y"))
+            {
+                return true;
+            }
+            else if(option.equals("n"))
+            {
+                return false;
+            }
+            else 
+            {
+                System.out.println("Invalid option. Please try again");
+                return promptUserForPasswordReset(userType, userID, password);
+            }
+        }
+        return false;
+    }
 }
+

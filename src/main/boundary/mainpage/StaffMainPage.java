@@ -7,16 +7,17 @@ import java.util.Scanner;
 
 import javax.management.RuntimeErrorException;
 
+import main.boundary.account.LoginUI;
 import main.boundary.account.Logout;
 import main.boundary.account.ResetPassword;
-import main.boundary.account.ViewUserProfile;
+import main.boundary.account.ViewStaffProfile;
 import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
 import main.boundary.modelviewer.SuggestionViewer;
 import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
 import main.controller.enquiry.EnquiryManager;
-import main.controller.camp.campClashTest;
+import main.controller.camp.CampDateClash;
 import main.controller.request.StudentManager;
 import main.database.camp.CampDatabase;
 import main.database.enquiry.EnquiryDatabase;
@@ -52,6 +53,32 @@ public class StaffMainPage
             System.out.println("Welcome to Student Main Page");
             System.out.println("Hello, " + staff.getUserName() + "!");
             System.out.println();
+
+            boolean shouldResetPassword = ResetPassword.promptUserForPasswordReset(UserType.STAFF, staff.getID(), staff.getPassword());
+
+            if(shouldResetPassword)
+            {
+                try 
+                {
+                    ResetPassword.changePassword(UserType.STAFF, staff.getID());
+                    StaffDatabase.getInstance().update(staff);
+                    LoginUI.login();
+                } catch (PageBackException e)
+                {
+                    try
+                    {
+                        LoginUI.login();
+                    } catch (PageBackException e2)
+                    {
+
+                    }
+                    
+                } catch(UserErrorException e)
+                {
+                    System.err.println("User not found");
+                }
+            }
+
             System.out.println("\t1. View my profile");
             System.out.println("\t2. Change my password");
             System.out.println("\t3. Create a camp");
@@ -83,7 +110,7 @@ public class StaffMainPage
 
             try {
                 switch (choice) {
-                    case 1 -> ViewUserProfile.viewUserProfilePage(staff);
+                    case 1 -> ViewStaffProfile.viewUserProfilePage(staff);
                     case 2 -> ResetPassword.changePassword(UserType.STAFF, staff.getID());
                     case 3 -> createCamp(staff);
                     case 4 -> CampViewer.viewAllCamp();

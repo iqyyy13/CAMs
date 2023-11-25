@@ -5,15 +5,16 @@ import java.util.Scanner;
 
 import javax.management.RuntimeErrorException;
 
+import main.boundary.account.LoginUI;
 import main.boundary.account.Logout;
 import main.boundary.account.ResetPassword;
-import main.boundary.account.ViewUserProfile;
+import main.boundary.account.ViewStudentProfile;
 import main.boundary.modelviewer.CampViewer;
 import main.boundary.modelviewer.ModelViewer;
 import main.boundary.modelviewer.SuggestionViewer;
 import main.controller.account.AccountManager;
 import main.controller.camp.CampManager;
-import main.controller.camp.campClashTest;
+import main.controller.camp.CampDateClash;
 import main.controller.enquiry.EnquiryManager;
 import main.controller.suggestion.SuggestionManager;
 import main.controller.request.StudentManager;
@@ -84,7 +85,7 @@ public class CCMainPage
 
             try {
                 switch (choice) {
-                    case 1 -> ViewUserProfile.viewStudentProfilePage(student);
+                    case 1 -> ViewStudentProfile.viewStudentProfilePage(student);
                     case 2 -> ResetPassword.changePassword(UserType.STUDENT, student.getID());
                     case 3 -> CampViewer.viewAvailableCamps(student);
                     case 4 -> CampViewer.viewRegisteredCamps(student);
@@ -130,7 +131,7 @@ public class CCMainPage
         ModelViewer.displayListOfDisplayable(CampManager.getAllAvailableCamps());
         System.out.println("Please enter the Camp ID that you would like to register: ");
         String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
-        String clashValue = campClashTest.registrationDateClash(student, campID);
+        String clashValue = CampDateClash.registrationDateClash(student, campID);
         if(clashValue != null)
         {
             System.out.println("The camp that you have registered for has date clashes with camp ID " + clashValue);
