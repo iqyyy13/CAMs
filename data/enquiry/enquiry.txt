@@ -1,6 +1,0 @@
-E1-->P1-->YCHERN-->false-->can i go home early-->[, okay can]-->
-E2-->P4-->YCHERN-->false-->can i go home-->[, gj]-->
-E3-->P1-->KOH1-->false-->yo-->[, go home then]-->
-E4-->P1-->YCHERN-->true-->yooooooo-->[]-->
-E5-->P1-->YCHERN-->true-->yes-->[]-->
-E6-->P4-->YCHERN-->false-->yooo-->[, yo]-->
