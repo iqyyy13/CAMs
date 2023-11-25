@@ -345,7 +345,7 @@ public class CCMainPage
             Scanner scanner = new Scanner(System.in);
             String suggestionMessage = scanner.nextLine();
 
-            SuggestionManager.createSuggestion(suggestionMessage, "null", student.getID(), camp.getStaffID(), student.getCCId());
+            SuggestionManager.createSuggestion(suggestionMessage, student.getID(), camp.getStaffID(), student.getCCId());
             System.out.println("Your suggestion has been created");
             System.out.println("Press Enter to continue");
             scanner.nextLine();

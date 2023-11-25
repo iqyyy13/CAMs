@@ -12,16 +12,28 @@ import main.utils.exception.UserErrorException;
 
 import java.util.Map;
 
+/**
+ * Represents a suggestion in the system
+ */
 public class Suggestion implements Model, Displayable
 {
-    //Attribues for a suggestion object
+    //Attributes for a suggestion object
     SuggestionStatus status;
     private String msg;
     private int suggestionID;
     private String committeeUserID;
     private String staffID;
     private String campID;
-    //constructor creates a suggestion object
+
+    /**
+     * Constructs a new suggestion object.
+     * 
+     * @param msg               The suggestion message
+     * @param suggestionID      The suggestion ID
+     * @param committeeUserID   The committee user ID
+     * @param staffID           The staff ID
+     * @param campID            The camp ID
+     */
     public Suggestion(String msg, int suggestionID, String committeeUserID, String staffID, String campID) 
     {
         this.msg = msg;
@@ -31,7 +43,16 @@ public class Suggestion implements Model, Displayable
         this.campID = campID;
         this.status = SuggestionStatus.PENDING;
     }
-    //constructor that helps convert a string ID to int when making an object
+    
+    /**
+     * Constructs a new suggestion object with a string ID
+     * 
+     * @param msg                   The suggestion message
+     * @param suggestionID          The suggestion ID as a string
+     * @param committeeUserID       The committee user ID
+     * @param staffID               The staff ID
+     * @param campID                The camp ID
+     */
     public Suggestion(String msg, String suggestionID, String committeeUserID, String staffID, String campID) 
     {
         this.msg = msg;
@@ -41,6 +62,7 @@ public class Suggestion implements Model, Displayable
         this.campID = campID;
         this.status = SuggestionStatus.PENDING;
     }
+
     /**
      * Constructs a new suggestion object with information from the specified map
      * 
@@ -51,71 +73,122 @@ public class Suggestion implements Model, Displayable
         fromMap(map);
     }
 
-    //Getter for staffID
-
+    
+    /**
+     * Gets the staff ID
+     * 
+     * @return  The staff ID
+     */
     public String getStaffID() 
     {
         return staffID;
     }
-    //Setter for staffID
+    
+    /**
+     * Sets the staff ID
+     * 
+     * @param staffID The staff ID to set.
+     */
     public void setStaffID(String staffID)
     {
         this.staffID = staffID;
     }
 
-    // Getter for campID
+    /**
+     * Gets the camp ID
+     * 
+     * @return The camp ID
+     */
     public String getCampID() 
     {
         return campID;
     }
-    //Setter for campID
+    
+    /**
+     * Sets the camp ID
+     * 
+     * @param campID The camp ID to set.
+     */
     public void setCampID(String campID) 
     {
         this.campID = campID;
     }
-    // Getter for msg
+    
+    /**
+     * Gets the suggestion message.
+     * 
+     * @return The suggestion message
+     */
     public String getMsg() 
     {
         return msg;
     }
 
-    // Setter for msg
+    /**
+     * Sets the suggestion message
+     * 
+     * @param msg The suggestion message to set
+     */
     public void setMsg(String msg) 
     {
         this.msg = msg;
     }
 
-    // Getter for suggestionID
+    /**
+     * Gets the suggestion ID
+     * 
+     * @return The suggestion ID
+     */
     public int getSuggestionID() 
     {
         return suggestionID;
     }
 
-    // Setter for suggestionID
+    /**
+     * Sets the suggestion ID
+     * 
+     * @param suggestionID The suggestion ID to set
+     */
     public void setSuggestionID(int suggestionID) 
     {
         this.suggestionID = suggestionID;
     }
 
-    // Getter for committeeUserID
+    /**
+     * Gets the committee user ID
+     * 
+     * @return  The committee user ID
+     */
     public String getCommitteeUserID() 
     {
         return committeeUserID;
     }
 
-    // Setter for committeeUserID
+    /**
+     * Sets the committee user ID
+     * 
+     * @param committeeUserID The committee user ID to set
+     */
     public void setCommitteeUserID(String committeeUserID) 
     {
         this.committeeUserID = committeeUserID;
     }
 
-    // Getter for suggestionstatus
+    /**
+     * Gets the suggestion status
+     * 
+     * @return The suggestion status
+     */
     public SuggestionStatus getStatus() 
     {
         return status;
     }
 
-    //set suggestion status
+    /**
+     * Sets the suggestion status
+     * 
+     * @param status The suggestion status to set
+     */
     public void setStatus(SuggestionStatus status) 
     {
         this.status = status;
@@ -127,8 +200,12 @@ public class Suggestion implements Model, Displayable
         // Assuming suggestionID is a unique identifier for the suggestion
         return String.valueOf(suggestionID);
     }
-    // Generate CC student info in string
-
+    
+    /**
+     * Generates a string representation of CC student information for the suggestion
+     * 
+     * @return The string representation of CC student information
+     */
     private String getCCStudentInformationString() 
     {
         try {
@@ -141,15 +218,24 @@ public class Suggestion implements Model, Displayable
             return "No Student Assigned";
         }
     }
-    // Generate Suggestion info in string
+    
+    /**
+     * Generates a string representation of suggestion information
+     * 
+     * @return The string representation of suggestion information
+     */
     private String getSuggestionInformationString()
     {
         return  String.format("| Suggestion Name               | %-65s |\n", getMsg()) + 
                 String.format("| Suggestion ID                 | %-65s |\n", getSuggestionID()) +
                 String.format("| Suggestion Status             | %-74s |\n", getStatus().colorString());
     }
-    //Return a combined string of info
     
+    /**
+     * Returns a combined string of CC student information and suggestion information
+     * 
+     * @return  The combined string of information
+     */
     private String getSingleSuggestionString()
     {
         return getCCStudentInformationString() +
@@ -171,6 +257,4 @@ public class Suggestion implements Model, Displayable
         // Define the splitter used to separate fields in the formatted string representation
         return "====================================================================================================="; // You can use any delimiter you prefer
     }
-
-   
 }

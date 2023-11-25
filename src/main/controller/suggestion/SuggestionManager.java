@@ -11,16 +11,23 @@ import main.utils.ui.ChangePage;
 import main.boundary.modelviewer.SuggestionViewer;
 import java.util.List;
 import java.util.Scanner;
+
 /**
  * The class provides methods for managing Suggestion list
  */
-
 public class SuggestionManager 
 {
 
 
     /**
-     * Creates suggestion based on user inputs.
+     * Creates a suggestion based on user inputs
+     * 
+     * @param msg               The message of the suggestion
+     * @param committeeUserID   The committee user ID associated with the suggestion
+     * @param staffID           The staff ID associated with the suggestion
+     * @param campID            The camp ID associated with the suggestion
+     * @return                  The created suggestion
+     * @throws UserAlreadyExistsException   If the suggestion already exists
      */
     public static Suggestion createSuggestion(String msg, String committeeUserID, String staffID, String campID)
             throws UserAlreadyExistsException 
@@ -30,15 +37,22 @@ public class SuggestionManager
         SuggestionDatabase.getInstance().add(suggestion);
         return suggestion;  
     }
+
     /**
-     * Getting an id from list.
+     * Gets a suggestion by ID
+     * @param suggestionID          The ID of the suggestion
+     * @return                      The suggestion with the specified ID
+     * @throws UserErrorException   If the suggestion is not found
      */
     public static Suggestion getByID(String suggestionID) throws UserErrorException
     {
         return SuggestionDatabase.getInstance().getByID(suggestionID);
     }
+
     /**
-     * Function to generate unique id.
+     * Generates a new unique suggestion ID
+     * 
+     * @return  The new suggestion ID
      */
     public static String getNewSuggestionID() 
     {
@@ -53,21 +67,32 @@ public class SuggestionManager
         }
         return String.valueOf(max + 1);
     }
+
     /**
-     * Function to update list.
+     * Updates the Suggestion list with the provided list of suggestion
+     * 
+     * @param suggestions The list of suggestions to update.
      */
     public static void updateAllSuggestions(List<Suggestion> suggestions) 
     {
         SuggestionDatabase.getInstance().updateAll(suggestions);
     }
+
     /**
-     * Delete suggestion from list.
+     * Deletes a suggestion from the list
+     * 
+     * @param suggestionID          The ID of the suggestion to be deleted
+     * @throws UserErrorException   If the suggestion is not found
      */
     public static void deleteSuggestion(String suggestionID) throws UserErrorException {
         SuggestionDatabase.getInstance().remove(suggestionID);
     }
+
     /**
-     * Edit suggestion from list.
+     * Edits details of a suggestion from the list
+     * 
+     * @param student The student making the edit
+     * @throws PageBackException If the user chooses to go back to the previous page
      */
     public static void editSuggestionDetails(Student student) throws PageBackException {
         ChangePage.changePage();
@@ -111,7 +136,6 @@ public class SuggestionManager
             }
         }
     }
-    
 }
 
 

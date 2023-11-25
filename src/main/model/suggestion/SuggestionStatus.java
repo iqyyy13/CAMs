@@ -6,17 +6,17 @@ package main.model.suggestion;
 public enum SuggestionStatus 
 {
     /**
-     * Suggestion is available
+     * Suggestion is PENDING
      */
     PENDING,
 
     /**
-     * Suggestion is allocated
+     * Suggestion is APPROVED
      */
     APPROVED,
 
     /**
-     * Suggestion is unavailable
+     * Suggestion is DISAPPROVED
      */
     DISAPPROVED;
 

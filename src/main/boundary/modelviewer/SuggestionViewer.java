@@ -28,8 +28,16 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * The class provides methods for viewing and managing suggestions
+ */
 public class SuggestionViewer 
 {
+    /**
+     * Displays the suggestions associated with a staff member
+     * 
+     * @param staff The staff member whose suggestions are to be viewed
+     */
     public static void viewSuggestions(Staff staff)
     {
         ChangePage.changePage();
@@ -44,6 +52,11 @@ public class SuggestionViewer
         }
     }
     
+    /**
+     * Displays the suggestions associated with a student 
+     * 
+     * @param student   The student whose suggestions are to be viewed
+     */
     public static void viewOwnSuggestions(Student student)
     {
         ChangePage.changePage();
@@ -58,6 +71,12 @@ public class SuggestionViewer
         }
     }
 
+    /**
+     * Finds a suggestion in a list based on its ID
+     * @param suggestionList    The list of suggestions to search
+     * @param suggestionID      The ID of the suggestion to find/
+     * @return                  The suggestion with the specified ID or null if not found
+     */
     public static Suggestion findSuggestionByID(List<Suggestion> suggestionList, String suggestionID)
     {
         for(Suggestion suggestion : suggestionList)
@@ -70,12 +89,23 @@ public class SuggestionViewer
         return null;
     }
 
+    /**
+     * Generates a display for editing a suggestion
+     * 
+     * @param suggestionToEdit  The suggestion to be edited.
+     */
     public static void generateSuggestionToEdit(Suggestion suggestionToEdit)
     {
         ModelViewer.displaySingleDisplayable(suggestionToEdit);
         return;
     }
 
+    /**
+     * Edits the details of a suggestion
+     * 
+     * @param student               The student making the edit
+     * @throws PageBackException    If the user chooses to go back to the previous page.
+     */
     public static void editSuggestionDetails(Student student) throws PageBackException
     {
         ChangePage.changePage();
