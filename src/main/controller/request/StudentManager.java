@@ -12,11 +12,16 @@ import main.utils.exception.UserErrorException;
 
 import java.util.List;
 
+/**
+ * Manages student-related operations
+ */
 public class StudentManager 
 {
     
     /** 
-     * @return List<Student>
+     * Retrieves a list of all students
+     * 
+     * @return A list containing all student objects
      */
     public static List<Student> viewAllStudents()
     {

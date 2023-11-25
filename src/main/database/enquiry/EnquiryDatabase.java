@@ -8,10 +8,16 @@ import java.util.Map;
 
 import static main.utils.config.Location.RESOURCE_LOCATION;
 
+/**
+ * Database class for managing enquiry objects
+ */
 public class EnquiryDatabase extends Database<Enquiry> 
 {
     private static final String FILE_PATH = "/data/enquiry/enquiry.txt";
 
+    /**
+     * Loads data from the file
+     */
     EnquiryDatabase() 
     {
         super();
@@ -20,19 +26,29 @@ public class EnquiryDatabase extends Database<Enquiry>
 
 
     /** 
-     * @return EnquiryDatabase
+     * Gets the instance of EnquiryDatabase
+     * 
+     * @return The EnquiryDatabase instance
      */
     public static EnquiryDatabase getInstance()
     {
         return new EnquiryDatabase();
     }
 
+    /**
+     * Retrieves the file path for storing Enquiry data
+     */
     @Override
     public String getFilePath() 
     {
         return RESOURCE_LOCATION + FILE_PATH;
     }
 
+    /**
+     * Sets all Enquiry objects using a list of mappable objects
+     * 
+     * @param listOfMappableObjects List of maps representing mappable objects.
+     */
     @Override
     public void setAll(List<Map<String, String>> listOfMappableObjects) 
     {

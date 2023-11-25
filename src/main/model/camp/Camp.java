@@ -323,51 +323,103 @@ public class Camp implements Model, Displayable
         return description;
     }
 
+    /**
+     * Sets the start date string of the camp
+     * 
+     * @param startDate The start date string in the format YYYYMMDD
+     */
     public void setStartDateString(String startDate)
     {
         this.startDate = formatDataString(startDate);
     }
 
+    /**
+     * Gets the start date string of the camp
+     * 
+     * @return  The start date string  in the format YYYY-MM-DD.
+     */
     public String getStartDateString()
     {
         return startDate;
     }
 
+    /**
+     * Gets the start date of the camp as a LocalDate object
+     * 
+     * @return  The start date of the camp.
+     */
     public LocalDate getStartDate()
     {
         return LocalDate.parse(startDate, DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
+    /**
+     * Sets the end date string of the camp
+     * 
+     * @param endDate   The end date string in the format YYYYMMDD.
+     */
     public void setEndDateString(String endDate)
     {
         this.endDate = formatDataString(endDate);
     }
 
+    /**
+     * Gets the end date string of the camp
+     * 
+     * @return  The end date string in the format YYYY-MM-DD
+     */
     public String getEndDateString()
     {
         return endDate;
     }
 
+    /**
+     * Gets the end date of the camp as a LocalDate object
+     * 
+     * @return  The end date of a camp
+     */
     public LocalDate getEndDate()
     {
         return LocalDate.parse(endDate, DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
+    /**
+     * Sets the closing date string of the camp
+     * 
+     * @param closingDate   The closing date string in the format YYYYMMDD
+     */
     public void setClosingDateString(String closingDate)
     {
         this.closingDate = formatDataString(closingDate);
     }
 
+    /**
+     * Gets the closing date string of the camp
+     * 
+     * @return  The closing date string in the format YYYY-MM-DD.
+     */
     public String getClosingDateString()
     {
         return closingDate;
     }
 
+    /**
+     * Gets the closing date of the camp as a LocalDate object
+     * 
+     * @return  The closing date of the camp
+     */
     public LocalDate getClosingDate()
     {
         return LocalDate.parse(closingDate, DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
+    /**
+     * Formats the input date string to the format YYYY-MM-DD
+     * Displays an error message if the input format is invalid
+     * 
+     * @param date  The date string to be formatted
+     * @return      The formatted date string or null if the input is invalid
+     */
     private static String formatDataString(String date)
     {
         if(date != null && date.length() == 8)
