@@ -100,7 +100,7 @@ public class CCMainPage
                     case 13 -> EnquiryManager.delete_enquiry(null);                    
                     case 14 -> createSuggestion(student);
                     case 15 -> SuggestionViewer.viewOwnSuggestions(student);
-                    case 16 -> SuggestionViewer.editSuggestionDetails(student);
+                    case 16 -> SuggestionManager.editSuggestionDetails(student);
                     case 17 -> deleteSuggestion(student);
                     case 18 -> generateReport(student);
                     case 19 -> Logout.logout();
