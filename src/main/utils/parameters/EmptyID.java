@@ -4,7 +4,8 @@ package main.utils.parameters;
 
  The EmptyID class provides a utility method for checking if an ID is empty.
  */
-public class EmptyID {
+public class EmptyID 
+{
     /**
      * The constant EMPTY_ID represents the empty ID value, which is "null".
      */

@@ -87,6 +87,13 @@ public class CampReportGenerator
         writeToFile(reportBuilder.toString(), getFilePath());
     }
     
+    /**
+     * Generates a camp attendance report based on the provided camp and report type,
+     * then writes the report to a file
+     * 
+     * @param camp          The camp for which the report is generated
+     * @param reportType    The type of report to generate ("CAMP ATTENDEE", "CC" or "ALL")
+     */
     public static void generateCCReportAndWriteToFile(Camp camp, String reportType)
     {
         StringBuilder reportBuilder = new StringBuilder();
@@ -144,6 +151,7 @@ public class CampReportGenerator
 
         writeToFile(reportBuilder.toString(), getFilePath());
     }
+
     /**
      * Writes the content to a file with the specified file name
      * 

@@ -542,6 +542,13 @@ public class Student implements User, Displayable
         }
     }
 
+    /**
+     * Retrieves the role display based on the camp ID
+     * 
+     * @param campID    The camp ID to check against the CC ID
+     * @return          If the camp ID matches the CC ID, returns "CC".
+     *                  Otherwise, returns "CAMP ATTENDEE".
+     */
     public String getRoleDisplay(String campID)
     {
         if(campID.equals(getCCId()))

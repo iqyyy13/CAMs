@@ -10,13 +10,8 @@ import java.util.Map;
  *
  * @param <MappableObject> a class that can be mapped to and from key-value pairs
  */
-public abstract class Preservable<MappableObject extends Mappable> {
-
-    
-    /** 
-     * @param FILE_PATH
-     * @return List<MappableObject>
-     */
+public abstract class Preservable<MappableObject extends Mappable> 
+{
     /**
      * Gets the list of mappable objects.
      *
