@@ -2,7 +2,7 @@ package main.boundary.modelviewer;
 
 import main.boundary.account.Logout;
 import main.boundary.account.ResetPassword;
-import main.boundary.account.ViewStaffProfile;
+import main.boundary.account.ViewUserProfile;
 import main.boundary.mainpage.CCMainPage;
 import main.boundary.mainpage.StaffMainPage;
 import main.boundary.mainpage.StudentMainPage;
@@ -28,16 +28,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-/**
- * The class provides methods for viewing and managing suggestions
- */
 public class SuggestionViewer 
 {
-    /**
-     * Displays the suggestions associated with a staff member
-     * 
-     * @param staff The staff member whose suggestions are to be viewed
-     */
     public static void viewSuggestions(Staff staff)
     {
         ChangePage.changePage();
@@ -52,11 +44,6 @@ public class SuggestionViewer
         }
     }
     
-    /**
-     * Displays the suggestions associated with a student 
-     * 
-     * @param student   The student whose suggestions are to be viewed
-     */
     public static void viewOwnSuggestions(Student student)
     {
         ChangePage.changePage();
@@ -71,12 +58,6 @@ public class SuggestionViewer
         }
     }
 
-    /**
-     * Finds a suggestion in a list based on its ID
-     * @param suggestionList    The list of suggestions to search
-     * @param suggestionID      The ID of the suggestion to find/
-     * @return                  The suggestion with the specified ID or null if not found
-     */
     public static Suggestion findSuggestionByID(List<Suggestion> suggestionList, String suggestionID)
     {
         for(Suggestion suggestion : suggestionList)
@@ -89,60 +70,11 @@ public class SuggestionViewer
         return null;
     }
 
-    /**
-     * Generates a display for editing a suggestion
-     * 
-     * @param suggestionToEdit  The suggestion to be edited.
-     */
     public static void generateSuggestionToEdit(Suggestion suggestionToEdit)
     {
         ModelViewer.displaySingleDisplayable(suggestionToEdit);
         return;
     }
 
-    /**
-     * Edits the details of a suggestion
-     * 
-     * @param student               The student making the edit
-     * @throws PageBackException    If the user chooses to go back to the previous page.
-     */
-    public static void editSuggestionDetails(Student student) throws PageBackException
-    {
-        ChangePage.changePage();
-        viewOwnSuggestions(student);
-        String studentID = student.getID();
-        List<Suggestion> suggestionList = SuggestionDatabase.getInstance().findByRules(p->p.getCommitteeUserID().equalsIgnoreCase(studentID));
-        System.out.println("");
-        System.out.println("Enter the SuggestionID that you would like to edit: ");
-        String option = new Scanner(System.in).nextLine().trim();
-
-        if(!option.isEmpty())
-        {
-            Suggestion suggestionToEdit = findSuggestionByID(suggestionList, option);
-            ChangePage.changePage();
-            generateSuggestionToEdit(suggestionToEdit);
-            if(suggestionToEdit != null)
-            {
-                System.out.println("Enter a new suggestion");
-                Scanner scanner = new Scanner(System.in);
-                String newSuggestionMessage = scanner.nextLine();
-                suggestionToEdit.setMsg(newSuggestionMessage);
-                try
-                {
-                    SuggestionDatabase.getInstance().update(suggestionToEdit);
-                    System.out.println("Suggestion details edited successfully.");
-                    System.out.println("Press enter to go back.");
-                    scanner.nextLine();
-                    throw new PageBackException();
-                } catch (UserErrorException e)
-                {
-                    System.err.println("User Error: " + e.getMessage());
-                }
-            }
-            else
-            {
-                System.out.println("Suggestion not found with the specified Suggestion ID.");
-            }
-        }
-    }
+    
 }
