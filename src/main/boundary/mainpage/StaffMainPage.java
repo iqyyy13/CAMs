@@ -164,6 +164,8 @@ public class StaffMainPage
         String endDate = new Scanner(System.in).nextLine();
         System.out.println("Enter the closing registration date (YYYYMMDD): ");
         String closingDate = new Scanner(System.in).nextLine();
+        System.out.println("Is this camp open to the whole NTU? [y]/[n] : ");
+        String option = new Scanner(System.in).nextLine().toLowerCase();
         Camp camp;
         try 
         {
@@ -175,6 +177,17 @@ public class StaffMainPage
             closingDate = formatDataString(closingDate);
 
             camp = CampManager.createCamp(campTitle, staff.getID(), staff.getFaculty(), location, description, startDate, endDate, closingDate);
+            if(option.equals("y"))
+            {
+                camp.setOpenToNTU("true");
+                try
+                {
+                    CampDatabase.getInstance().update(camp);
+                } catch(UserErrorException e)
+                {
+                    System.err.println("Camp ID not found");
+                }
+            }
         } catch (UserAlreadyExistsException e) {
             throw new RuntimeException(e);
         }

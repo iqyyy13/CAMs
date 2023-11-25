@@ -212,7 +212,7 @@ public class CampViewer
         else 
         {
             System.out.println("View Available Camps");
-            ModelViewer.displayListOfDisplayable(CampManager.viewAvailableCamps());
+            ModelViewer.displayListOfDisplayable(CampManager.viewAvailableCamps(student));
         }
         System.out.println("Press Enter to go back.");
         new Scanner(System.in).nextLine();

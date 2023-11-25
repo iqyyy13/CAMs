@@ -46,9 +46,12 @@ public class CampManager
      * 
      * @return A list containing available camps
      */
-    public static List<Camp> viewAvailableCamps() 
+    public static List<Camp> viewAvailableCamps(Student student) 
     {
-        return CampDatabase.getInstance().findByRules(p -> p.getStatus() == CampStatus.AVAILABLE);
+        String studentFaculty = student.getFaculty();
+
+        return CampDatabase.getInstance().findByRules(p -> (p.getStatus() == CampStatus.AVAILABLE) && 
+                                                           ("true".equals(p.getOpenToNTU()) || studentFaculty.equals(p.getFaculty())));
     }
 
     /**
