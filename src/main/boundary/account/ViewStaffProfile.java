@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 /**
  * Handles the display of the user profiles, providing methods to view a single user's profile
- * or multiple user profiles
  */
 public class ViewStaffProfile 
 {

@@ -8,8 +8,16 @@ import main.utils.ui.UserTypeGetter;
 
 import java.util.Scanner;
 
+/**
+ * Provides methods for viewing and displaying student profiles.
+ */
 public class ViewStudentProfile 
 {
+    /**
+     * Displays the profile of the given student
+     * 
+     * @param student   The student whose profile is to be displayed.
+     */
     public static void viewStudentProfile(Student student) 
     {
         String CC = "";
@@ -29,9 +37,9 @@ public class ViewStudentProfile
     }
 
     /**
-     * Displays the user's profile.
+     * Displays the student's profile and allows them to go back
      *
-     * @param user                  the user whose profile is to be displayed.
+     * @param student               The student whose profile is to be displayed
      * @throws PageBackException    if the user chooses to go back to the previous page.
      */
     public static void viewStudentProfilePage(Student student) throws PageBackException 

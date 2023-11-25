@@ -30,7 +30,6 @@ public class UserAdd
         }
     }
 
-    
     /** 
      * Adds a student in the database
      * 

@@ -258,6 +258,11 @@ public class StaffMainPage
         }
     }
 
+    /**
+     * Generates a performance report for the Staff member based on the chosen camp
+     * 
+     * @param staff The staff member for whom the performance report is generated
+     */
     private static void generatePerformanceReport(Staff staff)
     {
         ChangePage.changePage();
@@ -293,6 +298,11 @@ public class StaffMainPage
         StaffMainPage.staffMainPage(staff);
     }
 
+    /**
+     * Generates a report based on the Staff member's choice
+     * 
+     * @param staff The staff member for whom the report is generated
+     */
     private static void generateReport(Staff staff)
     {
         ChangePage.changePage();
@@ -330,6 +340,12 @@ public class StaffMainPage
         StaffMainPage.staffMainPage(staff);
     }
 
+    /**
+     * Formats the data string to the proper format (YYYY-MM-DD)
+     * 
+     * @param date  The date string to be formatted
+     * @return      The formatted date string
+     */
     private static String formatDataString(String date)
     {
         if(date != null && date.length() == 8)
@@ -344,6 +360,11 @@ public class StaffMainPage
         }
     }
 
+    /**
+     * Replies to suggestions by the staff member
+     * 
+     * @param staff The staff member replying to suggestions
+     */
     private static void replySuggestions(Staff staff) 
     {
         ChangePage.changePage();

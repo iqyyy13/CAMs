@@ -43,6 +43,12 @@ public class CampUpdate
         CampManager.updateCampsStatus();
     }
 
+    /**
+     * Changes the location of a camp
+     * 
+     * @param campID                The ID of the camp to be modified
+     * @throws UserErrorException   If an error occurs during the operation
+     */
     public static void changeCampLocation(String campID) throws UserErrorException 
     {
         ChangePage.changePage();
@@ -54,6 +60,12 @@ public class CampUpdate
         CampManager.updateCampsStatus();
     }
 
+    /**
+     * Changes the start date of a camp
+     * 
+     * @param campID                The ID of the camp to be modified
+     * @throws UserErrorException   If an error occurs during the operation
+     */
     public static void changeStartDate(String campID) throws UserErrorException
     {
         ChangePage.changePage();
@@ -65,6 +77,11 @@ public class CampUpdate
         CampManager.updateCampsStatus();
     }
 
+    /**
+     * Changes the end date of a camp
+     * @param campID                The ID of the camp to be modified
+     * @throws UserErrorException   If an error occurs during the operation
+     */
     public static void changeEndDate(String campID) throws UserErrorException
     {
         ChangePage.changePage();
@@ -76,6 +93,11 @@ public class CampUpdate
         CampManager.updateCampsStatus();
     }
 
+    /**
+     * Changes the closing date of a camp
+     * @param campID                The ID of the camp to be modified
+     * @throws UserErrorException   If an error occurs during the operation
+     */
     public static void changeClosingDate(String campID) throws UserErrorException
     {
         ChangePage.changePage();

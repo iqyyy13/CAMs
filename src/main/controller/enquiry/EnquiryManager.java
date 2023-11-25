@@ -14,34 +14,41 @@ import java.io.FileReader;
 import java.io.File;
 import java.util.*;
 
-
+/**
+ * Manages the creation, retrieval and manipulation of enquiries
+ */
 public class EnquiryManager {
 
 
+    /**
+     * List of enquiries
+     */
     static ArrayList < Enquiry > enquiry_list = new ArrayList < Enquiry > ();
 
-
+    /**
+     * Filepath for storing enquiry data
+     */
     private static final String filepath = Location.RESOURCE_LOCATION + "/data/enquiry/enquiry.txt";
 
-
+    /**
+     * Flag to check if the list is empty
+     */
     static boolean check_empty = true;
 
-
-    public EnquiryManager() {
+    /**
+     * Constructs an EnquiryManager
+     */
+    public EnquiryManager() 
+    {
 
     }
 
-
     /**
-     * Displays the user's profile.
-     *
-     * @throws PageBackException if the user chooses to go back to the previous
-     *                           page.
+     * Creates a new enquiry assuming a valid camp_id is given (User must be part of that camp)
      * 
-     */
-
-    /**
-     * Allows user to create new enquiry assuming a valid camp_id is given (User must be part of that camp).
+     * @param camp_id               The ID of the camp
+     * @param student_id            The ID of the student
+     * @throws PageBackException    If the user chooses to go back to the previous page
      */
     public static void new_enquiry(String camp_id, String student_id) throws PageBackException {
 
@@ -112,7 +119,7 @@ public class EnquiryManager {
 
 
     /**
-     * Refreshes the DB upon returning to Student Main Page.
+     * Refreshes the Database upon returning to Student Main Page.
      */
     public static void refresh_enquiry_db() {
 
@@ -146,7 +153,10 @@ public class EnquiryManager {
     }
 
     /**
-     * Allows user (Staff) to view all pending enquiries.
+     * Allows the user (Staff) to view all pending enquiries.
+     * 
+     * @param staff_id              The ID of the staff member
+     * @throws PageBackException    if the user chooses to go back to the previous page
      */
     public static void view_all_pending_enquiry(String staff_id) throws PageBackException 
     {
@@ -188,7 +198,10 @@ public class EnquiryManager {
     }
 
     /**
-     * Allows user (Student - CC) to view all pending enquiries.
+     * Allows the user (Student - CC) to view all pending enquiries.
+     * 
+     * @param campID                The ID of the camp
+     * @throws PageBackException    if the user chooses to go back to the previous page
      */
     public static void view_CC_pending_enquiry(String campID) throws PageBackException 
     {
@@ -223,6 +236,9 @@ public class EnquiryManager {
 
     /**
      * Allows user to view enquiries tagged to Student ID.
+     * 
+     * @param student_id    The ID of the student
+     * @throws PageBackException    if the user chooses to go back to the previous page
      */
     public static void view_enquiry(String student_id) throws PageBackException {
 
@@ -258,7 +274,10 @@ public class EnquiryManager {
 
 
     /**
-     * Allows user to edit enquiries they have submitted to the system.
+     * Allows the user to edit enquiries they have submitted to the system.
+     * 
+     * @param enquiry_id    The ID of an enquiry
+     * @throws PageBackException    if the user chooses to go back to the previous page
      */
     public static void edit_enquiry(String enquiry_id) throws PageBackException {
 
@@ -321,6 +340,9 @@ public class EnquiryManager {
 
     /**
      * Allows user to delete enquiries they have submitted into system
+     * 
+     * @param enquiry_id    The ID of the enquiry
+     * @throws PageBackException    if the user chooses to go back to the previous page
      */
     public static void delete_enquiry(String enquiry_id) throws PageBackException {
 
@@ -379,6 +401,9 @@ public class EnquiryManager {
 
     /**
      * Allows user to reply to enquires submitted to system by providing Enquiry ID.
+     * 
+     * @param enquiry_id    The ID of an enquiry
+     * @throws PageBackException    if the user chooses to go back to the previous page
      */
     public static void reply_enquiry(String enquiry_id) throws PageBackException {
 

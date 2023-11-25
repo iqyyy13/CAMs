@@ -293,6 +293,11 @@ public class CCMainPage
         }
     }
 
+    /**
+     * Generates a report based on the CC member's choice
+     * 
+     * @param student   The CC member for whom the report is generated
+     */
     private static void generateReport(Student student)
     {
         ChangePage.changePage();        
@@ -333,6 +338,11 @@ public class CCMainPage
         CCMainPage.ccMainPage(student);
     }
 
+    /**
+     * Creates a suggestion by the CC member
+     * 
+     * @param student   The CC member creating the suggestion
+     */
     private static void createSuggestion(Student student)
     {
         ChangePage.changePage();
@@ -365,7 +375,13 @@ public class CCMainPage
         }
     }
 
-       private static void deleteSuggestion(Student student) throws PageBackException
+    /**
+     * Deletes the suggestion by the CC member
+     * 
+     * @param student               The CC member deleting the suggestion
+     * @throws PageBackException    If the user chooses to go back
+     */
+    private static void deleteSuggestion(Student student) throws PageBackException
     {
         ChangePage.changePage();
         String studentID = student.getID();
