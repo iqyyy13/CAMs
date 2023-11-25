@@ -94,6 +94,13 @@ public class CampDateClash
         return !(endDate1.isBefore(startDate2) || startDate1.isAfter(endDate2));
     }
 
+    /**
+     * Checks if the closing registration date for a given camp is before the current date
+     * 
+     * @param student   The student for whom the check is performed
+     * @param campID    The ID of the camp for which the closing registration date is checked.
+     * @return {@code true} if the closing registration date is before the current date, {@code false}
+     */
     public static boolean closingRegistrationDateChecker(Student student, String campID)
     {
         try
