@@ -144,9 +144,19 @@ public class StudentMainPage
         System.out.println("Please enter the Camp ID that you would like to register: ");
         String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
         String clashValue = CampDateClash.registrationDateClash(student, campID);
+        boolean closingDateClash = CampDateClash.closingRegistrationDateChecker(student, campID);
+
         if(clashValue != null)
         {
             System.out.println("The camp that you have registered for has date clashes with camp ID " + clashValue);
+            System.out.println("Press Enter to go back");
+            new Scanner(System.in).nextLine();
+            StudentMainPage.studentMainPage(student);
+        }
+
+        if(closingDateClash)
+        {
+            System.out.println("Closing registration date has passed");
             System.out.println("Press Enter to go back");
             new Scanner(System.in).nextLine();
             StudentMainPage.studentMainPage(student);

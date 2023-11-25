@@ -1,11 +1,13 @@
 package main.controller.camp;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import main.database.camp.CampDatabase;
 import main.database.user.StudentDatabase;
 import main.model.camp.Camp;
 import main.model.user.Student;
+import main.utils.exception.UserErrorException;
 
 /**
  * Utility class for checking date clashes between camps and student registration
@@ -90,5 +92,31 @@ public class CampDateClash
     private static boolean hasDateClash(LocalDate startDate1, LocalDate endDate1, LocalDate startDate2, LocalDate endDate2)
     {
         return !(endDate1.isBefore(startDate2) || startDate1.isAfter(endDate2));
+    }
+
+    public static boolean closingRegistrationDateChecker(Student student, String campID)
+    {
+        try
+        {
+            Camp camp = CampDatabase.getInstance().getByID(campID);
+            String closingDateString = camp.getClosingDateString();
+            LocalDate closingDate = LocalDate.parse(closingDateString, DateTimeFormatter.ISO_LOCAL_DATE);
+            LocalDate currentDate = LocalDate.now();
+
+            if(closingDate.isBefore(currentDate))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+            
+        } catch (UserErrorException e)
+        {
+            System.err.println("Camp ID not found");
+        }
+
+        return false;
     }
 }
