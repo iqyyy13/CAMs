@@ -77,6 +77,8 @@ public class CCMainPage
 
             int choice = IntGetter.readInt();
 
+            EnquiryManager.refresh_enquiry_db();
+
             try {
                 student = StudentDatabase.getInstance().getByID(student.getID());
             } catch (UserErrorException e) {
