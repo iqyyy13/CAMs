@@ -547,6 +547,12 @@ public class Camp implements Model, Displayable
         }
     }
     
+    /**
+     * Retrieves and formats the staff information associated with the camp
+     * 
+     * @return  A formatted string containing staff information
+     *          If no staff is assigned, returns "No Staff Assigned"
+     */
     private String getCampStaffInformationString() {
         try {
             Staff staff = StaffDatabase.getInstance().getByID(staffID);
@@ -558,6 +564,11 @@ public class Camp implements Model, Displayable
         }
     }
 
+    /**
+     * Retrieves and formats the camp information
+     * 
+     * @return  A formatted string containing camp information
+     */
     private String getCampInformationString() 
     {
         return String.format("| Location                    | %-65s |\n", getLocation()) +
@@ -569,6 +580,12 @@ public class Camp implements Model, Displayable
                String.format("| Closing Registration Date   | %-65s |\n", getClosingDateString());
     }
 
+    /**
+     * Retrieves and formats a single camp information string
+     * Handles word wrapping for long camp titles and descriptions
+     * 
+     * @return  A formatted string containing information about a single camp
+     */
     private String getSingleCampString() 
     {
         String campTitle = getCampTitle();
