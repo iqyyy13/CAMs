@@ -1,5 +1,7 @@
 # CAMs
 
+Run Main.java at least once for javadoc comments to show properly
+
 Report - Where our SC2002 Assignment Report is located.
 
 Declaration - Our GAI Declaration from the members of the group
