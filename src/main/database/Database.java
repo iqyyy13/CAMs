@@ -83,7 +83,8 @@ public abstract class Database<ModelObject extends Model> extends Preservable<Mo
      * Adds a model object to the database.
      *
      * @param modelObject the model object to add
-     * @throws ModelAlreadyExistsException if a model object with the same ID already exists in the database
+     * 
+     * @throws UserAlreadyExistsException if a model object with the same ID already exists in the database
      */
     public void add(ModelObject modelObject) throws UserAlreadyExistsException 
     {

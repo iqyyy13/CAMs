@@ -111,6 +111,9 @@ public class Camp implements Model, Displayable
      * @param faculty       The faculty associated with the camp
      * @param location      The location of the camp
      * @param description   The description of the camp
+     * @param startDate     The startDate of the camp
+     * @param endDate       The endDate of the camp
+     * @param closingDate   The closingDate of the camp
      */
     public Camp(String campID, String campTitle, String staffID, String faculty, String location, String description, String startDate,
                 String endDate, String closingDate) 

@@ -8,7 +8,7 @@ public class UserErrorException extends Exception
 {
     /**
      * Creates a new instance of the UserErrorException class with a default error message.
-     * The default message is "Model not found".
+     * The default message is "User not found".
      */
     public UserErrorException() 
     {
