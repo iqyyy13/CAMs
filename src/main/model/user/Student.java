@@ -47,11 +47,6 @@ public class Student implements User, Displayable
     private StudentStatus status;
 
     /**
-     * ID of a staff
-     */
-    private String staffID;
-
-    /**
      * ID of a camp
      */
     private String campID;
@@ -99,7 +94,6 @@ public class Student implements User, Displayable
         this.email = email;
         this.faculty = faculty;
         this.status = StudentStatus.UNREGISTERED;
-        staffID = EmptyID.EMPTY_ID;
         campID = EmptyID.EMPTY_ID;
         this.CC = "0";
         this.points = 0;
@@ -121,7 +115,6 @@ public class Student implements User, Displayable
         this.email = email;
         this.faculty = faculty;
         this.status = StudentStatus.UNREGISTERED;
-        staffID = EmptyID.EMPTY_ID;
         campID = EmptyID.EMPTY_ID;
         this.password = password;
         this.CC = "0";
@@ -269,24 +262,6 @@ public class Student implements User, Displayable
     public UserType getUserType() 
     {
         return userType;
-    }
-
-    /**
-     * Gets the staffID of the user
-     * @return the staffID of the user
-     */
-    public String getStaffID()
-    {
-        return staffID;
-    }
-
-    /**
-     * Sets the staffID of the user
-     * @param staffID The staffID to set for the user
-     */
-    public void setStaffID(String staffID)
-    {
-        this.staffID = staffID;
     }
 
     /**

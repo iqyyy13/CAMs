@@ -29,11 +29,6 @@ public class Staff implements User
      * Faculty of a staff member
      */
     private String faculty;
-
-    /**
-     * ID of a camp associated with a staff member
-     */
-    private String campID;
     
     /**
      * Password of a staff member
@@ -60,7 +55,6 @@ public class Staff implements User
         this.staffName = staffName;
         this.email = email;
         this.faculty = faculty;
-        campID = EmptyID.EMPTY_ID;
     }
     
     /**
@@ -79,7 +73,6 @@ public class Staff implements User
         this.staffName = staffName;
         this.email = email;
         this.faculty = faculty;
-        campID = EmptyID.EMPTY_ID;
         this.password = password;
     }
 
@@ -104,7 +97,6 @@ public class Staff implements User
         this.faculty = EmptyID.EMPTY_ID;
         this.userType = UserType.STAFF;
         this.password = EmptyID.EMPTY_ID;
-        this.campID = EmptyID.EMPTY_ID;
     }
 
     
@@ -156,24 +148,6 @@ public class Staff implements User
     public String getFaculty() 
     {
         return this.faculty;
-    }
-
-    /**
-     * Gets the campID associated with the user
-     * @return the campID associated with the user
-     */
-    public String getCampID() 
-    {
-        return campID;
-    }
-
-    /**
-     * Sets the campID associated with the user
-     * @param campID The campID to set
-     */
-    public void setCampID(String campID) 
-    {
-        this.campID = campID;
     }
 
     /**

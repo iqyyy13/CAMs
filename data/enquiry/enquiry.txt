@@ -1,3 +1,0 @@
-E1-->P1-->YCHERN-->false-->dada-->[, yes, yahoo]-->
-E2-->P1-->YCHERN-->false-->yes-->[, es]-->
-E3-->P1-->YCHERN-->true-->asdada-->[]-->

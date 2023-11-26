@@ -81,12 +81,24 @@ public class Camp implements Model, Displayable
      */
     private String description;
 
+    /**
+     * The start date of the camp
+     */
     private String startDate;
 
+    /**
+     * The end date of the camp
+     */
     private String endDate;
 
+    /**
+     * The closing date of the camp
+     */
     private String closingDate;
 
+    /**
+     * Whether the camp is open to NTU or to faculty only
+     */
     private String openToNTU;
 
 
@@ -312,6 +324,11 @@ public class Camp implements Model, Displayable
         return location;
     }
 
+    /**
+     * Sets the location associated with the camp
+     * 
+     * @param location the location to set
+     */
     public void setLocation(String location)
     {
         this.location = location;
@@ -327,11 +344,21 @@ public class Camp implements Model, Displayable
         return description;
     }
 
+    /**
+     * Retrieves whether the camp is openToNTU
+     * 
+     * @return true if open, false if no
+     */
     public String getOpenToNTU()
     {
         return openToNTU;
     }
 
+    /**
+     * Sets whether the camp is openToNTU
+     * 
+     * @param openToNTU the value to set
+     */
     public void setOpenToNTU(String openToNTU)
     {
         this.openToNTU = openToNTU;

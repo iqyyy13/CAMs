@@ -29,11 +29,11 @@ public class ViewStudentProfile
 
         String userType = UserTypeGetter.getUserTypeInCamelCase(student);
         System.out.println("Welcome to View " + userType + " Profile");
-        System.out.println("┌---------------------------------------------------------------------------------------------------------------------┐");
+        System.out.println("|---------------------------------------------------------------------------------------------------------------------|");
         System.out.printf("| %-15s | %-30s | %-15s | %-15s | %-15s | %-10s |\n", "Name", "Email", "Faculty", userType + " ID", "CC", "Points");
         System.out.println("|-----------------|--------------------------------|-----------------|-----------------|------------------------------|");
         System.out.printf("| %-15s | %-30s | %-15s | %-15s | %-15s | %-10s |\n", student.getUserName(), student.getEmail(), student.getFaculty(), student.getID(), CC, student.getPoints());
-        System.out.println("└---------------------------------------------------------------------------------------------------------------------┘");
+        System.out.println("|---------------------------------------------------------------------------------------------------------------------|");
     }
 
     /**
