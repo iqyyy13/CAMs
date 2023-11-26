@@ -50,9 +50,13 @@ public class CampViewer
             System.out.println("View Available Camps");
             ModelViewer.displayListOfDisplayable(CampManager.viewAvailableCamps(student));
         }
-        System.out.println("Press Enter to go back.");
-        new Scanner(System.in).nextLine();
-        throw new PageBackException();
+        System.out.println("Press [b] to go back or Enter to continue");
+        String option = new Scanner(System.in).nextLine();
+        if(option.equals("b"))
+        {
+            throw new PageBackException();
+        }
+        
     }
 
     /**

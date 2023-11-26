@@ -130,7 +130,7 @@ public class CCMainPage
     {
         ChangePage.changePage();
         System.out.println("Here is the list of camps that are available for you to join.");
-        ModelViewer.displayListOfDisplayable(CampManager.getAllAvailableCamps());
+        CampViewer.viewAvailableCamps(student);
         System.out.println("Please enter the Camp ID that you would like to register: ");
         String campID = new Scanner(System.in).nextLine().trim().toUpperCase();
         String clashValue = CampDateClash.registrationDateClash(student, campID);
@@ -205,6 +205,14 @@ public class CCMainPage
             {
                 try
                 {
+                    if(camp.getAvailableCCSlots() == 0)
+                    {
+                        System.out.println("You are not allowed to register as there are no available slots.");
+                        System.out.println("Press Enter to go back");
+                        Scanner scanner = new Scanner(System.in);
+                        scanner.nextLine();
+                        StudentMainPage.studentMainPage(student);
+                    }
                     student.registerCamp(student,campID);
                     student.registerAsCC(student, camp1);
                     camp1.decrementAvailableCCSlots();
@@ -233,6 +241,14 @@ public class CCMainPage
             {
                 try
                 {
+                    if(camp.getAvailableSlots() == 0)
+                    {
+                        System.out.println("You are not allowed to register as there are no available slots.");
+                        System.out.println("Press Enter to go back");
+                        Scanner scanner = new Scanner(System.in);
+                        scanner.nextLine();
+                        StudentMainPage.studentMainPage(student);
+                    }
                     student.registerCamp(student,campID);
                     camp1.decrementAvailableSlots();
                     camp1.storeStudentID(student, camp1);
@@ -255,6 +271,14 @@ public class CCMainPage
                     }
                 }
             }
+        }
+        else
+        {
+            System.out.println("Registration cancelled");
+            System.out.println("Press Enter to return to home page");
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
+            StudentMainPage.studentMainPage(student);
         }
     }
 
