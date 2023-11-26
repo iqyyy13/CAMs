@@ -283,7 +283,7 @@ public class StaffMainPage
         ModelViewer.displayListOfDisplayable(campList);
         System.out.println("Enter the CampID to generate a performance report of:");
         Scanner scanner = new Scanner(System.in);
-        String campID = scanner.nextLine();
+        String campID = scanner.nextLine().toUpperCase();
 
         Camp camp = CampViewer.findCampByID(campList, campID);
         String registeredStudentID = camp.getStudentID();

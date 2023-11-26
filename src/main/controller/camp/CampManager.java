@@ -63,6 +63,9 @@ public class CampManager
      * @param faculty                       The faculty associated with the camp
      * @param location                      The location associated with the camp
      * @param description                   The description associated with the camp
+     * @param startDate                     The start date associated with the camp
+     * @param endDate                       The end date associated with the camp
+     * @param closingDate                   The closingDate associated with the camp
      * @throws UserAlreadyExistsException   If the camp ID already exists
      */
     public static void createCamp(String campID, String campTitle, String staffID, String faculty, String location, String description, 
@@ -82,6 +85,9 @@ public class CampManager
      * @param faculty                       The faculty associated with the camp
      * @param location                      The location associated with the camp
      * @param description                   The description associated with the camp
+     * @param startDate                     The start date associated with the camp
+     * @param endDate                       The end date associated with the camp
+     * @param closingDate                   The closing date associated with the camp
      * @return                              The newly created camp object
      * @throws UserAlreadyExistsException   If the camp ID already exists
      */
