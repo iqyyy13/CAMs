@@ -431,8 +431,16 @@ public class CCMainPage
         Suggestion suggestionToDelete = SuggestionViewer.findSuggestionByID(suggestionList, option);
 
         if (suggestionToDelete != null) {
-            if (suggestionToDelete.getStatus() == SuggestionStatus.APPROVED || suggestionToDelete.getStatus() == SuggestionStatus.DISAPPROVED) {
+            if (suggestionToDelete.getStatus() == SuggestionStatus.APPROVED) {
                 System.out.println("Cannot delete an approved suggestion.");
+                System.out.println("Press Enter to go back.");
+                new Scanner(System.in).nextLine();
+                throw new PageBackException();
+            }
+
+            if(suggestionToDelete.getStatus() == SuggestionStatus.DISAPPROVED)
+            {
+                System.out.println("Cannot delete a disapproved suggestion.");
                 System.out.println("Press Enter to go back.");
                 new Scanner(System.in).nextLine();
                 throw new PageBackException();

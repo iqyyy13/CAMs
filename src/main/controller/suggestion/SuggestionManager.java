@@ -111,7 +111,7 @@ public class SuggestionManager
                 //prevent editing from approved suggestions
                 ChangePage.changePage();
                 SuggestionViewer.generateSuggestionToEdit(suggestionToEdit);
-                if (suggestionToEdit.getStatus() != SuggestionStatus.APPROVED) {
+                if (suggestionToEdit.getStatus() == SuggestionStatus.PENDING) {
                     System.out.println("Enter a new suggestion");
                     Scanner scanner = new Scanner(System.in);
                     String newSuggestionMessage = scanner.nextLine();
@@ -126,7 +126,7 @@ public class SuggestionManager
                         System.err.println("User Error: " + e.getMessage());
                     }
                 } else {
-                    System.out.println("Unable to edit as suggestion is approved.");
+                    System.out.println("Unable to edit as suggestion is approved/disapproved.");
                     System.out.println("Press enter to go back.");
                     Scanner back = new Scanner(System.in);
                     back.nextLine();
