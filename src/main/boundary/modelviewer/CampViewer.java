@@ -32,170 +32,6 @@ import java.util.Scanner;
 public class CampViewer 
 {
     
-    /** 
-     * Retrieves the CampStatus based on user input
-     * @return CampStatus
-     * @throws PageBackException if the user chooses to go back
-     */
-    public static CampStatus getCampStatus() throws PageBackException
-    {
-        System.out.println("\t1. Available");
-        System.out.println("\t2. Allocated");
-        System.out.println("\t3. Unavailable");
-        System.out.print("Please enter your choice: ");
-        int option = IntGetter.readInt();
-
-        return switch (option)
-        {
-            case 1 -> CampStatus.AVAILABLE;
-            case 2 -> CampStatus.ALLOCATED;
-            case 3 -> CampStatus.UNAVAILABLE;
-            default ->
-            {
-                System.out.println("Please enter a number between 1-3.");
-                System.out.println("Press Enter to retry.");
-                String input = new Scanner(System.in).nextLine().trim();
-                if(input.equals("0"))
-                {
-                    throw new PageBackException();
-                }
-                else
-                {
-                    yield getCampStatus();
-                }
-            }
-        };
-    }
-
-    /**
-     * Generates and displays details for a camp based on the provided CampID
-     * 
-     * @throws PageBackException    if the user chooses to go back during the operation
-     */
-    public static void generateDetailsByCampID() throws PageBackException 
-    {
-        System.out.println("Please Enter the CampID to search: ");
-        String s1 = new Scanner(System.in).nextLine();
-        try {
-            Camp camp = CampDatabase.getInstance().getByID(s1);
-            camp.displayCamp();
-        } catch (UserErrorException e) {
-            System.out.println("Cannot find the camp matching this ID");
-            System.out.println("Press Enter to retry");
-            String input = new Scanner(System.in).nextLine().trim();
-            if (input.equals("b")) 
-            {
-                throw new PageBackException();
-            } 
-            else 
-            {
-                generateDetailsByCampID();
-            }
-        }
-        System.out.println("Press Enter to continue");
-        new Scanner(System.in).nextLine();
-        throw new PageBackException();
-    }
-
-    /**
-     * Generates and displays details for a camp based on the provided StaffID
-     * 
-     * @throws PageBackException if the user chooses to go back during the operation
-     */
-    public static void generateDetailsByStaffID() throws PageBackException
-    {
-        System.out.println("Please enter the StaffID to search: ");
-        String s1 = new Scanner(System.in).nextLine();
-        if (!StaffDatabase.getInstance().contains(s1)) 
-        {
-            System.out.println("Staff Not Found.");
-            System.out.println("Press Enter to retry");
-            String input = new Scanner(System.in).nextLine().trim();
-            if (input.equalsIgnoreCase("b")) 
-            {
-                throw new PageBackException();
-            } 
-            else 
-            {
-                generateDetailsByStaffID();
-                return;
-            }
-        }
-        List<Camp> campList = CampDatabase.getInstance().findByRules(p -> p.getStaffID().equalsIgnoreCase(s1));
-        ModelViewer.displayListOfDisplayable(campList);
-        System.out.println("Enter <Enter> to continue");
-        new Scanner(System.in).nextLine();
-        throw new PageBackException();
-    }
-
-    /**
-     * Generates and displays details for a camp based on the provided StudentID
-     * 
-     * @throws PageBackException    if the user chooses to go back during the operation
-     */
-    public static void generateDetailsByStudentID() throws PageBackException 
-    {
-        System.out.println("Enter the StudentID to search");
-        String s1 = new Scanner(System.in).nextLine();
-        ModelViewer.displayListOfDisplayable(CampDatabase.getInstance().findByRules(p -> Objects.equals(p.getStudentID(), s1)));
-        System.out.println("Enter <Enter> to continue");
-        new Scanner(System.in).nextLine();
-        throw new PageBackException();
-    }
-
-    /**
-     * Generates and displays details for a camp based on the provided Status
-     * 
-     * @throws PageBackException    if the user chooses to go back during the operation
-     */
-    public static void generateDetailsByStatus() throws PageBackException 
-    {
-        CampStatus status = getCampStatus();
-        ModelViewer.displayListOfDisplayable(CampDatabase.getInstance().findByRules(p -> Objects.equals(p.getStatus(), status)));
-        System.out.println("Enter <Enter> to continue");
-        new Scanner(System.in).nextLine();
-        throw new PageBackException();
-    }
-
-    /**
-     * Generates and displays camp details based on user-selected search criteria
-     * 
-     * @throws PageBackException    if the user chooses to go back during the operation
-     */
-    public static void generateCampDetails() throws PageBackException
-    {
-        ChangePage.changePage();
-        System.out.println("Please select the way to search:");
-        System.out.println("\t 1. By CampID");
-        System.out.println("\t 2. By StaffID");
-        System.out.println("\t 3. By Student");
-        System.out.println("\t 4. By Status");
-        System.out.println("\t 0. Go Back");
-        System.out.print("Please enter your choice: ");
-        int option = IntGetter.readInt();
-        if (option == 0) 
-        {
-            throw new PageBackException();
-        }
-        try {
-            switch (option) 
-            {
-                case 1 -> generateDetailsByCampID();
-                case 2 -> generateDetailsByStaffID();
-                case 3 -> generateDetailsByStudentID();
-                case 4 -> generateDetailsByStatus();
-                default -> 
-                {
-                    System.out.println("Invalid choice. Please enter again. ");
-                    new Scanner(System.in).nextLine();
-                    throw new PageBackException();
-                }
-            }
-        } catch (PageBackException e) {
-            generateCampDetails();
-        }
-    }
-
     /**
      * Displays the available camps for a student and allows navigation to the previous page
      *   
@@ -214,9 +50,13 @@ public class CampViewer
             System.out.println("View Available Camps");
             ModelViewer.displayListOfDisplayable(CampManager.viewAvailableCamps(student));
         }
-        System.out.println("Press Enter to go back.");
-        new Scanner(System.in).nextLine();
-        throw new PageBackException();
+        System.out.println("Press [b] to go back or Enter to continue");
+        String option = new Scanner(System.in).nextLine();
+        if(option.equals("b"))
+        {
+            throw new PageBackException();
+        }
+        
     }
 
     /**

@@ -95,28 +95,6 @@ public class CampManager
         return c;
     }
 
-
-    /**
-     * Retrieves the list of all camps from the database
-     * 
-     * @return  A list containing all camps stored in the database
-     */
-    public static List<Camp> getAllCamp() 
-    {
-        return CampDatabase.getInstance().getList();
-    }
-
-    /**
-     * Retrieves the list of camps associated with a specific status with the database
-     * 
-     * @param campStatus    The status of the camps to retrieve
-     * @return              A list containing camps with the specified status
-     */
-    public static List<Camp> getAllCampByStatus(CampStatus campStatus) 
-    {
-        return CampDatabase.getInstance().findByRules(camp -> camp.getStatus().equals(campStatus));
-    }
-
     /**
      * Generates a new unique camp ID based on the existing IDs in the database
      * 

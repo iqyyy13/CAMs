@@ -3,8 +3,8 @@ package main.utils.iocontrol;
 /**
  * A class for mapping characters to control the output of objects.
  */
-public record ObjectOutputControlCharacters() {
-
+public record ObjectOutputControlCharacters() 
+{
     /**
      * The character to be used to separate the key and value of a map entry.
      */

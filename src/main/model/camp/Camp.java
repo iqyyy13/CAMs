@@ -470,7 +470,7 @@ public class Camp implements Model, Displayable
      */
     public void decrementAvailableCCSlots()
     {
-        if(availableSlots > 0)
+        if(availableCCSlots > 0)
         {
             availableCCSlots--;
             System.out.println("The number of available slots now are : " + getAvailableCCSlots());
@@ -487,7 +487,7 @@ public class Camp implements Model, Displayable
      */
     public void incrementAvailableSlots()
     {
-        if(availableSlots > 0)
+        if(availableSlots < this.maxSlots)
         {
             availableSlots++;
             System.out.println("The number of available slots now are : " + getAvailableSlots());
@@ -495,7 +495,7 @@ public class Camp implements Model, Displayable
         }
         else
         {
-            System.out.println("No available slots for regular registration");
+            System.out.println("Error. Number of available slots is more than number of allocated slots.");
         }
     }
 
@@ -504,7 +504,7 @@ public class Camp implements Model, Displayable
      */
     public void incrementAvailableCCSlots()
     {
-        if(availableSlots > 0)
+        if(availableCCSlots < this.maxCCSlots)
         {
             availableCCSlots++;
             System.out.println("The number of available slots now are : " + getAvailableCCSlots());
@@ -512,7 +512,7 @@ public class Camp implements Model, Displayable
         }
         else
         {
-            System.out.println("No available slots for regular registration");
+            System.out.println("Error. Number of available slots is more than number of allocated slots.");
         }
     }
 
