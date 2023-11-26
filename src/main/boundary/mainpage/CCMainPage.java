@@ -25,6 +25,7 @@ import main.database.suggestion.SuggestionDatabase;
 import main.model.camp.Camp;
 import main.model.camp.CampStatus;
 import main.model.suggestion.Suggestion;
+import main.model.suggestion.SuggestionStatus;
 import main.model.user.*;
 import main.utils.exception.UserErrorException;
 import main.utils.exception.PageBackException;
@@ -98,7 +99,7 @@ public class CCMainPage
                     case 9 -> EnquiryManager.view_enquiry(student.getID());
                     case 10 -> EnquiryManager.edit_enquiry(null);
                     case 11 -> EnquiryManager.view_CC_pending_enquiry(student.getCCId());
-                    case 12 -> EnquiryManager.reply_enquiry(null);
+                    case 12 -> replyEnquiry(student);
                     case 13 -> EnquiryManager.delete_enquiry(null);                    
                     case 14 -> createSuggestion(student);
                     case 15 -> SuggestionViewer.viewOwnSuggestions(student);
@@ -412,56 +413,78 @@ public class CCMainPage
     }
 
     /**
-     * Deletes the suggestion by the CC member
-     * 
-     * @param student               The CC member deleting the suggestion
-     * @throws PageBackException    If the user chooses to go back
-     */
-    private static void deleteSuggestion(Student student) throws PageBackException {
-    ChangePage.changePage();
-    String studentID = student.getID();
-    List<Suggestion> suggestionList = SuggestionDatabase.getInstance().findByRules(p -> p.getCommitteeUserID().equalsIgnoreCase(studentID));
-    ModelViewer.displayListOfDisplayable(suggestionList);
-    System.out.println("");
-    System.out.println("Enter the SuggestionID that you would like to delete:");
-    String option = new Scanner(System.in).nextLine().trim().toUpperCase();
+    * Deletes the suggestion by the CC member
+    * 
+    * @param student               The CC member deleting the suggestion
+    * @throws PageBackException    If the user chooses to go back
+    */
+    private static void deleteSuggestion(Student student) throws PageBackException 
+    {
+        ChangePage.changePage();
+        String studentID = student.getID();
+        List<Suggestion> suggestionList = SuggestionDatabase.getInstance().findByRules(p -> p.getCommitteeUserID().equalsIgnoreCase(studentID));
+        ModelViewer.displayListOfDisplayable(suggestionList);
+        System.out.println("");
+        System.out.println("Enter the SuggestionID that you would like to delete:");
+        String option = new Scanner(System.in).nextLine().trim().toUpperCase();
 
-    Suggestion suggestionToDelete = SuggestionViewer.findSuggestionByID(suggestionList, option);
+        Suggestion suggestionToDelete = SuggestionViewer.findSuggestionByID(suggestionList, option);
 
-    if (suggestionToDelete != null) {
-        if (suggestionToDelete.getStatus() == SuggestionStatus.APPROVED) {
-            System.out.println("Cannot delete an approved suggestion.");
-            System.out.println("Press Enter to go back.");
-            new Scanner(System.in).nextLine();
-            throw new PageBackException();
-        }
-
-        System.out.println("You are about to delete Suggestion with Suggestion ID " + option + ". Are you sure?");
-        System.out.println("Press enter to confirm or [b] to go back.");
-
-        String userInput = new Scanner(System.in).nextLine().trim();
-
-        if (userInput.isEmpty()) {
-            try {
-                System.out.println("Confirmed... Deleting.");
-                SuggestionManager.deleteSuggestion(suggestionToDelete.getID());
-                System.out.println("Suggestion with Suggestion ID " + option + " deleted successfully.");
+        if (suggestionToDelete != null) {
+            if (suggestionToDelete.getStatus() == SuggestionStatus.APPROVED || suggestionToDelete.getStatus() == SuggestionStatus.DISAPPROVED) {
+                System.out.println("Cannot delete an approved suggestion.");
                 System.out.println("Press Enter to go back.");
                 new Scanner(System.in).nextLine();
                 throw new PageBackException();
-            } catch (UserErrorException e) {
-                System.out.println("Error Deleting Suggestion");
             }
-        } else if (userInput.equalsIgnoreCase("b")) {
-            System.out.println("Going back...");
-            throw new PageBackException();
+
+            System.out.println("You are about to delete Suggestion with Suggestion ID " + option + ". Are you sure?");
+            System.out.println("Press enter to confirm or [b] to go back.");
+
+            String userInput = new Scanner(System.in).nextLine().trim();
+
+            if (userInput.isEmpty()) {
+                try {
+                    System.out.println("Confirmed... Deleting.");
+                    SuggestionManager.deleteSuggestion(suggestionToDelete.getID());
+                    System.out.println("Suggestion with Suggestion ID " + option + " deleted successfully.");
+                    System.out.println("Press Enter to go back.");
+                    new Scanner(System.in).nextLine();
+                    throw new PageBackException();
+                } catch (UserErrorException e) {
+                    System.out.println("Error Deleting Suggestion");
+                }
+            } else if (userInput.equalsIgnoreCase("b")) {
+                System.out.println("Going back...");
+                throw new PageBackException();
+            } else {
+                System.out.println("Invalid choice. Please press enter to confirm or [b] to go back.");
+                deleteSuggestion(student);
+            }
         } else {
-            System.out.println("Invalid choice. Please press enter to confirm or [b] to go back.");
+            System.out.println("Suggestion not found with SuggestionID " + option + ".");
+            System.out.println("Press Enter to go back");
+            Scanner scanner = new Scanner(System.in);
+            scanner.nextLine();
             deleteSuggestion(student);
         }
-    } else {
-        System.out.println("Suggestion not found with SuggestionID " + option + ".");
     }
-}
+
+    private static void replyEnquiry(Student student)
+    {
+        student.incrementPoint();
+        try
+        {
+            StudentDatabase.getInstance().update(student);
+            EnquiryManager.reply_enquiry(null);
+        } catch (PageBackException e)
+        {
+            CCMainPage.ccMainPage(student);
+        } catch (UserErrorException e)
+        {
+            System.err.println("User not found");
+        }
+
+    }
 }
 

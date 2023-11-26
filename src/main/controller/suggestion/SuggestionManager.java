@@ -106,10 +106,11 @@ public class SuggestionManager
         //checks if empty
         if (!option.isEmpty()) {
             Suggestion suggestionToEdit = SuggestionViewer.findSuggestionByID(suggestionList, option);
-            SuggestionViewer.generateSuggestionToEdit(suggestionToEdit);
             //check valid suggestion id
             if (suggestionToEdit != null) {
                 //prevent editing from approved suggestions
+                ChangePage.changePage();
+                SuggestionViewer.generateSuggestionToEdit(suggestionToEdit);
                 if (suggestionToEdit.getStatus() != SuggestionStatus.APPROVED) {
                     System.out.println("Enter a new suggestion");
                     Scanner scanner = new Scanner(System.in);
@@ -133,6 +134,10 @@ public class SuggestionManager
                 }
             } else {
                 System.out.println("Suggestion not found with the specified Suggestion ID.");
+                System.out.println("Press Enter to retry");
+                Scanner scanner = new Scanner(System.in);
+                scanner.nextLine();
+                editSuggestionDetails(student);
             }
         }
     }
